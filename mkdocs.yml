@@ -1,6 +1,7 @@
 site_name: The Cafe
 theme:
-  name: material
+  # name: material
+  name: alabaster
   # font: false
 repo_url: https://github.com/tonygilkerson/cafe
 plugins:
