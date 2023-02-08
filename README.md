@@ -26,11 +26,5 @@ Create a token with **repo** and **write:packages** scopes. Once the token is cr
 ## Install Ingress Controller
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-
-kubectl wait --namespace ingress-nginx \
-  --for=condition=ready pod \
-  --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
-
+microk8s enable ingress
 ```
