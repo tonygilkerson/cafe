@@ -22,3 +22,15 @@ mkdocs serve
 ## Github Actions Setup
 
 Create a token with **repo** and **write:packages** scopes. Once the token is created, copy it and navigate to your repository `Settings > Secrets`. Create a secret called `AEG_REGISTRY_TOKEN` and insert the token as the value. Then it can be referenced like this `${{ secrets.GITHUB_REGISTRY_TOKEN }}` in the CI pipeline.
+
+## Install Ingress Controller
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
+
+```
