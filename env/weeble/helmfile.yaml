@@ -1,0 +1,14 @@
+missingFileHandler: Error
+
+helmfiles:
+{{ range .Values.aceApps }}
+- path: ../../apps/{{ . }}
+  values:
+  - {{ $.Values | toYaml | nindent 6}}
+{{ end }}
+
+environments:
+  default:
+    values:
+      - ../state-default-values.yaml
+      - ./state-values.yaml 

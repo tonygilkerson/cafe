@@ -1,0 +1,23 @@
+aceApps:
+- cert-manager
+
+domain: tonygilkerson.us
+acme:
+  enabled: true
+  internal:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: act3support@rbr-tech.com
+    dnsHost: https://dns01.act3-ace.com
+    privateKeySecret: letsencrypt-acct-internal
+    username: a750ebb3-9ccb-4308-a9c2-ca0216679003
+    fulldomain: 40129018-a85b-4e37-b6df-fa89782bcb55.dns01.act3-ace.com
+    subdomain: 40129018-a85b-4e37-b6df-fa89782bcb55
+  external:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: act3support@rbr-tech.com
+    dnsHost: https://dns01.act3-ace.com
+    privateKeySecret: letsencrypt-acct-external
+    username: 20bae405-ffab-4213-b457-25e6ce89e5da
+    fulldomain: 4d8af185-0f15-4fe5-bff4-40b61eb588a8.dns01.act3-ace.com
+    subdomain: 4d8af185-0f15-4fe5-bff4-40b61eb588a8
+
