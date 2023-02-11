@@ -1,35 +1,21 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: cafe
-#   namespace: cafe
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - host: tonygilkerson.us
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: cafe
-#             port:
-#               number: 80
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cafe
   annotations:
     # add an annotation indicating the issuer to use.
-    cert-manager.io/cluster-issuer: letsencrypt-cluster-prod  
+    cert-manager.io/cluster-issuer: letsencrypt-cluster-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/issue-temporary-certificate: "true"
+    acme.cert-manager.io/http01-edit-in-place: "true"    
 spec:
+  ingressClassName: public
   rules:
   - host: {{ .Values.domain | quote }}
     http:
       paths:
       - path: /
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: cafe
