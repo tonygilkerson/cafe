@@ -1,0 +1,47 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	// "math"
+	// "math/rand"
+	"os"
+
+	"dagger.io/dagger"
+)
+
+func main() {
+	fmt.Println("debug1")
+	ctx := context.Background()
+	
+	fmt.Println("debug2")
+	//
+	// initialize Dagger client
+	//
+	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout))
+	if err != nil {
+		panic(err)
+	}
+	defer client.Close()
+	
+	fmt.Println("debug3")
+	// contextDir := client.Host().Directory(".", dagger.HostDirectoryOpts{
+	client.Host().Directory(".", dagger.HostDirectoryOpts{
+		Exclude: []string{"ci/"},
+	})
+
+	//
+	// Build and publish container image
+	//
+	// client.Container().
+	// 	Build(contextDir)
+	// 	// .Publish(ctx, fmt.Sprintf("ttl.sh/hello-dagger-%.0f", math.Floor(rand.Float64()*10000000)))
+	// if err != nil {
+	// 	panic(err)
+	// }
+
+	// fmt.Printf("Published image to: %s\n", ref)
+	fmt.Printf("Published image to: %s\n", "todo")
+
+
+}
