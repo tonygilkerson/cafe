@@ -1,7 +1,7 @@
 missingFileHandler: Error
 
 helmfiles:
-{{ range .Values.aceApps }}
+{{ range .Values.cafeApps }}
 - path: ../../apps/{{ . }}
   values:
   - {{ $.Values | toYaml | nindent 6}}

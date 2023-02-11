@@ -1,5 +1,6 @@
-aceApps:
+cafeApps:
 - cert-manager
+- cafe
 
 domain: tonygilkerson.us
 acme:
