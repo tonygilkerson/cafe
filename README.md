@@ -31,7 +31,7 @@ mkdocs serve
 ## Install Ingress Controller
 
 ```bash
-microk8s enable ingress
+microk8s enable ingress dns
 ```
 
 todo
