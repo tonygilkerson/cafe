@@ -3,11 +3,7 @@ kind: Ingress
 metadata:
   name: cafe
   annotations:
-    # add an annotation indicating the issuer to use.
-    cert-manager.io/cluster-issuer: letsencrypt-cluster-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    cert-manager.io/issue-temporary-certificate: "true"
-    acme.cert-manager.io/http01-edit-in-place: "true"    
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: public
   rules:

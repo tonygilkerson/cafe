@@ -31,7 +31,20 @@ mkdocs serve
 ## Install Ingress Controller
 
 ```bash
-microk8s enable ingress dns
+microk8s enable ingress dns cert-manager
 ```
 
-todo
+**cert-manager** needs patched to fix this error
+
+>"error"="failed to perform self check GET request ...
+
+
+Add DNS entries in the cert-manager deployment at `spec.template.spec.dnsConfig`
+
+```yaml
+dnsConfig:
+  nameservers:
+    - 1.1.1.1
+    - 8.8.8.8
+dnsPolicy: None
+```
