@@ -1,7 +1,7 @@
 site_name: The Cafe
 theme:
-  # name: material
-  name: alabaster
+  name: material
+  # name: alabaster
   # font: false
 repo_url: https://github.com/tonygilkerson/cafe
 plugins:
@@ -10,4 +10,7 @@ plugins:
   - search:
 nav:
   - Home: index.md
-  
+  - Apps: 
+    - apps/cafe/index.md
+    - apps/argocd/index.md
+
