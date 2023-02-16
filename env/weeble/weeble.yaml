@@ -4,6 +4,8 @@ metadata:
   name: weeble
   namespace: argocd
 spec:
+  project: default
+  sources: []
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
@@ -11,5 +13,5 @@ spec:
     path: env/weeble/k8s
     repoURL: 'https://github.com/tonygilkerson/cafe.git'
     targetRevision: HEAD
-  sources: []
-  project: default
+  syncPolicy:
+    automated: {}
