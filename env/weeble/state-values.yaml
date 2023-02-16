@@ -1,8 +1,0 @@
-cafeApps:
-# - cert-manager     # Use microk8s enable cert-manager instead
-- cafe
-- argocd
-
-domain: tonygilkerson.us
-
-

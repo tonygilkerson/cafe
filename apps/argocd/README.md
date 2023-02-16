@@ -1,11 +1,12 @@
 # Argo CD
 
-## Make Helm Chart
+## Install
 
-Turn the [official install](https://argo-cd.readthedocs.io/en/stable/getting_started/) into a chart
+Here is the [official install](https://argo-cd.readthedocs.io/en/stable/getting_started/) docs
 
 ```sh
-curl -o apps/argocd/charts/argocd/templates/install.yaml  https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 ## Access UI
