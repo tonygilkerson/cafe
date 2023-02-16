@@ -1,0 +1,11 @@
+missingFileHandler: Error
+
+releases:
+- name: argocd
+  namespace: argocd
+  chart: ./charts/argocd
+  values:
+  - values/argocd.yaml.gotmpl
+
+commonLabels:
+  app: argocd
