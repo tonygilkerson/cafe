@@ -25,6 +25,7 @@ jobs:
         dry_run: false
       env:
         GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
+        GH_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
 
 
   # build:
