@@ -37,6 +37,15 @@ export KUBECONFIG=~/.kube/config-files/weeble.yaml
 kubectl cluster-info
 ```
 
+## Access UI
+
+Look at secret in `argocd/argocd-initial-admin-secret`
+
+```sh
+kubectl -n argocd port-forward svc/argocd-server 8080:443
+open http://localhost:8080
+```
+
 ## Github Actions Setup
 
 * Create a [token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **repo** and **write:packages** scopes. 
