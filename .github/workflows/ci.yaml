@@ -23,7 +23,7 @@ jobs:
                                   # for semantic-release when using
                                   # semantic-release-action lower than @v3
       env:
-        GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
+        GITHUB_TOKEN: ${{ secrets.AEG_ADMIN_TEST }}
 
   # build:
   #   needs: semantic-release
