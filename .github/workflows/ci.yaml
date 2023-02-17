@@ -23,10 +23,9 @@ jobs:
                                   # for semantic-release when using
                                   # semantic-release-action lower than @v3
         dry_run: false
-        github_token: ${{ secrets.AEG_CAFE_ADMIN }}
-      # env:
-      #   GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
-      #   GH_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
+        GH_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
 
 
   # build:
