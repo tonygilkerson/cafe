@@ -6,5 +6,5 @@
   "plugins": [
     "@semantic-release/commit-analyzer"
   ],
-  "repositoryUrl": "https://github.com/tonygilkerson/cafe.git"
+  "repositoryUrl": "git@github.com:tonygilkerson/cafe.git"
 }
