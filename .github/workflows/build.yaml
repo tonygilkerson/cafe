@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  semantic-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.AEG_REGISTRY_TOKEN }}
+
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v2
+      with:
+        push: true # Will only build if this is not here
+        tags: |
+          ghcr.io/${{ github.repository }}:${GITHUB_REF#refs/*/}

@@ -27,19 +27,3 @@ jobs:
       if: steps.semantic.outputs.new_release_published == 'true'
       run: |
         echo Semantic Release Version ${{ steps.semantic.outputs.new_release_version }}
-
-    - name: Login to GitHub Container Registry
-      if: steps.semantic.outputs.new_release_published == 'true'
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.AEG_REGISTRY_TOKEN }}
-
-    - name: Build and Push Docker Image
-      if: steps.semantic.outputs.new_release_published == 'true'
-      uses: docker/build-push-action@v2
-      with:
-        push: true # Will only build if this is not here
-        tags: |
-          ghcr.io/${{ github.repository }}:${{ steps.semantic.outputs.new_release_version }}
