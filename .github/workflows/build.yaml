@@ -1,12 +1,12 @@
 name: build
 
-on:
+on:  
   push:
     tags:
-    - 'v*'
+      - '*'
 
 jobs:
-  semantic-release:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
