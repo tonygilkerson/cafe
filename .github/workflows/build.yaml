@@ -1,7 +1,7 @@
 name: build
 
 on:
-  push:
+  create:
     # Sequence of patterns matched against refs/tags
     tags:        
       - "*"
