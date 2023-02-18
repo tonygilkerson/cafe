@@ -1,14 +1,10 @@
-name: Cafe CI
+name: Semantic Release
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-# on:
-#   push:
-#     tags:
-#     - 'v*'
 
 jobs:
   semantic-release:
@@ -27,24 +23,23 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
         GH_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
 
+    - name: Semantic Release Version
+      if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        echo Semantic Release Version ${{ steps.semantic.outputs.new_release_version }}
 
-  # build:
-  #   needs: semantic-release
-  #   runs-on: ubuntu-latest
+    - name: Login to GitHub Container Registry
+      if: steps.semantic.outputs.new_release_published == 'true'
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.AEG_REGISTRY_TOKEN }}
 
-  #   steps:
-  #   - uses: actions/checkout@v3
-
-  #   - name: Login to GitHub Container Registry
-  #     uses: docker/login-action@v1
-  #     with:
-  #       registry: ghcr.io
-  #       username: ${{ github.repository_owner }}
-  #       password: ${{ secrets.AEG_REGISTRY_TOKEN }}
-
-  #   - name: Build and Push Docker Image
-  #     uses: docker/build-push-action@v2
-  #     with:
-  #       push: true # Will only build if this is not here
-  #       tags: |
-  #         ghcr.io/${{ github.repository }}:latest
+    - name: Build and Push Docker Image
+      if: steps.semantic.outputs.new_release_published == 'true'
+      uses: docker/build-push-action@v2
+      with:
+        push: true # Will only build if this is not here
+        tags: |
+          ghcr.io/${{ github.repository }}:${{ steps.semantic.outputs.new_release_version }}
