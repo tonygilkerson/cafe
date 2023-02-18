@@ -1,11 +1,17 @@
 name: build
 
+# on:
+#   push:
+#     # Sequence of patterns matched against refs/tags
+#     tags:        
+#       - v1.*
+
 on:
   push:
-    # Sequence of patterns matched against refs/tags
-    tags:        
-      - v1.*
-
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
