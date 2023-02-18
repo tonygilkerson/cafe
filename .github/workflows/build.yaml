@@ -2,9 +2,6 @@ name: build
 
 on:
   create:
-    # Sequence of patterns matched against refs/tags
-    tags:        
-      - "*"
 
 jobs:
   build:
