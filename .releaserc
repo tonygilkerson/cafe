@@ -10,6 +10,15 @@
       {
         "prepareCmd": "img=\"ghcr.io/tonygilkerson/cafe:v${nextRelease.version}\" yq eval '.spec.template.spec.containers[0].image = strenv(img)' ./apps/cafe/k8s/deployment.yaml --inplace"
       }
+    ],
+    [
+      "@semantic-release/git", 
+      {
+        "assets": [ 
+          "./apps/cafe/k8s/deployment.yaml "
+          ],
+        "message": "chore(release): ${nextRelease.version}  \n\n${nextRelease.notes}"
+      }
     ]
   ],
   "repositoryUrl": "https://github.com/tonygilkerson/cafe.git"
