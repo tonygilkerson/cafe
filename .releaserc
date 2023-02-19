@@ -4,7 +4,13 @@
     "main"
   ],
   "plugins": [
-    "@semantic-release/commit-analyzer"
+    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/exec", 
+      {
+        "prepareCmd": "img=ghcr.io/tonygilkerson/cafe:v${nextRelease.version} yq -e '.spec.template.spec.containers[0].image = strenv(img)'  apps/cafe/k8s/deployment.yaml --inplace"
+      }
+    ]
   ],
   "repositoryUrl": "https://github.com/tonygilkerson/cafe.git"
 }
