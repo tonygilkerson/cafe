@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # see: https://artifacthub.io/packages/helm/grafana/grafana
+    chart: grafana
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 6.50.7
+    helm:
+      releaseName: grafana
+      values: |
+        ingress:
+          enabled: true
+          path: /
+          hosts:
+            - grafana.tonygilkerson.us
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          tls:
+          - hosts:
+            - grafana.tonygilkerson.us
+            secretName: grafana-tls            
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: visibility
+  syncPolicy:
+    automated: {}

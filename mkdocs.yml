@@ -12,5 +12,6 @@ nav:
   - Home: index.md
   - Apps: 
     - apps/cafe/index.md
-    - apps/argocd/index.md
+
+    
 
