@@ -14,9 +14,7 @@
     [
       "@semantic-release/git", 
       {
-        "assets": [ 
-          "./apps/cafe/k8s/deployment.yaml "
-          ],
+        "assets": [ "./apps/cafe/k8s/deployment.yaml"],
         "message": "chore(release): ${nextRelease.version}  \n\n${nextRelease.notes}"
       }
     ]
