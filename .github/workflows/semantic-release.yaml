@@ -16,10 +16,10 @@ jobs:
       uses: cycjimmy/semantic-release-action@v3
       id: semantic 
       with:
+        dry_run: false
         semantic_version: 19.0.5  # It is recommended to specify a version range
                                   # for semantic-release when using
                                   # semantic-release-action lower than @v3
-        dry_run: false
       env:
         GITHUB_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
         GH_TOKEN: ${{ secrets.AEG_CAFE_ADMIN }}
@@ -29,7 +29,15 @@ jobs:
       run: |
         echo Semantic Release Version ${{ steps.semantic.outputs.new_release_version }}
 
-    - name: Build and Push Docker Image
+    - name: Login to Container Registry
+      if: steps.semantic.outputs.new_release_published == 'true'
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.AEG_REGISTRY_TOKEN }}
+
+    - name: Build and Push Container Image
       if: steps.semantic.outputs.new_release_published == 'true'
       uses: docker/build-push-action@v2
       with:
