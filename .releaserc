@@ -8,7 +8,7 @@
     [
       "@semantic-release/exec", 
       {
-        "prepareCmd": "img=\"ghcr.io/tonygilkerson/cafe:v${nextRelease.version}\" yq '.spec.template.spec.containers[0].image = strenv(img)' ./apps/cafe/k8s/deployment.yaml --inplace"
+        "prepareCmd": "img=\"ghcr.io/tonygilkerson/cafe:v${nextRelease.version}\" yq eval '.spec.template.spec.containers[0].image = strenv(img)' ./apps/cafe/k8s/deployment.yaml --inplace"
       }
     ]
   ],

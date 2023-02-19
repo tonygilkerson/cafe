@@ -37,7 +37,7 @@ jobs:
         ls -ltr
         yq --help
         yq -V
-        yq apps/cafe/k8s/deployment.yaml
+        yq eval '.' ./apps/cafe/k8s/deployment.yaml
     - name: Semantic Release
       uses: cycjimmy/semantic-release-action@v3
       id: semantic 
