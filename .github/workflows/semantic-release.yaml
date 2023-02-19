@@ -33,7 +33,11 @@ jobs:
         sudo apt update
         sudo apt install yq -y
         npm install @semantic-release/exec
-
+        pwd
+        ls -ltr
+        yq --help
+        yq -V
+        yq apps/cafe/k8s/deployment.yaml
     - name: Semantic Release
       uses: cycjimmy/semantic-release-action@v3
       id: semantic 
