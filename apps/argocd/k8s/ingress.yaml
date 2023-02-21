@@ -19,5 +19,5 @@ spec:
               number: 443
   tls:
   - hosts:
-    - tonygilkerson.us
+    - argocd.tonygilkerson.us
     secretName: argocd-tls
