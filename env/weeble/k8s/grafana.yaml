@@ -23,7 +23,15 @@ spec:
           tls:
           - hosts:
             - grafana.tonygilkerson.us
-            secretName: grafana-tls            
+            secretName: grafana-tls
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Prometheus
+              type: prometheus
+              url: http://prometheus-server
+              isDefault: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: visibility
