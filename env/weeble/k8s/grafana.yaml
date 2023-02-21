@@ -24,6 +24,14 @@ spec:
           - hosts:
             - grafana.tonygilkerson.us
             secretName: grafana-tls
+        grafana.ini:
+          server:
+            domain: grafana.tonygilkerson.us
+            root_url: https://grafana.tonygilkerson.us
+          auth.anonymous:
+            enabled: true
+          security:
+            allow_embedding: true
         datasources:
           datasources.yaml:
             apiVersion: 1
