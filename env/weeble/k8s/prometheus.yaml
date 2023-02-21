@@ -13,17 +13,18 @@ spec:
     helm:
       releaseName: prometheus
       values: |
-        ingress:
-          enabled: true
-          path: /
-          hosts:
-            - prometheus.tonygilkerson.us
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt
-          tls:
-          - hosts:
-            - prometheus.tonygilkerson.us
-            secretName: prometheus-tls            
+        server:      
+          ingress:
+            enabled: true
+            path: /
+            hosts:
+              - prometheus.tonygilkerson.us
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            tls:
+            - hosts:
+              - prometheus.tonygilkerson.us
+              secretName: prometheus-tls            
   destination:
     server: "https://kubernetes.default.svc"
     namespace: visibility
