@@ -4,6 +4,8 @@ metadata:
   name: argocd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"    
 spec:
   ingressClassName: public
   rules:
@@ -16,7 +18,7 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 80
+              number: 443
   tls:
   - hosts:
     - argocd.tonygilkerson.us
