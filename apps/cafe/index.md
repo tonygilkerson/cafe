@@ -2,6 +2,7 @@
 
 The Cafe hosts the following apps
 
-* **ArgoCD** - GitOps for the cluster.  This app is manually deployed to boot strap all the other apps.
-* **Cafe** - This documentation web site.
+* **[Cafe](https://tonygilkerson.us)** - This documentation web site
+* **[ArgoCD](https://argocd.tonygilkerson.us)** - GitOps for the cluster
 * **[Grafana](https://grafana.tonygilkerson.us)** - Cafe visibility charts
+* **[Prometheus](https://prometheus.tonygilkerson.us)** -  
