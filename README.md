@@ -37,6 +37,14 @@ export KUBECONFIG=~/.kube/config-files/weeble.yaml
 kubectl cluster-info
 ```
 
+## kps
+
+Need to label namespaces that you want to monitor
+
+```sh
+kubectl label ns kps tonygilkerson.us/alerting=enabled
+```
+
 ## Access UI
 
 Look at secret in `argocd/argocd-initial-admin-secret`

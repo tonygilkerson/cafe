@@ -82,35 +82,36 @@ spec:
               secretName: prometheus-tls 
 
           prometheusSpec:
+            # To enable run this on the target namespace 
+            # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
             ruleNamespaceSelector:
               matchLabels:
                 tonygilkerson.us/alerting: enabled
-                release: kps
 
-            ruleSelector:
-              matchLabels:
-                tonygilkerson.us/alerting: enabled
-                release: "kps"
+            # all rules
+            ruleSelector: {}
             
+            # To enable run this on the target namespace 
+            # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
             serviceMonitorNamespaceSelector:
               matchLabels:
                 tonygilkerson.us/alerting: enabled
-                release: "kps"
 
-            serviceMonitorSelector:
-              matchLabels:
-                tonygilkerson.us/alerting: enabled
-                release: "kps"
+            # All serviceMonitors  
+            serviceMonitorSelector: {}
 
         alertmanager:
           alertmanagerSpec:
+
+            # To enable run this on the target namespace 
+            # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
             alertmanagerConfigNamespaceSelector:
               matchLabels:
                 tonygilkerson.us/alerting: enabled
 
             alertmanagerConfigSelector:
               matchLabels:
-                tonygilkerson.us/alerting: enabled
+                miletwo.us/alerting: enabled
                   
   destination:
     server: "https://kubernetes.default.svc"
