@@ -33,14 +33,7 @@ spec:
               enabled: true
             security:
               allow_embedding: true
-          datasources:
-            datasources.yaml:
-              apiVersion: 1
-              datasources:
-              - name: Prometheus
-                type: prometheus
-                url: http://prometheus-server
-                isDefault: true
+
           # Provision grafana-dashboards-kubernetes
           dashboardProviders:
             dashboardproviders.yaml:
