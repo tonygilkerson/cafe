@@ -63,7 +63,8 @@ spec:
 
         kube-state-metrics:
           releaseLabel: false
-          customLabels: "foo: bar"
+          customLabels:
+            foo: bar
 
   destination:
     server: "https://kubernetes.default.svc"
