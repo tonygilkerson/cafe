@@ -1,0 +1,18 @@
+missingFileHandler: Error
+
+helmfiles:
+
+- path: ../../apps/kps
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+
+
+
+environments:
+  default:
+    values:
+      - clusterName: weeble
+      
+
+
+  

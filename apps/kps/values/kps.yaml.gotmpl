@@ -1,0 +1,52 @@
+grafana:
+  enabled: false
+  
+prometheus:    
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - prometheus.tonygilkerson.us
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    tls:
+    - hosts:
+      - prometheus.tonygilkerson.us
+      secretName: prometheus-tls 
+
+  prometheusSpec:
+    # To enable run this on the target namespace 
+    # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
+    ruleNamespaceSelector:
+      matchLabels:
+        tonygilkerson.us/alerting: enabled
+
+    # all rules
+    ruleSelector: {}
+    
+    # To enable run this on the target namespace 
+    # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
+    serviceMonitorNamespaceSelector:
+      matchLabels:
+        tonygilkerson.us/alerting: enabled
+
+    # All serviceMonitors  
+    serviceMonitorSelector: {}
+
+alertmanager:
+  alertmanagerSpec:
+
+    # To enable run this on the target namespace 
+    # kubectl label ns NAMESPACE tonygilkerson.us/alerting=enabled
+    alertmanagerConfigNamespaceSelector:
+      matchLabels:
+        tonygilkerson.us/alerting: enabled
+
+    alertmanagerConfigSelector:
+      matchLabels:
+        miletwo.us/alerting: enabled
+
+# kube-state-metrics:
+#   releaseLabel: false
+#   customLabels:
+#     foo: bar

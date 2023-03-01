@@ -1,0 +1,25 @@
+repositories:
+- name: grafana
+  url: https://grafana.github.io/helm-charts
+- name: prometheus-community 
+  url: https://prometheus-community.github.io/helm-charts
+
+
+releases:
+- name: grafana
+  namespace: kps
+  chart: grafana/grafana
+  version: 6.50.7
+  values:
+  - values/grafana.yaml.gotmpl
+  
+- name: kps
+  namespace: kps
+  chart: prometheus-community/kube-prometheus-stack
+  version: 45.4.0
+  values:
+  - values/kps.yaml.gotmpl
+
+
+commonLabels:
+  app: kps
