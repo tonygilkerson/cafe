@@ -62,7 +62,8 @@ spec:
                 miletwo.us/alerting: enabled
 
         kube-state-metrics:
-          releaseLabel: true
+          releaseLabel: false
+          customLabels: "foo: bar"
 
   destination:
     server: "https://kubernetes.default.svc"
