@@ -62,7 +62,7 @@ spec:
                 miletwo.us/alerting: enabled
 
         kube-state-metrics:
-          namespaceOverride: kps
+          releaseLabel: false
 
   destination:
     server: "https://kubernetes.default.svc"
