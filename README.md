@@ -30,9 +30,6 @@ mkdocs serve
 To run from my Mac
 
 ```sh
-KUBECONFIG=~/.kube/config-files/weeble.yaml kubectl cluster-info
-
-# Or for a given shell session
 export KUBECONFIG=~/.kube/config-files/weeble.yaml 
 kubectl cluster-info
 ```

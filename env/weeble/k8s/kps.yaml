@@ -60,7 +60,10 @@ spec:
             alertmanagerConfigSelector:
               matchLabels:
                 miletwo.us/alerting: enabled
-                  
+
+        kube-state-metrics:
+          namespaceOverride: kps
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kps
