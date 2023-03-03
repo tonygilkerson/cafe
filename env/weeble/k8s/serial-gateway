@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cafe
+  namespace: argocd
+spec:
+  destination:
+    namespace: iot
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: deploy/k8s
+    repoURL: 'https://github.com/tonygilkerson/serial-gateway.git'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated: {}

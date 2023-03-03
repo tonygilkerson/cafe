@@ -59,6 +59,13 @@ open http://localhost:8080
 
 >Expiration: This token expires on Wed, May 10 2023. To set a new expiration date, you must [regenerate the token](https://github.com/settings/tokens/1096032899)
 
+## Workflow permissions
+
+Go to [Actions->General->Workflow permissions](https://github.com/tonygilkerson/serial-gateway/settings/actions)
+
+* Select `Read and write permissions`
+* Check `Allow Github Actions to create and approve pull requests`
+
 ## Cert-Manager Fix
 
 **cert-manager** needs patched to fix this error
