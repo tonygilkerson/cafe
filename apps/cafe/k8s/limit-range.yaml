@@ -14,7 +14,7 @@ spec:
     max: # max and min define the limit range
       cpu: 1
       memory: 1Gi
-    min:
-      cpu: 500m
-      memory: 512Mi
+    # min:
+    #   cpu: 50m
+    #   memory: 32Mi
     type: Container
