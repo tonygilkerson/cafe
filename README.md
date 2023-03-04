@@ -145,7 +145,9 @@ On my workstation add the following:
 ```sh
 # ~/.ssh/config
 # 10.0.0.25 is the wan address of the dd-wrt router, it will port forward 22
+# My IOT cluster
 Host weeble
+  ForwardAgent yes
   Hostname 10.0.0.25
   User tgilkerson
 ```
