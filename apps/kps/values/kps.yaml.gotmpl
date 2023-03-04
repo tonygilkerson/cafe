@@ -31,7 +31,10 @@ prometheus:
         tonygilkerson.us/alerting: enabled
 
     # All serviceMonitors  
-    serviceMonitorSelector: {}
+    serviceMonitorSelector:
+      matchLabels:
+        release: kps
+     
 
 alertmanager:
   alertmanagerSpec:
