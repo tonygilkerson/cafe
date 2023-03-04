@@ -2,6 +2,15 @@
 
 Deployment scripts for The Cafe
 
+## Kubectl
+
+To run from my Mac
+
+```sh
+export KUBECONFIG=~/.kube/config-files/weeble.yaml 
+kubectl cluster-info
+```
+
 ## MicroK8s
 
 ```bash
@@ -23,15 +32,6 @@ Edit markdown files and test with
 
 ```sh
 mkdocs serve
-```
-
-## Kubectl
-
-To run from my Mac
-
-```sh
-export KUBECONFIG=~/.kube/config-files/weeble.yaml 
-kubectl cluster-info
 ```
 
 ## kps
@@ -100,4 +100,62 @@ Set the forward section to:
 
 ```text
 forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
+```
+
+## Initial Server Setup
+
+Starting with a clean install of Ubuntu
+
+```sh
+# Firewall
+sudo ufw status
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 16443 # k8s api
+sudo ufw enable
+
+# SSH
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install openssh-server
+
+sudo systemctl start ssh
+sudo systemctl stop ssh
+sudo systemctl restart ssh
+
+sudo systemctl status ssh
+
+# Containers
+sudo apt install podman-docker
+
+# git
+sudo apt install git
+git config --global user.name "Tony Gilkerson"
+git config --global user.email "tonygilkerson@yahoo.com"
+
+# microk8s
+sudo snap install microk8s --classic --channel=latest/stable
+```
+
+On my workstation add the following:
+
+```sh
+# ~/.ssh/config
+# 10.0.0.25 is the wan address of the dd-wrt router, it will port forward 22
+Host weeble
+  Hostname 10.0.0.25
+  User tgilkerson
+```
+
+## Dev Tools
+
+```sh
+sudo apt-get install curl
+
+cd ~/github
+git clone git@github.com:tonygilkerson/dotfiles.git
+./dev-tools/dev_tools_install.sh
 ```
