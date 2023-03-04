@@ -18,3 +18,66 @@ spec:
     #   cpu: 50m
     #   memory: 32Mi
     type: Container
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range
+  namespace: cafe
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 128m
+      memory: 128Mi
+    defaultRequest: # this section defines default requests
+      cpu: 64m
+      memory: 64Mi
+    max: # max and min define the limit range
+      cpu: 1
+      memory: 1Gi
+    # min:
+    #   cpu: 50m
+    #   memory: 32Mi
+    type: Container
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range
+  namespace: iot
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 128m
+      memory: 128Mi
+    defaultRequest: # this section defines default requests
+      cpu: 64m
+      memory: 64Mi
+    max: # max and min define the limit range
+      cpu: 1
+      memory: 1Gi
+    # min:
+    #   cpu: 50m
+    #   memory: 32Mi
+    type: Container
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range
+  namespace: kps
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 128m
+      memory: 128Mi
+    defaultRequest: # this section defines default requests
+      cpu: 64m
+      memory: 64Mi
+    max: # max and min define the limit range
+      cpu: 1
+      memory: 1Gi
+    # min:
+    #   cpu: 50m
+    #   memory: 32Mi
+    type: Container
