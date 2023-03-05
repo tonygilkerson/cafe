@@ -6,10 +6,10 @@ metadata:
 spec:
   limits:
   - default: # this section defines default limits
-      cpu: 128m
+      cpu: 64m
       memory: 128Mi
     defaultRequest: # this section defines default requests
-      cpu: 64m
+      cpu: 32m
       memory: 64Mi
     max: # max and min define the limit range
       cpu: 1
