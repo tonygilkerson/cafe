@@ -6,7 +6,13 @@ Here is the [official install](https://argo-cd.readthedocs.io/en/stable/getting_
 
 ```sh
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Grap the argocd k8s manifests
+# Edit the manifests as needed, ie add resource requests/limits
+curl -o apps/argocd/k8s/manifests.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Apply
+kubectl apply -n argocd -f apps/argocd/k8s
 ```
 
 ## Access UI
