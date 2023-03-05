@@ -137,6 +137,18 @@ Go to [Actions->General->Workflow permissions](https://github.com/tonygilkerson/
 * Select `Read and write permissions`
 * Check `Allow Github Actions to create and approve pull requests`
 
+## Github Auth 
+
+Reference: [this](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+```sh
+ssh-keygen -t ed25519 -C "tonygilkerson@yahoo.com"
+# Your will need to save your public key in Github
+Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
+```
+
+Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
+
 ---
 ## Old Archive Stuff
 
