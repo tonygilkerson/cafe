@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cafe
-          image: ghcr.io/tonygilkerson/cafe:v1.0.19
+          image: ghcr.io/tonygilkerson/cafe:v1.0.20
           ports:
             - name: http
               containerPort: 8080
