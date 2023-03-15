@@ -11,7 +11,7 @@ plugins:
 nav:
   - Home: index.md
   - Apps: apps/cafe/index.md
-  - Mail Mon: mail-mon-state.md
+  - MailMon: mail-mon-state.md
 
     
 
