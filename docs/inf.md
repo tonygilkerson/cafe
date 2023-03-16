@@ -1,6 +1,6 @@
-# Apps in the Cafe
+# Infrastructure Apps in the Cafe
 
-The Cafe hosts the following apps!
+The good stuff
 
 * **[Cafe](https://tonygilkerson.us)** - This documentation web site
 * **[ArgoCD](https://argocd.tonygilkerson.us)** - GitOps for the cluster

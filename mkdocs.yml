@@ -10,8 +10,8 @@ plugins:
   - search:
 nav:
   - Home: index.md
-  - Apps: apps.md
-  - Mail Mon: mail-mon-state.md
+  - Infrastructure: inf.md
+  - IoT: iot.md
 
     
 

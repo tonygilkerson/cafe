@@ -1,4 +1,6 @@
-# Mail Mon
+# IoT
+
+## Mail Mon
 
 The mail mon is deployed in the field and metrics are collected here in the Cafe
 
