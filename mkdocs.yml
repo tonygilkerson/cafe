@@ -3,14 +3,15 @@ theme:
   name: material
   # name: alabaster
   # font: false
-repo_url: https://github.com/tonygilkerson/cafe
+# repo_url: https://github.com/tonygilkerson/cafe
 plugins:
   - simple:
   - mermaid2:
   - search:
 nav:
   - Home: index.md
-  - Apps: apps/cafe/index.md
+  # - Apps: apps/cafe/index.md
+  - Apps: apps.md
   - Mail Mon: mail-mon-state.md
 
     

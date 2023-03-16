@@ -1,3 +1,6 @@
-# Mail Monitor
+# Mail Mon
 
-![state](img/mail-mon-state.drawio.png)
+The mail mon is deployed in the field and metrics are collected here in the Cafe
+
+* [Mail Mon Github Page](https://tonygilkerson.github.io/mail-mon/)
+* [Mail Mon Dashboard](todo)
