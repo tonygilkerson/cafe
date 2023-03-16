@@ -1,0 +1,3 @@
+mkdocs-alabaster
+mkdocs-mermaid2-plugin
+mkdocs-simple-plugin
