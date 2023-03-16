@@ -10,7 +10,6 @@ plugins:
   - search:
 nav:
   - Home: index.md
-  # - Apps: apps/cafe/index.md
   - Apps: apps.md
   - Mail Mon: mail-mon-state.md
 
