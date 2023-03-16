@@ -2,6 +2,7 @@
 
 Setup for the Cafe
 
+Githup Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
 ## Initial Server Setup
 
@@ -90,6 +91,8 @@ Edit markdown files and test with
 ```sh
 mkdocs serve
 ```
+
+Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
 
 ## ArgoCD UI
@@ -181,4 +184,3 @@ Set the forward section to:
 ```text
 forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
 ```
-
