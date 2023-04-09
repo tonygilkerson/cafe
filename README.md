@@ -68,6 +68,9 @@ git clone git@github.com:tonygilkerson/dotfiles.git
 ## MicroK8s
 
 ```bash
+# If microk8s is already installed an you want to start over run reset
+microk8s reset --destroy-storage
+
 microk8s enable ingress dns cert-manager hostpath-storage metrics-server
 microk8s config > ~/.kube/config
 ```
@@ -94,13 +97,13 @@ mkdocs serve
 
 Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
-
 ## ArgoCD UI
 
 Bootstrap the cluster
 
 * Manually install argocd see [argocd install](apps/argocd/index.md)
-* Manually install the apps of apps 
+* Manually install the apps of apps
+
    ```sh
    # create app namespaces
    kubectl create ns cafe
@@ -140,19 +143,20 @@ Go to [Actions->General->Workflow permissions](https://github.com/tonygilkerson/
 * Select `Read and write permissions`
 * Check `Allow Github Actions to create and approve pull requests`
 
-## Github Auth 
+## Github Auth
 
 Reference: [this](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 ```sh
 ssh-keygen -t ed25519 -C "tonygilkerson@yahoo.com"
-# Your will need to save your public key in Github
+# You will need to save your public key in Github
 Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
 ```
 
 Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
 
 ---
+
 ## Old Archive Stuff
 
 This no longer applies but might be useful as a reference. If you have not used this in a while then you can delete this section 2023-Mar
