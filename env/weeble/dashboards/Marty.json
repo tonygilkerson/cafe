@@ -40,6 +40,12 @@
       "id": "state-timeline",
       "name": "State timeline",
       "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
     }
   ],
   "annotations": {
@@ -81,23 +87,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "DOWN"
-                },
-                "1": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "UP"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -106,8 +96,16 @@
                 "value": null
               },
               {
-                "color": "red",
+                "color": "orange",
                 "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 2
+              },
+              {
+                "color": "green",
+                "value": 3
               }
             ]
           }
@@ -143,13 +141,90 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "up{job=\"serial-gateway\"}",
-          "legendFormat": "Marty",
+          "expr": "round(sum(increase(mbx_road_main_loop_heartbeat_count[15m])))",
+          "legendFormat": "Road",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Heartbeat",
+      "title": "Heartbeats",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "mbx_charger_charge_status",
+          "legendFormat": "Charger",
+          "range": true,
+          "refId": "Charger"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "mbx_charger_power_status",
+          "hide": false,
+          "legendFormat": "Power",
+          "range": true,
+          "refId": "Power"
+        }
+      ],
+      "title": "Charger Status",
       "type": "stat"
     },
     {
@@ -181,7 +256,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 8
       },
       "id": 9,
       "options": {
@@ -207,12 +282,12 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "round(increase(mbx_arrived_count[$__range]))",
+          "expr": "round(sum(increase(mbx_mule_alarm_count[$__range])))",
           "hide": false,
-          "interval": "1m",
-          "legendFormat": "Arrived",
+          "interval": "5m",
+          "legendFormat": "Mule",
           "range": true,
-          "refId": "Arrived"
+          "refId": "Mule"
         },
         {
           "datasource": {
@@ -220,37 +295,11 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "round(increase(mbx_departed_count[$__range]))",
-          "interval": "1m",
-          "legendFormat": "Departed",
+          "expr": "round(sum(increase(mbx_mailbox_door_opened_count[$__range])))",
+          "interval": "5m",
+          "legendFormat": "Door",
           "range": true,
-          "refId": "Departed"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_false_count[$__range]))",
-          "hide": true,
-          "interval": "1m",
-          "legendFormat": "False",
-          "range": true,
-          "refId": "False"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_error_count[$__range]))",
-          "hide": true,
-          "interval": "1m",
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Error"
+          "refId": "Door"
         }
       ],
       "title": "TLDR ",
@@ -261,128 +310,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 16
       },
       "id": 15,
       "title": "Row title",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 1
-              },
-              {
-                "color": "super-light-yellow",
-                "value": 3
-              },
-              {
-                "color": "orange",
-                "value": 4
-              },
-              {
-                "color": "red",
-                "value": 5
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 13
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "9.3.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_arrived_count[$__range]))",
-          "hide": true,
-          "interval": "1m",
-          "legendFormat": "Arrived",
-          "range": true,
-          "refId": "Arrived"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_departed_count[$__range]))",
-          "hide": true,
-          "interval": "1m",
-          "legendFormat": "Departed",
-          "range": true,
-          "refId": "Departed"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_false_count[$__range]))",
-          "hide": false,
-          "interval": "1m",
-          "legendFormat": "False",
-          "range": true,
-          "refId": "False"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_error_count[$__range]))",
-          "hide": false,
-          "interval": "1m",
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Error"
-        }
-      ],
-      "title": "Problems?",
-      "type": "stat"
     },
     {
       "datasource": {
@@ -420,7 +352,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 17
       },
       "id": 7,
       "options": {
@@ -446,59 +378,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "increase(mbx_arrived_count[5m])",
+          "expr": "increase(mbx_mule_alarm_count[5m])",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "5m",
           "legendFormat": "Arrived",
           "range": true,
-          "refId": "Arrived"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(mbx_departed_count[5m])",
-          "hide": false,
-          "instant": false,
-          "interval": "5m",
-          "legendFormat": "Departed",
-          "range": true,
-          "refId": "Departed"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(mbx_false_count[5m])",
-          "hide": false,
-          "instant": false,
-          "interval": "5m",
-          "legendFormat": "False",
-          "range": true,
-          "refId": "False"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "increase(mbx_error_count[5m])",
-          "hide": false,
-          "instant": false,
-          "interval": "5m",
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Error"
+          "refId": "Mule"
         }
       ],
       "title": "Timeline",
@@ -509,122 +396,48 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Counts cars passing by my mailbox and lets me know when the mail has arrived.",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 29
-      },
-      "id": 2,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "9.3.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "round(increase(mbx_arrived_count[$__range]))",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Arrived",
-          "range": true,
-          "refId": "Arrived"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_departed_count[$__range]))",
-          "hide": false,
-          "legendFormat": "Departed",
-          "range": true,
-          "refId": "Departed"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_false_count[$__range]))",
-          "hide": false,
-          "legendFormat": "False",
-          "range": true,
-          "refId": "False"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "round(increase(mbx_error_count[$__range]))",
-          "hide": false,
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Error"
-        }
-      ],
-      "title": "Count in the select time range",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -639,7 +452,253 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 38
+        "y": 25
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "mbx_road_main_loop_heartbeat_count",
+          "legendFormat": "Heartbeat",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Heartbeat",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "mbx_temperature_fahrenheit",
+          "legendFormat": "Temperature",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 41
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "mbx_charger_charge_status",
+          "legendFormat": "Charger",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Charger",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 49
       },
       "id": 11,
       "options": {
@@ -664,10 +723,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "mbx_arrived_count",
-          "legendFormat": "Arrived",
+          "expr": "mbx_mule_alarm_count",
+          "legendFormat": "Mule",
           "range": true,
-          "refId": "Arrived"
+          "refId": "Mule"
         },
         {
           "datasource": {
@@ -675,11 +734,11 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "mbx_departed_count",
+          "expr": "mbx_mailbox_door_opened_count",
           "hide": false,
-          "legendFormat": "Departed",
+          "legendFormat": "Door",
           "range": true,
-          "refId": "Departed"
+          "refId": "Door"
         },
         {
           "datasource": {
@@ -687,30 +746,18 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "mbx_false_count",
+          "expr": "mbx_heard_sound_count",
           "hide": false,
-          "legendFormat": "False",
+          "legendFormat": "Heard",
           "range": true,
-          "refId": "False"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "mbx_error_count",
-          "hide": false,
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Error"
+          "refId": "Heard"
         }
       ],
       "title": "Absolute Counts",
       "type": "bargauge"
     }
   ],
-  "refresh": false,
+  "refresh": "5s",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
@@ -720,13 +767,13 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Marty",
-  "uid": "ekPVvvs4z",
-  "version": 14,
+  "uid": "ekPVvvs4a",
+  "version": 10,
   "weekStart": ""
 }
