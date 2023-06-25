@@ -46,7 +46,7 @@ spec:
   limits:
   - default: # this section defines default limits
       cpu: 64m
-      memory: 128Mi
+      memory: 256Mi
     type: Container
 ---
 apiVersion: v1

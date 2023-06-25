@@ -33,7 +33,8 @@ prometheus:
     # All serviceMonitors  
     serviceMonitorSelector:
       matchLabels:
-        release: kps
+        tonygilkerson.us/alerting: enabled
+        # release: kps
      
     resources:
       limits: 
@@ -44,6 +45,19 @@ prometheus:
         memory: 2048Mi
 
 alertmanager:
+  enabled: true
+  
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - alert.tonygilkerson.us
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    tls:
+    - hosts:
+      - alert.tonygilkerson.us
+      secretName: alert-tls 
   alertmanagerSpec:
 
     # To enable run this on the target namespace 
@@ -54,7 +68,7 @@ alertmanager:
 
     alertmanagerConfigSelector:
       matchLabels:
-        miletwo.us/alerting: enabled
+        tonygilkerson.us/alerting: enabled
 
 # kube-state-metrics:
 #   releaseLabel: false
