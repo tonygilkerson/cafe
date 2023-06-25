@@ -128,6 +128,16 @@ kubectl label ns iot tonygilkerson.us/alerting=enabled
 kubectl label ns cafe tonygilkerson.us/alerting=enabled
 ```
 
+### kps upgrade
+
+Apply the latest CRD then update the release version in the helmfile and apply.
+
+```sh
+cd ~/github/kube-prometheus-stack
+git clone https://github.com/prometheus-community/helm-charts.git
+kubectl apply --server-side -f ~/github/kube-prometheus-stack/helm-charts/charts/kube-prometheus-stack/crds --force-conflicts
+```
+
 ## Github Actions Setup
 
 * Create a [token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **repo** and **write:packages** scopes.

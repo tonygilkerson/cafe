@@ -9,14 +9,14 @@ releases:
 - name: grafana
   namespace: kps
   chart: grafana/grafana
-  version: 6.50.7
+  version: 6.57.3
   values:
   - values/grafana.yaml.gotmpl
   
 - name: kps
   namespace: kps
   chart: prometheus-community/kube-prometheus-stack
-  version: 45.4.0
+  version: 47.0.0
   values:
   - values/kps.yaml.gotmpl
 
