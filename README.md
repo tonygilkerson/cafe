@@ -142,6 +142,9 @@ kubectl -n cafe create secret generic slack-webhook-url-mbx-heartbeat --from-lit
 
 SLACK_WEBHOOK_URL="REPLACE-ME"
 kubectl -n cafe create secret generic slack-webhook-url-mbx-notifications --from-literal=url=$SLACK_WEBHOOK_URL
+
+SLACK_WEBHOOK_URL="https://slack.com/api/chat.postMessage"
+kubectl -n cafe create secret generic slack-webhook-url-chat --from-literal=url=$SLACK_WEBHOOK_URL
 ```
 
 ### kps upgrade

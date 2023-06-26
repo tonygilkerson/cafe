@@ -67,7 +67,9 @@ spec:
     - name: slack-notifications
       slackConfigs:
         - channel: '#mbx-notifications'
-          apiURL: https://slack.com/api/chat.postMessage
+          apiURL:
+            name: slack-webhook-url-chat
+            key: url
           httpConfig:
             bearerTokenSecret:
               name: slack-webhook-url-mbx-notifications
