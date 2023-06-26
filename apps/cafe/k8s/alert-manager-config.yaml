@@ -60,8 +60,8 @@ spec:
   route:
     groupBy: ['job']
     groupWait: 1m
-    groupInterval: 5m
-    repeatInterval: 12h
+    groupInterval: 1m
+    repeatInterval: 1m
     receiver: slack-notifications
   receivers:
     - name: slack-notifications
