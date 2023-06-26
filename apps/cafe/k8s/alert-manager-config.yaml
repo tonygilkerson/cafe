@@ -53,7 +53,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: watchdog-test
-  namespace: kps
+  namespace: cafe
   labels:
     tonygilkerson.us/alerting: enabled
 spec:
@@ -64,15 +64,15 @@ spec:
     repeatInterval: 1m
     receiver: slack-notifications
   receivers:
-    - name: slack-notifications
-      slackConfigs:
-        - channel: '#mbx-notifications'
-          apiURL:
-            name: slack-webhook-url-chat
-            key: url
-          # httpConfig:
-          #   bearerTokenSecret:
-          #     name: slack-webhook-url-mbx-notifications
-          #     key: url
+  - name: slack-notifications
+    slackConfigs:
+    - channel: '#mbx-notifications'
+      apiURL:
+        name: slack-webhook-url-chat
+        key: url
+      # httpConfig:
+      #   bearerTokenSecret:
+      #     name: slack-webhook-url-mbx-notifications
+      #     key: url
 
 
