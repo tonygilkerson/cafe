@@ -53,35 +53,36 @@ spec:
   #       name: slack-webhook-url-mbx-heartbeat
   - name: slack-notifications
     slackConfigs:
-    - channel: '#mbx-notifications'
+    # - channel: '#mbx-notifications'
+    - channel: '#mbx-door'
       apiURL:
         name: slack-webhook-url-mbx-notifications
         key: url        
----
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: AlertmanagerConfig
-metadata:
-  name: watchdog-test
-  namespace: cafe
-  labels:
-    tonygilkerson.us/alerting: enabled
-spec:
-  route:
-    groupBy: ['job']
-    groupWait: 1m
-    groupInterval: 1m
-    repeatInterval: 1m
-    receiver: slack-notifications
-    matchers:
-    - matchType: =
-      name: alertname
-      value: Watchdog    
-  receivers:
-  - name: slack-notifications
-    slackConfigs:
-    - channel: '#mbx-notifications'
-      apiURL:
-        name: slack-webhook-url-mbx-notifications
-        key: url  
+# ---
+# apiVersion: monitoring.coreos.com/v1alpha1
+# kind: AlertmanagerConfig
+# metadata:
+#   name: watchdog-test
+#   namespace: cafe
+#   labels:
+#     tonygilkerson.us/alerting: enabled
+# spec:
+#   route:
+#     groupBy: ['job']
+#     groupWait: 1m
+#     groupInterval: 1m
+#     repeatInterval: 1m
+#     receiver: slack-notifications
+#     matchers:
+#     - matchType: =
+#       name: alertname
+#       value: Watchdog    
+#   receivers:
+#   - name: slack-notifications
+#     slackConfigs:
+#     - channel: '#mbx-notifications'
+#       apiURL:
+#         name: slack-webhook-url-mbx-notifications
+#         key: url  
 
 
