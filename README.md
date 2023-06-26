@@ -128,6 +128,16 @@ kubectl label ns iot tonygilkerson.us/alerting=enabled
 kubectl label ns cafe tonygilkerson.us/alerting=enabled
 ```
 
+Create slack url secret:
+
+```sh
+SLACK_WEBHOOK_URL="REPLACE-ME"
+kubectl -n cafe create secret generic slack-webhook-url-mbx-door --from-literal=url=$SLACK_WEBHOOK_URL
+
+SLACK_WEBHOOK_URL="REPLACE-ME"
+kubectl -n cafe create secret generic slack-webhook-url-mbx-cars --from-literal=url=$SLACK_WEBHOOK_URL
+```
+
 ### kps upgrade
 
 Apply the latest CRD then update the release version in the helmfile and apply.

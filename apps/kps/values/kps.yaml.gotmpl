@@ -21,6 +21,11 @@ prometheus:
       matchLabels:
         tonygilkerson.us/alerting: enabled
 
+    ## If true, a nil or {} value for prometheus.prometheusSpec.ruleSelector will cause the
+    ## prometheus resource to be created with selectors based on values in the helm deployment,
+    ## which will also match the PrometheusRule resources created
+    ##
+    ruleSelectorNilUsesHelmValues: false
     ## If {}, select all PrometheusRules
     ruleSelector: {}
     
@@ -29,6 +34,12 @@ prometheus:
     serviceMonitorNamespaceSelector:
       matchLabels:
         tonygilkerson.us/alerting: enabled
+
+    ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
+    ## prometheus resource to be created with selectors based on values in the helm deployment,
+    ## which will also match the servicemonitors created
+    ##
+    serviceMonitorSelectorNilUsesHelmValues: false
 
     # All serviceMonitors  
     ## If {}, select all ServiceMonitors

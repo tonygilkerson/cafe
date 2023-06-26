@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: mbx
+  namespace: cafe
+  labels:
+    tonygilkerson.us/alerting: enabled
+spec:
+  route:
+    groupBy: ['job']
+    groupWait: 3s
+    groupInterval: 15m
+    repeatInterval: 12h
+    receiver: webhook
+    matchers:
+    - matchType: =
+      name: alertname
+      value: PodBoom        
+  receivers:
+  - name: webhook
+    webhookConfigs:
+    - urlSecret: 
+        key: url
+        name: slack-webhook-url-mbx-door
