@@ -79,7 +79,7 @@ spec:
   receivers:
   - name: slack-notifications
     slackConfigs:
-    - channel: '#mbx-door'
+    - channel: '#mbx-notifications'
       apiURL:
         name: slack-webhook-url-mbx-notifications
         key: url  
