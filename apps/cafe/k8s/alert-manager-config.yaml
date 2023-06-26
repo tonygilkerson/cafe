@@ -42,8 +42,9 @@ spec:
       name: alertname
       value: MbxHeartbeat        
   receivers:
-  - name: webhook
-    webhookConfigs:
-    - urlSecret: 
+  - name: slack-notifications
+    slackConfigs:
+    - channel: "#mbx-notifications"
+      apiURL:
+        name: slack-webhook-url-mbx-notifications
         key: url
-        name: slack-webhook-url-mbx-heartbeat
