@@ -21,7 +21,7 @@ prometheus:
       matchLabels:
         tonygilkerson.us/alerting: enabled
 
-    # all rules
+    ## If {}, select all PrometheusRules
     ruleSelector: {}
     
     # To enable run this on the target namespace 
@@ -31,10 +31,8 @@ prometheus:
         tonygilkerson.us/alerting: enabled
 
     # All serviceMonitors  
-    serviceMonitorSelector:
-      matchLabels:
-        tonygilkerson.us/alerting: enabled
-        # release: kps
+    ## If {}, select all ServiceMonitors
+    serviceMonitorSelector: {}
      
     resources:
       limits: 
@@ -46,7 +44,7 @@ prometheus:
 
 alertmanager:
   enabled: true
-  
+
   ingress:
     enabled: true
     path: /
