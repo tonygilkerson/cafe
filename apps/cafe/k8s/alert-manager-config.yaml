@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
-  name: mbx
+  name: mbx-door
   namespace: cafe
   labels:
     tonygilkerson.us/alerting: enabled
@@ -15,7 +15,7 @@ spec:
     matchers:
     - matchType: =
       name: alertname
-      value: PodBoom        
+      value: MbxDoorOpen        
   receivers:
   - name: webhook
     webhookConfigs:
