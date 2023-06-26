@@ -27,32 +27,29 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
-  name: mbx-heartbeat
+  name: mbx-cars
   namespace: cafe
   labels:
     tonygilkerson.us/alerting: enabled
 spec:
   route:
     groupBy: ['job']
-    groupWait: 3s
-    groupInterval: 1m
+    groupWait: 1m
+    groupInterval: 15m
     repeatInterval: 12h
-    # groupWait: 3s
-    # groupInterval: 15m
-    # repeatInterval: 12h
-    # receiver: webhook-mbx-heartbeat
-    receiver: slack-notifications
+    receiver: slack-notifications-mbx-cars
     matchers:
     - matchType: =
       name: alertname
-      value: MbxHeartbeat        
+      value: MbxDoorOpen        
   receivers:
-  - name: slack-notifications
+  - name: slack-notifications-mbx-cars
     slackConfigs:
-    - channel: '#mbx-notifications'
+    - channel: '#mbx-cars'
       apiURL:
-        name: slack-webhook-url-mbx-notifications
-        key: url        
+        name: slack-webhook-url-mbx-cars
+        key: url
+ 
 
 
 

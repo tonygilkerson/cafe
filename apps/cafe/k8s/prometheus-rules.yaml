@@ -18,6 +18,15 @@ spec:
       labels:
         severity: critical
         namespace: cafe
+    - alert: MbxCars
+      expr: round(sum(increase(mbx_mule_alarm_count[5m]))) > 0
+      for: 0m
+      annotations:
+        description: Car passing by!
+        text: Car passing by!
+      labels:
+        severity: critical
+        namespace: cafe
     - alert: MbxHeartbeat
       expr: round(sum(increase(mbx_road_main_loop_heartbeat_count[5m]))) > 0
       for: 0m
