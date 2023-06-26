@@ -72,10 +72,14 @@ spec:
     groupInterval: 1m
     repeatInterval: 1m
     receiver: slack-notifications
+    matchers:
+    - matchType: =
+      name: alertname
+      value: Watchdog    
   receivers:
   - name: slack-notifications
     slackConfigs:
-    - channel: '#mbx-notifications'
+    - channel: '#mbx-door'
       apiURL:
         name: slack-webhook-url-mbx-notifications
         key: url  
