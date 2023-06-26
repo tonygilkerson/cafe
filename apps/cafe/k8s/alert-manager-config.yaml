@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
-  name: mbx-door
+  name: mbx-door-open
   namespace: cafe
   labels:
     tonygilkerson.us/alerting: enabled
