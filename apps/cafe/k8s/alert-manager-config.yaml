@@ -41,7 +41,7 @@ spec:
     matchers:
     - matchType: =
       name: alertname
-      value: MbxDoorOpen        
+      value: MbxCars        
   receivers:
   - name: slack-notifications-mbx-cars
     slackConfigs:
