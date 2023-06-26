@@ -8,8 +8,8 @@ metadata:
 spec:
   route:
     groupBy: ['job']
-    groupWait: 1m
-    groupInterval: 15m
+    groupWait: 3s
+    groupInterval: 5s
     repeatInterval: 12h
     receiver: slack-notifications-mbx-door
     matchers:
@@ -34,8 +34,8 @@ metadata:
 spec:
   route:
     groupBy: ['job']
-    groupWait: 1m
-    groupInterval: 15m
+    groupWait: 3s
+    groupInterval: 5s
     repeatInterval: 12h
     receiver: slack-notifications-mbx-cars
     matchers:
