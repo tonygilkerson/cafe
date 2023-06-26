@@ -39,17 +39,24 @@ spec:
     # groupWait: 3s
     # groupInterval: 15m
     # repeatInterval: 12h
-    receiver: webhook-mbx-heartbeat
+    # receiver: webhook-mbx-heartbeat
+    receiver: slack-notifications
     matchers:
     - matchType: =
       name: alertname
       value: MbxHeartbeat        
   receivers:
-  - name: webhook-mbx-heartbeat
-    webhookConfigs:
-    - urlSecret: 
-        key: url
-        name: slack-webhook-url-mbx-heartbeat
+  # - name: webhook-mbx-heartbeat
+  #   webhookConfigs:
+  #   - urlSecret: 
+  #       key: url
+  #       name: slack-webhook-url-mbx-heartbeat
+  - name: slack-notifications
+    slackConfigs:
+    - channel: '#mbx-notifications'
+      apiURL:
+        name: slack-webhook-url-mbx-notifications
+        key: url        
 ---
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
