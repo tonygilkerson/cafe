@@ -70,9 +70,9 @@ spec:
           apiURL:
             name: slack-webhook-url-chat
             key: url
-          httpConfig:
-            bearerTokenSecret:
-              name: slack-webhook-url-mbx-notifications
-              key: url
+          # httpConfig:
+          #   bearerTokenSecret:
+          #     name: slack-webhook-url-mbx-notifications
+          #     key: url
 
 
