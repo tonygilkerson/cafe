@@ -136,6 +136,9 @@ kubectl -n cafe create secret generic slack-webhook-url-mbx-door --from-literal=
 
 SLACK_WEBHOOK_URL="REPLACE-ME"
 kubectl -n cafe create secret generic slack-webhook-url-mbx-cars --from-literal=url=$SLACK_WEBHOOK_URL
+
+SLACK_WEBHOOK_URL="REPLACE-ME"
+kubectl -n cafe create secret generic slack-webhook-url-mbx-heartbeat --from-literal=url=$SLACK_WEBHOOK_URL
 ```
 
 ### kps upgrade

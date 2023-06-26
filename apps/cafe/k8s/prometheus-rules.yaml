@@ -17,4 +17,12 @@ spec:
       labels:
         severity: critical
         namespace: cafe
+    - alert: MbxHeartbeat
+      expr: round(sum(increase(mbx_road_main_loop_heartbeat_count[5m]))) > 0
+      for: 0m
+      annotations:
+        description: Heartbeat alert
+      labels:
+        severity: critical
+        namespace: cafe
 
