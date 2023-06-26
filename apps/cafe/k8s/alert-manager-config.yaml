@@ -64,7 +64,7 @@ spec:
     repeatInterval: 1m
     receiver: webhook-watchdog
   receivers:
-  - name: webhook
+  - name: webhook-watchdog
     webhookConfigs:
     - urlSecret: 
         key: url
