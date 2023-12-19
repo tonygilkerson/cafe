@@ -9,6 +9,15 @@ Githup Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.githu
 Starting with a clean install of Ubuntu
 
 ```sh
+# Look at current setting
+$ sudo systemctl get-default
+graphical.target
+
+# Set to text mode
+# You will still be able to use X by typing startx after you logged in.
+sudo systemctl enable multi-user.target --force
+sudo systemctl set-default multi-user.target
+
 # Firewall
 sudo ufw status
 sudo ufw default allow outgoing
