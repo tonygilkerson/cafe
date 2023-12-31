@@ -13,6 +13,8 @@ define help_info
 	@echo "    If <chart-name> is specified then only that chart is upgraded, otherwise all charts listed in external-charts.txt file are upgraded."
 	@echo "    IMPORTANT: Use git to review changes under external-charts folder. Make sure you don't stomp on custom changes."
 	@echo ""
+	@echo "  $$ make getSerialGateway"
+	@echo "    This will pull the latest chart for the serial-gateway"
 
 endef
 
@@ -23,6 +25,11 @@ externalCharts:
 	@echo "Pull external charts"
 	bin/external-charts.sh --chart-list external-charts.txt --output ${PWD}/external-charts --chart "$(chart)"
 
-upgradeArgo:
-	@echo "Pull Argo manifests"
-	curl -o apps/argocd/k8s/manifests.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+getSerialGateway:
+	@echo "Get Serial Gateway"
+	rm -fr .temp/serial-gateway || true
+	rm -rf external-charts/serial-gateway || true
+	mkdir -p .temp
+	git -C .temp clone git@github.com:tonygilkerson/serial-gateway.git
+	cp -r .temp/serial-gateway/charts/serial-gateway external-charts/
+	

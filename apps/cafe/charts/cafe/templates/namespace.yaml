@@ -1,0 +1,24 @@
+# 
+# The cafe namespace is created when this chart is deployed
+# So we don't need to do it here
+#
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name:  cafe
+#   labels:
+#     tonygilkerson.us/alerting: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  iot
+  labels:
+    tonygilkerson.us/alerting: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  kps
+  labels:
+    tonygilkerson.us/alerting: enabled

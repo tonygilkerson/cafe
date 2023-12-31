@@ -1,0 +1,10 @@
+
+releases:
+- name: serial-gateway
+  namespace: iot
+  chart: ../../external-charts/serial-gateway
+  # values:
+  # - values/cafe.yaml.gotmpl
+
+commonLabels:
+  app: serial-gateway

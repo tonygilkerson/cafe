@@ -1,0 +1,10 @@
+
+releases:
+- name: cafe
+  namespace: cafe
+  chart: charts/cafe
+  # values:
+  # - values/cafe.yaml.gotmpl
+
+commonLabels:
+  app: cafe

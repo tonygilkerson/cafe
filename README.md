@@ -115,7 +115,8 @@ Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https:/
 
 Bootstrap the cluster
 
-* Manually install argocd see [argocd install](apps/argocd/README.md)
+* Manually install argocd see [argocd README](apps/argocd/README.md)
+* Manually install kps see [kps README](apps/kps/README.md)
 * Manually install the apps of apps
 
    ```sh
@@ -136,10 +137,6 @@ Need to label namespaces that you want to monitor
 # Deploy the visibility stack
 # Use "sync" the first time to avoid "no CRD" error
 helmfile -i -f env/weeble/helmfile.yaml sync
-
-kubectl label ns kps tonygilkerson.us/alerting=enabled
-kubectl label ns iot tonygilkerson.us/alerting=enabled
-kubectl label ns cafe tonygilkerson.us/alerting=enabled
 ```
 
 Create slack url secret:
@@ -150,16 +147,6 @@ kubectl -n cafe create secret generic slack-webhook-url-mbx-door --from-literal=
 
 SLACK_WEBHOOK_URL="REPLACE-ME"
 kubectl -n cafe create secret generic slack-webhook-url-mbx-cars --from-literal=url=$SLACK_WEBHOOK_URL
-```
-
-### kps upgrade
-
-Apply the latest CRD then update the release version in the helmfile and apply.
-
-```sh
-cd ~/github/kube-prometheus-stack
-git clone https://github.com/prometheus-community/helm-charts.git
-kubectl apply --server-side -f ~/github/kube-prometheus-stack/helm-charts/charts/kube-prometheus-stack/crds --force-conflicts
 ```
 
 ## Github Actions Setup

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serial-gateway
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: serial-gateway
+  template:
+    metadata:
+      labels:
+        app: serial-gateway
+    spec:
+      containers:
+        - name: serial-gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 125m
+              memory: 128Mi
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERIAL_PORT
+              value: /dev/ttyUSB0
+          volumeMounts:
+            - name: serial-device
+              mountPath: /dev
+          securityContext:
+            privileged: true
+            # runAsUser: 0              
+      volumes:
+        - name: serial-device
+          hostPath:
+            path: /dev

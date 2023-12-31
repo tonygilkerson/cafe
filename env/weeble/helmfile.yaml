@@ -5,6 +5,12 @@ helmfiles:
 - path: ../../apps/kps
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/cafe
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/serial-gateway
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 
