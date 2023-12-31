@@ -1,0 +1,18 @@
+dependencies:
+- name: crds
+  repository: ""
+  version: 0.0.0
+- name: kube-state-metrics
+  repository: ""
+  version: 5.15.*
+- name: prometheus-node-exporter
+  repository: ""
+  version: 4.24.*
+- name: grafana
+  repository: ""
+  version: 7.0.*
+- name: prometheus-windows-exporter
+  repository: ""
+  version: 0.1.*
+digest: sha256:b09119000e442dc91c722619ec964247915d78491d9dfd2ea0455a589ee8e60c
+generated: "2023-12-30T19:49:02.065179-05:00"

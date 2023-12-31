@@ -40,6 +40,12 @@ git config --global user.email "tonygilkerson@yahoo.com"
 
 # microk8s
 sudo snap install microk8s --classic --channel=latest/stable
+
+# microk8s upgrade
+K8SVERSION=1.29
+sudo snap refresh microk8s --channel=$K8SVERSION/stable
+microk8s stop
+microk8s start
 ```
 
 On my workstation add the following:
@@ -63,7 +69,6 @@ cd ~/github
 git clone git@github.com:tonygilkerson/dotfiles.git
 ./dev-tools/dev_tools_install.sh
 ```
-
 
 ## MicroK8s
 
@@ -101,7 +106,7 @@ Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https:/
 
 Bootstrap the cluster
 
-* Manually install argocd see [argocd install](apps/argocd/index.md)
+* Manually install argocd see [argocd install](apps/argocd/README.md)
 * Manually install the apps of apps
 
    ```sh
