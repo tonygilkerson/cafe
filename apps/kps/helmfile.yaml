@@ -3,14 +3,12 @@ releases:
 - name: grafana
   namespace: kps
   chart: ../../external-charts/kube-prometheus-stack/charts/grafana
-  version: 6.50.7
   values:
   - values/grafana.yaml.gotmpl
   
 - name: kps
   namespace: kps
   chart: ../../external-charts/kube-prometheus-stack
-  version: 45.4.0
   values:
   - values/kps.yaml.gotmpl
 

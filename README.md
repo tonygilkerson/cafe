@@ -9,6 +9,15 @@ Githup Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.githu
 Starting with a clean install of Ubuntu
 
 ```sh
+# Look at current setting
+$ sudo systemctl get-default
+graphical.target
+
+# Set to text mode
+# You will still be able to use X by typing startx after you logged in.
+sudo systemctl enable multi-user.target --force
+sudo systemctl set-default multi-user.target
+
 # Firewall
 sudo ufw status
 sudo ufw default allow outgoing
@@ -131,6 +140,26 @@ helmfile -i -f env/weeble/helmfile.yaml sync
 kubectl label ns kps tonygilkerson.us/alerting=enabled
 kubectl label ns iot tonygilkerson.us/alerting=enabled
 kubectl label ns cafe tonygilkerson.us/alerting=enabled
+```
+
+Create slack url secret:
+
+```sh
+SLACK_WEBHOOK_URL="REPLACE-ME"
+kubectl -n cafe create secret generic slack-webhook-url-mbx-door --from-literal=url=$SLACK_WEBHOOK_URL
+
+SLACK_WEBHOOK_URL="REPLACE-ME"
+kubectl -n cafe create secret generic slack-webhook-url-mbx-cars --from-literal=url=$SLACK_WEBHOOK_URL
+```
+
+### kps upgrade
+
+Apply the latest CRD then update the release version in the helmfile and apply.
+
+```sh
+cd ~/github/kube-prometheus-stack
+git clone https://github.com/prometheus-community/helm-charts.git
+kubectl apply --server-side -f ~/github/kube-prometheus-stack/helm-charts/charts/kube-prometheus-stack/crds --force-conflicts
 ```
 
 ## Github Actions Setup

@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mbx-road
+  namespace: cafe
+  labels:
+     tonygilkerson.us/alerting: enabled
+spec:
+  groups:
+  - name: road
+    rules:
+    - alert: MbxDoorOpen
+      expr: round(sum(increase(mbx_mailbox_door_opened_count[1m]))) > 0
+      for: 0m
+      annotations:
+        description: You got mail!
+        text: You got mail!
+      labels:
+        severity: critical
+        namespace: cafe
+    - alert: MbxCars
+      expr: round(sum(increase(mbx_mule_alarm_count[1m]))) > 0
+      for: 0m
+      annotations:
+        description: Car passing by!
+        text: Car passing by!
+      labels:
+        severity: critical
+        namespace: cafe
+
+
