@@ -39,6 +39,9 @@ sudo systemctl restart ssh
 
 sudo systemctl status ssh
 
+# After executing the command the screen will turn off automatically every minute (if idle). 
+setterm --blank 1
+
 # Containers
 sudo apt install podman-docker
 
