@@ -17,9 +17,16 @@ spec:
       labels:
         app: castopod
     spec:
+      volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: castopod-media
       containers:
       - image: castopod/castopod:latest
         name: castopod
+        volumeMounts:
+        - mountPath: /var/www/castopod/public/media
+          name: media
         ports:
         - containerPort: 8000
         resources: {}
@@ -49,3 +56,4 @@ spec:
             secretKeyRef:
               name: castopod
               key: cpPassword
+

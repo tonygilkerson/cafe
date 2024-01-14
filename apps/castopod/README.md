@@ -9,7 +9,7 @@ To install or upgrade the mariadb charts, first edit the version number in `exte
 make externalCharts chart=mariadb
 
 # Deploy
-helmfile -f env/weeble/helmfile.yaml -l app=castopod apply --skip-deps
+helmfile -f env/weeble/helmfile.yaml -l app=castopod sync --skip-deps
 ```
 
 ## Castopod Setup
@@ -23,3 +23,11 @@ password: ****
 ```
 
 Then you can go to `https://castopod.tonygilkerson.us/cp-admin`
+
+## Storage
+
+The two PVC created by this app are used for storing the castopod media and db stuff.  If you want to delete then reinstall and still retain the data then you will need to edit the PVs and set the reclaim policy to `Retain`
+
+```sh
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
