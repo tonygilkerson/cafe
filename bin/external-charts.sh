@@ -1,6 +1,8 @@
 #!/bin/bash
-# set -x # trace
+set -x # trace
 set -e # exit when any command fails
+
+tmpdir=".temp/external-charts-ace"
 
 usage () {
     echo "USAGE: ${0##*/} [--chart-list external-charts.txt] [--output external-charts] [--chart <chart-name>]"

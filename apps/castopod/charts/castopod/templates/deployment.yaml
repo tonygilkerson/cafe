@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: castopod
+  name: castopod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: castopod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: castopod
+    spec:
+      containers:
+      - image: castopod/castopod:latest
+        name: castopod
+        ports:
+        - containerPort: 8000
+        resources: {}
+        env:
+        - name: CP_DISABLE_HTTPS
+          value: "1"
+        - name: CP_DATABASE_HOSTNAME
+          value: mariadb
+        - name: CP_MEDIA_BASEURL
+          value: https://castopod.{{ .Values.domain }}
+        - name: CP_BASEURL
+          value: https://castopod.{{ .Values.domain }}
+        - name: CP_ANALYTICS_SALT
+          value: {{ randAlphaNum 64 | b64enc }}
+        - name: CP_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: castopod
+              key: cpDb
+        - name: CP_DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: castopod
+              key: cpUser
+        - name: CP_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: castopod
+              key: cpPassword

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: castopod
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: public
+  rules:
+  - host: castopod.{{ .Values.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: castopod
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - castopod.{{ .Values.domain }}
+    secretName: castopod-tls
+

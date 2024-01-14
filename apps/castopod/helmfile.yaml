@@ -1,0 +1,17 @@
+
+releases:
+- name: castopod
+  namespace: castopod
+  chart: charts/castopod
+  values:
+  - values/castopod.yaml.gotmpl
+  
+- name: mariadb
+  namespace: castopod
+  chart: ../../external-charts/mariadb
+  values:
+  - values/mariadb.yaml.gotmpl
+
+
+commonLabels:
+  app: castopod

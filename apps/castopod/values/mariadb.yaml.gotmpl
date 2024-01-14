@@ -1,0 +1,32 @@
+settings:
+  existingSecret: castopod
+  ## The root user password
+  rootPassword:
+    secretKey: cpPassword # The key in the castopod secret
+    
+userDatabase:
+  existingSecret: castopod
+  name:
+    secretKey: cpDb # The key in the castopod secret
+  user:
+    secretKey: cpUser # The key in the castopod secret
+  password:
+    secretKey: cpPassword # The key in the castopod secret
+
+# Resource limits and requests
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Resource limits and requests
+initResources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

@@ -11,6 +11,9 @@ helmfiles:
 - path: ../../apps/serial-gateway
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/castopod
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

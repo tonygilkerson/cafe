@@ -1,1 +1,2 @@
 kube-prometheus-stack,https://prometheus-community.github.io/helm-charts,55.5.1
+mariadb,https://groundhog2k.github.io/helm-charts,2.1.2

@@ -22,3 +22,10 @@ metadata:
   name:  kps
   labels:
     tonygilkerson.us/alerting: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  castopod
+  labels:
+    tonygilkerson.us/alerting: enabled
