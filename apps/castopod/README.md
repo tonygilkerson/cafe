@@ -31,3 +31,12 @@ The two PVC created by this app are used for storing the castopod media and db s
 ```sh
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
+
+## MP3
+
+```
+ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
+
+```
+
+Where `-segment_time` is the amount of time you want per each file (in seconds).
