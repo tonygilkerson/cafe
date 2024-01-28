@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: serial-gateway
+spec:
+  ingressClassName: public
+  rules:
+  - host: serial-gateway.tonygilkerson.us
+    http:
+      paths:
+      - backend:
+          service:
+            name: castopod
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - serial-gateway.tonygilkerson.us
+    secretName: serial-gateway-tls
+
