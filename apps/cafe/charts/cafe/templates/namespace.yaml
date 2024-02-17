@@ -12,20 +12,31 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name:  iot
+  name:  serial-gateway
   labels:
-    tonygilkerson.us/alerting: enabled
+    {{- include "ns-common.labels" . | nindent 4 }}
+    {{- include "ns-pod-security-baseline.labels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  ispy
+  labels:
+    {{- include "ns-common.labels" . | nindent 4 }}
+    {{- include "ns-pod-security-restricted.labels" . | nindent 4 }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name:  kps
   labels:
-    tonygilkerson.us/alerting: enabled
+    {{- include "ns-common.labels" . | nindent 4 }}
+    {{- include "ns-pod-security-baseline.labels" . | nindent 4 }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name:  castopod
   labels:
-    tonygilkerson.us/alerting: enabled
+    {{- include "ns-common.labels" . | nindent 4 }}
+    {{- include "ns-pod-security-restricted.labels" . | nindent 4 }}

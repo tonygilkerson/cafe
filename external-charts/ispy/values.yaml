@@ -1,0 +1,8 @@
+# domain: 127.0.0.1.nip.io # Ues for local testing
+domain: tonygilkerson.us
+# ingressClassName: nginx # Use for local testing
+ingressClassName: public
+image:
+  # repository: localhost/ispy # Ues for local testing
+  repository: ghcr.io/tonygilkerson/ispy
+  tag: v1.0.3

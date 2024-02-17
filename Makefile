@@ -15,6 +15,9 @@ define help_info
 	@echo ""
 	@echo "  $$ make getSerialGateway"
 	@echo "    This will pull the latest chart for the serial-gateway"
+	@echo ""
+	@echo "  $$ make getISpy"
+	@echo "    This will pull the latest chart for the ISpy"
 
 endef
 
@@ -32,4 +35,12 @@ getSerialGateway:
 	mkdir -p .temp
 	git -C .temp clone git@github.com:tonygilkerson/serial-gateway.git
 	cp -r .temp/serial-gateway/charts/serial-gateway external-charts/
+
+getISpy:
+	@echo "Get ISpy"
+	rm -fr .temp/ispy || true
+	rm -rf external-charts/ispy || true
+	mkdir -p .temp
+	git -C .temp clone git@github.com:tonygilkerson/ispy.git
+	cp -r .temp/ispy/charts/ispy external-charts/
 	

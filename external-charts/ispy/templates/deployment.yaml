@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ispy
+  name: ispy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ispy
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ispy
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000    
+      containers:   
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          name: ispy
+          resources:
+            requests:
+              cpu: 32m
+              memory: 32Mi
+            limits:
+              cpu: 500m
+              memory: 64Mi
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP              
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+

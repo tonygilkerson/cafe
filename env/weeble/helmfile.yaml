@@ -14,6 +14,9 @@ helmfiles:
 - path: ../../apps/castopod
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/ispy
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

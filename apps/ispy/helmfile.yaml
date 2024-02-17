@@ -1,0 +1,10 @@
+
+releases:
+- name: ispy
+  namespace: ispy
+  chart: ../../external-charts/ispy
+  values:
+  - values/ispy.yaml.gotmpl
+
+commonLabels:
+  app: ispy
