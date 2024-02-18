@@ -5,4 +5,4 @@ ingressClassName: public
 image:
   # repository: localhost/ispy # Ues for local testing
   repository: ghcr.io/tonygilkerson/ispy
-  tag: v1.0.3
+  tag: v1.0.5
