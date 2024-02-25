@@ -38,6 +38,7 @@ sudo systemctl stop ssh
 sudo systemctl restart ssh
 
 sudo systemctl status ssh
+sudo apt-get install iotop
 
 # After executing the command the screen will turn off automatically every minute (if idle). 
 setterm --blank 1
