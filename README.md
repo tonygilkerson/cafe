@@ -40,6 +40,31 @@ sudo systemctl restart ssh
 sudo systemctl status ssh
 sudo apt-get install iotop
 
+# clamav ref: https://www.inmotionhosting.com/support/security/install-clamav-on-ubuntu/
+sudo apt-get install clamav clamav-daemon -y
+
+# Common clamav commands
+
+# Scan all files, starting from the current directory:
+clamscan -r /
+
+# Scan files but only show infected files:
+clamscan -r -i /path-to-folder
+
+# Scan files but don’t show OK files:
+clamscan -r -o /path-to-folder
+
+# Scan files and send results of infected files to a results file:
+clamscan -r /path-to-folder | grep FOUND >> /path-folder/file.txt
+
+# Scan files and move infected files to a different directory:
+clamscan -r --move=/path-to-folder /path-to-quarantine-folder
+
+# Manually update the ClamAV signature database:
+sudo systemctl stop clamav-freshclam
+sudo freshclam
+sudo systemctl start clamav-freshclam
+
 # After executing the command the screen will turn off automatically every minute (if idle). 
 setterm --blank 1
 
