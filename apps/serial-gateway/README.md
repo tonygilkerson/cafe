@@ -9,5 +9,5 @@ To install or upgrade the serial-gateway chart run the following. You can review
 make getSerialGateway
 
 # Deploy
-helmfile -f env/weeble/helmfile.yaml -l app=serial-gateway apply --skip-deps
+helmfile -i -f env/weeble/helmfile.yaml -l app=serial-gateway apply --skip-deps
 ```
