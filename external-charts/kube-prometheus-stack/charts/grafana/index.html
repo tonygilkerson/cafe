@@ -1,0 +1,2161 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Grafana Helm Chart - The Cafe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#grafana-helm-chart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="The Cafe" class="md-header__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Cafe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Grafana Helm Chart
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="The Cafe" class="md-nav__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    The Cafe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../inf/" class="md-nav__link">
+        Infrastructure
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../iot/" class="md-nav__link">
+        IoT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-repo-info" class="md-nav__link">
+    Get Repo Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-chart" class="md-nav__link">
+    Installing the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-the-chart" class="md-nav__link">
+    Uninstalling the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-an-existing-release-to-a-new-major-version" class="md-nav__link">
+    Upgrading an existing Release to a new major version
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading an existing Release to a new major version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-400-and-3121" class="md-nav__link">
+    To 4.0.0 (And 3.12.1)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-500" class="md-nav__link">
+    To 5.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-600" class="md-nav__link">
+    To 6.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-700" class="md-nav__link">
+    To 7.0.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-ingress-with-path" class="md-nav__link">
+    Example ingress with path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-extravolumemounts-and-extravolumes" class="md-nav__link">
+    Example of extraVolumeMounts and extraVolumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-dashboards" class="md-nav__link">
+    Import dashboards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base64-dashboards" class="md-nav__link">
+    BASE64 dashboards
+  </a>
+  
+    <nav class="md-nav" aria-label="BASE64 dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gerrit-use-case" class="md-nav__link">
+    Gerrit use case
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecar-for-dashboards" class="md-nav__link">
+    Sidecar for dashboards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecar-for-datasources" class="md-nav__link">
+    Sidecar for datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecar-for-notifiers" class="md-nav__link">
+    Sidecar for notifiers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecar-for-alerting-resources" class="md-nav__link">
+    Sidecar for alerting resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statically-provision-alerting-resources" class="md-nav__link">
+    Statically provision alerting resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Statically provision alerting resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-file-provisioning" class="md-nav__link">
+    Important notes on file provisioning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-serve-grafana-with-a-path-prefix-grafana" class="md-nav__link">
+    How to serve Grafana with a path prefix (/grafana)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-securely-reference-secrets-in-grafanaini" class="md-nav__link">
+    How to securely reference secrets in grafana.ini
+  </a>
+  
+    <nav class="md-nav" aria-label="How to securely reference secrets in grafana.ini">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extrasecretmounts-using-a-container-storage-interface-csi-provider" class="md-nav__link">
+    extraSecretMounts using a Container Storage Interface (CSI) provider
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-renderer-plug-in" class="md-nav__link">
+    Image Renderer Plug-In
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Renderer Plug-In">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-renderer-networkpolicy" class="md-nav__link">
+    Image Renderer NetworkPolicy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-availability-for-unified-alerting" class="md-nav__link">
+    High Availability for unified alerting
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="grafana-helm-chart">Grafana Helm Chart</h1>
+<ul>
+<li>Installs the web dashboarding system <a href="http://grafana.org/">Grafana</a></li>
+</ul>
+<h2 id="get-repo-info">Get Repo Info</h2>
+<pre><code class="language-console">helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+</code></pre>
+<p><em>See <a href="https://helm.sh/docs/helm/helm_repo/">helm repo</a> for command documentation.</em></p>
+<h2 id="installing-the-chart">Installing the Chart</h2>
+<p>To install the chart with the release name <code>my-release</code>:</p>
+<pre><code class="language-console">helm install my-release grafana/grafana
+</code></pre>
+<h2 id="uninstalling-the-chart">Uninstalling the Chart</h2>
+<p>To uninstall/delete the my-release deployment:</p>
+<pre><code class="language-console">helm delete my-release
+</code></pre>
+<p>The command removes all the Kubernetes components associated with the chart and deletes the release.</p>
+<h2 id="upgrading-an-existing-release-to-a-new-major-version">Upgrading an existing Release to a new major version</h2>
+<p>A major chart version change (like v1.2.3 -&gt; v2.0.0) indicates that there is an
+incompatible breaking change needing manual actions.</p>
+<h3 id="to-400-and-3121">To 4.0.0 (And 3.12.1)</h3>
+<p>This version requires Helm &gt;= 2.12.0.</p>
+<h3 id="to-500">To 5.0.0</h3>
+<p>You have to add --force to your helm upgrade command as the labels of the chart have changed.</p>
+<h3 id="to-600">To 6.0.0</h3>
+<p>This version requires Helm &gt;= 3.1.0.</p>
+<h3 id="to-700">To 7.0.0</h3>
+<p>For consistency with other Helm charts, the <code>global.image.registry</code> parameter was renamed
+to <code>global.imageRegistry</code>. If you were not previously setting <code>global.image.registry</code>, no action
+is required on upgrade. If you were previously setting <code>global.image.registry</code>, you will
+need to instead set <code>global.imageRegistry</code>.</p>
+<h2 id="configuration">Configuration</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>replicas</code></td>
+<td>Number of nodes</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>podDisruptionBudget.minAvailable</code></td>
+<td>Pod disruption minimum available</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>podDisruptionBudget.maxUnavailable</code></td>
+<td>Pod disruption maximum unavailable</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>podDisruptionBudget.apiVersion</code></td>
+<td>Pod disruption apiVersion</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>deploymentStrategy</code></td>
+<td>Deployment strategy</td>
+<td><code>{ "type": "RollingUpdate" }</code></td>
+</tr>
+<tr>
+<td><code>livenessProbe</code></td>
+<td>Liveness Probe settings</td>
+<td><code>{ "httpGet": { "path": "/api/health", "port": 3000 } "initialDelaySeconds": 60, "timeoutSeconds": 30, "failureThreshold": 10 }</code></td>
+</tr>
+<tr>
+<td><code>readinessProbe</code></td>
+<td>Readiness Probe settings</td>
+<td><code>{ "httpGet": { "path": "/api/health", "port": 3000 } }</code></td>
+</tr>
+<tr>
+<td><code>securityContext</code></td>
+<td>Deployment securityContext</td>
+<td><code>{"runAsUser": 472, "runAsGroup": 472, "fsGroup": 472}</code></td>
+</tr>
+<tr>
+<td><code>priorityClassName</code></td>
+<td>Name of Priority Class to assign pods</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>image.registry</code></td>
+<td>Image registry</td>
+<td><code>docker.io</code></td>
+</tr>
+<tr>
+<td><code>image.repository</code></td>
+<td>Image repository</td>
+<td><code>grafana/grafana</code></td>
+</tr>
+<tr>
+<td><code>image.tag</code></td>
+<td>Overrides the Grafana image tag whose default is the chart appVersion (<code>Must be &gt;= 5.0.0</code>)</td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>image.sha</code></td>
+<td>Image sha (optional)</td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>image.pullPolicy</code></td>
+<td>Image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>image.pullSecrets</code></td>
+<td>Image pull secrets (can be templated)</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>service.enabled</code></td>
+<td>Enable grafana service</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>service.type</code></td>
+<td>Kubernetes service type</td>
+<td><code>ClusterIP</code></td>
+</tr>
+<tr>
+<td><code>service.port</code></td>
+<td>Kubernetes port where service is exposed</td>
+<td><code>80</code></td>
+</tr>
+<tr>
+<td><code>service.portName</code></td>
+<td>Name of the port on the service</td>
+<td><code>service</code></td>
+</tr>
+<tr>
+<td><code>service.appProtocol</code></td>
+<td>Adds the appProtocol field to the service</td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>service.targetPort</code></td>
+<td>Internal service is port</td>
+<td><code>3000</code></td>
+</tr>
+<tr>
+<td><code>service.nodePort</code></td>
+<td>Kubernetes service nodePort</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.annotations</code></td>
+<td>Service annotations (can be templated)</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>service.labels</code></td>
+<td>Custom labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>service.clusterIP</code></td>
+<td>internal cluster service IP</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.loadBalancerIP</code></td>
+<td>IP address to assign to load balancer (if supported)</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.loadBalancerSourceRanges</code></td>
+<td>list of IP CIDRs allowed access to lb (if supported)</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>service.externalIPs</code></td>
+<td>service external IP addresses</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>service.externalTrafficPolicy</code></td>
+<td>change the default externalTrafficPolicy</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>headlessService</code></td>
+<td>Create a headless service</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>extraExposePorts</code></td>
+<td>Additional service ports for sidecar containers</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>hostAliases</code></td>
+<td>adds rules to the pod's /etc/hosts</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>ingress.enabled</code></td>
+<td>Enables Ingress</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>ingress.annotations</code></td>
+<td>Ingress annotations (values are templated)</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>ingress.labels</code></td>
+<td>Custom labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>ingress.path</code></td>
+<td>Ingress accepted path</td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td><code>ingress.pathType</code></td>
+<td>Ingress type of path</td>
+<td><code>Prefix</code></td>
+</tr>
+<tr>
+<td><code>ingress.hosts</code></td>
+<td>Ingress accepted hostnames</td>
+<td><code>["chart-example.local"]</code></td>
+</tr>
+<tr>
+<td><code>ingress.extraPaths</code></td>
+<td>Ingress extra paths to prepend to every host configuration. Useful when configuring <a href="https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#actions">custom actions with AWS ALB Ingress Controller</a>. Requires <code>ingress.hosts</code> to have one or more host entries.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>ingress.tls</code></td>
+<td>Ingress TLS configuration</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>ingress.ingressClassName</code></td>
+<td>Ingress Class Name. MAY be required for Kubernetes versions &gt;= 1.18</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>resources</code></td>
+<td>CPU/Memory resource requests/limits</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>nodeSelector</code></td>
+<td>Node labels for pod assignment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>tolerations</code></td>
+<td>Toleration labels for pod assignment</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>affinity</code></td>
+<td>Affinity settings for pod assignment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>extraInitContainers</code></td>
+<td>Init containers to add to the grafana pod</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>extraContainers</code></td>
+<td>Sidecar containers to add to the grafana pod</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>extraContainerVolumes</code></td>
+<td>Volumes that can be mounted in sidecar containers</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraLabels</code></td>
+<td>Custom labels for all manifests</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>schedulerName</code></td>
+<td>Name of the k8s scheduler (other than default)</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>persistence.enabled</code></td>
+<td>Use persistent volume to store data</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>persistence.type</code></td>
+<td>Type of persistence (<code>pvc</code> or <code>statefulset</code>)</td>
+<td><code>pvc</code></td>
+</tr>
+<tr>
+<td><code>persistence.size</code></td>
+<td>Size of persistent volume claim</td>
+<td><code>10Gi</code></td>
+</tr>
+<tr>
+<td><code>persistence.existingClaim</code></td>
+<td>Use an existing PVC to persist data (can be templated)</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>persistence.storageClassName</code></td>
+<td>Type of persistent volume claim</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>persistence.accessModes</code></td>
+<td>Persistence access modes</td>
+<td><code>[ReadWriteOnce]</code></td>
+</tr>
+<tr>
+<td><code>persistence.annotations</code></td>
+<td>PersistentVolumeClaim annotations</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>persistence.finalizers</code></td>
+<td>PersistentVolumeClaim finalizers</td>
+<td><code>[ "kubernetes.io/pvc-protection" ]</code></td>
+</tr>
+<tr>
+<td><code>persistence.extraPvcLabels</code></td>
+<td>Extra labels to apply to a PVC.</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>persistence.subPath</code></td>
+<td>Mount a sub dir of the persistent volume (can be templated)</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>persistence.inMemory.enabled</code></td>
+<td>If persistence is not enabled, whether to mount the local storage in-memory to improve performance</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>persistence.inMemory.sizeLimit</code></td>
+<td>SizeLimit for the in-memory local storage</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>initChownData.enabled</code></td>
+<td>If false, don't reset data ownership at startup</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>initChownData.image.registry</code></td>
+<td>init-chown-data container image registry</td>
+<td><code>docker.io</code></td>
+</tr>
+<tr>
+<td><code>initChownData.image.repository</code></td>
+<td>init-chown-data container image repository</td>
+<td><code>busybox</code></td>
+</tr>
+<tr>
+<td><code>initChownData.image.tag</code></td>
+<td>init-chown-data container image tag</td>
+<td><code>1.31.1</code></td>
+</tr>
+<tr>
+<td><code>initChownData.image.sha</code></td>
+<td>init-chown-data container image sha (optional)</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>initChownData.image.pullPolicy</code></td>
+<td>init-chown-data container image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>initChownData.resources</code></td>
+<td>init-chown-data pod resource requests &amp; limits</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>schedulerName</code></td>
+<td>Alternate scheduler name</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Extra environment variables passed to pods</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>envValueFrom</code></td>
+<td>Environment variables from alternate sources. See the API docs on <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#envvarsource-v1-core">EnvVarSource</a> for format details. Can be templated</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>envFromSecret</code></td>
+<td>Name of a Kubernetes secret (must be manually created in the same namespace) containing values to be added to the environment. Can be templated</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>envFromSecrets</code></td>
+<td>List of Kubernetes secrets (must be manually created in the same namespace) containing values to be added to the environment. Can be templated</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>envFromConfigMaps</code></td>
+<td>List of Kubernetes ConfigMaps (must be manually created in the same namespace) containing values to be added to the environment. Can be templated</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>envRenderSecret</code></td>
+<td>Sensible environment variables passed to pods and stored as secret. (passed through <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#using-the-tpl-function">tpl</a>)</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>enableServiceLinks</code></td>
+<td>Inject Kubernetes services as environment variables.</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>extraSecretMounts</code></td>
+<td>Additional grafana server secret mounts</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraVolumeMounts</code></td>
+<td>Additional grafana server volume mounts</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraVolumes</code></td>
+<td>Additional Grafana server volumes</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>createConfigmap</code></td>
+<td>Enable creating the grafana configmap</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>extraConfigmapMounts</code></td>
+<td>Additional grafana server configMap volume mounts (values are templated)</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraEmptyDirMounts</code></td>
+<td>Additional grafana server emptyDir volume mounts</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>plugins</code></td>
+<td>Plugins to be loaded along with Grafana</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>datasources</code></td>
+<td>Configure grafana datasources (passed through tpl)</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>alerting</code></td>
+<td>Configure grafana alerting (passed through tpl)</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>notifiers</code></td>
+<td>Configure grafana notifiers</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>dashboardProviders</code></td>
+<td>Configure grafana dashboard providers</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>dashboards</code></td>
+<td>Dashboards to import</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>dashboardsConfigMaps</code></td>
+<td>ConfigMaps reference that contains dashboards</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>grafana.ini</code></td>
+<td>Grafana's primary configuration</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>global.imageRegistry</code></td>
+<td>Global image pull registry for all images.</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>global.imagePullSecrets</code></td>
+<td>Global image pull secrets (can be templated). Allows either an array of {name: pullSecret} maps (k8s-style), or an array of strings (more common helm-style).</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>ldap.enabled</code></td>
+<td>Enable LDAP authentication</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>ldap.existingSecret</code></td>
+<td>The name of an existing secret containing the <code>ldap.toml</code> file, this must have the key <code>ldap-toml</code>.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>ldap.config</code></td>
+<td>Grafana's LDAP configuration</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>annotations</code></td>
+<td>Deployment annotations</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>Deployment labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podAnnotations</code></td>
+<td>Pod annotations</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podLabels</code></td>
+<td>Pod labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podPortName</code></td>
+<td>Name of the grafana port on the pod</td>
+<td><code>grafana</code></td>
+</tr>
+<tr>
+<td><code>lifecycleHooks</code></td>
+<td>Lifecycle hooks for podStart and preStop <a href="https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/#define-poststart-and-prestop-handlers">Example</a></td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>sidecar.image.registry</code></td>
+<td>Sidecar image registry</td>
+<td><code>quay.io</code></td>
+</tr>
+<tr>
+<td><code>sidecar.image.repository</code></td>
+<td>Sidecar image repository</td>
+<td><code>kiwigrid/k8s-sidecar</code></td>
+</tr>
+<tr>
+<td><code>sidecar.image.tag</code></td>
+<td>Sidecar image tag</td>
+<td><code>1.24.6</code></td>
+</tr>
+<tr>
+<td><code>sidecar.image.sha</code></td>
+<td>Sidecar image sha (optional)</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.imagePullPolicy</code></td>
+<td>Sidecar image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>sidecar.resources</code></td>
+<td>Sidecar resources</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>sidecar.securityContext</code></td>
+<td>Sidecar securityContext</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>sidecar.enableUniqueFilenames</code></td>
+<td>Sets the kiwigrid/k8s-sidecar UNIQUE_FILENAMES environment variable. If set to <code>true</code> the sidecar will create unique filenames where duplicate data keys exist between ConfigMaps and/or Secrets within the same or multiple Namespaces.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.enabled</code></td>
+<td>Enables the cluster wide search for alerts and adds/updates/deletes them in grafana</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.label</code></td>
+<td>Label that config maps with alerts should have to be added</td>
+<td><code>grafana_alert</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.labelValue</code></td>
+<td>Label value that config maps with alerts should have to be added</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.searchNamespace</code></td>
+<td>Namespaces list. If specified, the sidecar will search for alerts config-maps  inside these namespaces. Otherwise the namespace in which the sidecar is running will be used. It's also possible to specify ALL to search in all namespaces.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.watchMethod</code></td>
+<td>Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.</td>
+<td><code>WATCH</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.resource</code></td>
+<td>Should the sidecar looks into secrets, configmaps or both.</td>
+<td><code>both</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.reloadURL</code></td>
+<td>Full url of datasource configuration reload API endpoint, to invoke after a config-map change</td>
+<td><code>"http://localhost:3000/api/admin/provisioning/alerting/reload"</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.skipReload</code></td>
+<td>Enabling this omits defining the REQ_URL and REQ_METHOD environment variables</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.initAlerts</code></td>
+<td>Set to true to deploy the alerts sidecar as an initContainer. This is needed if skipReload is true, to load any alerts defined at startup time.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.alerts.extraMounts</code></td>
+<td>Additional alerts sidecar volume mounts.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.enabled</code></td>
+<td>Enables the cluster wide search for dashboards and adds/updates/deletes them in grafana</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.SCProvider</code></td>
+<td>Enables creation of sidecar provider</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.name</code></td>
+<td>Unique name of the grafana provider</td>
+<td><code>sidecarProvider</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.orgid</code></td>
+<td>Id of the organisation, to which the dashboards should be added</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.folder</code></td>
+<td>Logical folder in which grafana groups dashboards</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.disableDelete</code></td>
+<td>Activate to avoid the deletion of imported dashboards</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.allowUiUpdates</code></td>
+<td>Allow updating provisioned dashboards from the UI</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.type</code></td>
+<td>Provider type</td>
+<td><code>file</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.provider.foldersFromFilesStructure</code></td>
+<td>Allow Grafana to replicate dashboard structure from filesystem.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.watchMethod</code></td>
+<td>Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.</td>
+<td><code>WATCH</code></td>
+</tr>
+<tr>
+<td><code>sidecar.skipTlsVerify</code></td>
+<td>Set to true to skip tls verification for kube api calls</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.label</code></td>
+<td>Label that config maps with dashboards should have to be added</td>
+<td><code>grafana_dashboard</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.labelValue</code></td>
+<td>Label value that config maps with dashboards should have to be added</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.folder</code></td>
+<td>Folder in the pod that should hold the collected dashboards (unless <code>sidecar.dashboards.defaultFolderName</code> is set). This path will be mounted.</td>
+<td><code>/tmp/dashboards</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.folderAnnotation</code></td>
+<td>The annotation the sidecar will look for in configmaps to override the destination folder for files</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.defaultFolderName</code></td>
+<td>The default folder name, it will create a subfolder under the <code>sidecar.dashboards.folder</code> and put dashboards in there instead</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.searchNamespace</code></td>
+<td>Namespaces list. If specified, the sidecar will search for dashboards config-maps  inside these namespaces. Otherwise the namespace in which the sidecar is running will be used. It's also possible to specify ALL to search in all namespaces.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.script</code></td>
+<td>Absolute path to shell script to execute after a configmap got reloaded.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.reloadURL</code></td>
+<td>Full url of dashboards configuration reload API endpoint, to invoke after a config-map change</td>
+<td><code>"http://localhost:3000/api/admin/provisioning/dashboards/reload"</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.skipReload</code></td>
+<td>Enabling this omits defining the REQ_USERNAME, REQ_PASSWORD, REQ_URL and REQ_METHOD environment variables</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.resource</code></td>
+<td>Should the sidecar looks into secrets, configmaps or both.</td>
+<td><code>both</code></td>
+</tr>
+<tr>
+<td><code>sidecar.dashboards.extraMounts</code></td>
+<td>Additional dashboard sidecar volume mounts.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.enabled</code></td>
+<td>Enables the cluster wide search for datasources and adds/updates/deletes them in grafana</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.label</code></td>
+<td>Label that config maps with datasources should have to be added</td>
+<td><code>grafana_datasource</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.labelValue</code></td>
+<td>Label value that config maps with datasources should have to be added</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.searchNamespace</code></td>
+<td>Namespaces list. If specified, the sidecar will search for datasources config-maps  inside these namespaces. Otherwise the namespace in which the sidecar is running will be used. It's also possible to specify ALL to search in all namespaces.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.watchMethod</code></td>
+<td>Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.</td>
+<td><code>WATCH</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.resource</code></td>
+<td>Should the sidecar looks into secrets, configmaps or both.</td>
+<td><code>both</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.reloadURL</code></td>
+<td>Full url of datasource configuration reload API endpoint, to invoke after a config-map change</td>
+<td><code>"http://localhost:3000/api/admin/provisioning/datasources/reload"</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.skipReload</code></td>
+<td>Enabling this omits defining the REQ_URL and REQ_METHOD environment variables</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.datasources.initDatasources</code></td>
+<td>Set to true to deploy the datasource sidecar as an initContainer in addition to a container. This is needed if skipReload is true, to load any datasources defined at startup time.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.enabled</code></td>
+<td>Enables the cluster wide search for notifiers and adds/updates/deletes them in grafana</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.label</code></td>
+<td>Label that config maps with notifiers should have to be added</td>
+<td><code>grafana_notifier</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.labelValue</code></td>
+<td>Label value that config maps with notifiers should have to be added</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.searchNamespace</code></td>
+<td>Namespaces list. If specified, the sidecar will search for notifiers config-maps (or secrets) inside these namespaces. Otherwise the namespace in which the sidecar is running will be used. It's also possible to specify ALL to search in all namespaces.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.watchMethod</code></td>
+<td>Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.</td>
+<td><code>WATCH</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.resource</code></td>
+<td>Should the sidecar looks into secrets, configmaps or both.</td>
+<td><code>both</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.reloadURL</code></td>
+<td>Full url of notifier configuration reload API endpoint, to invoke after a config-map change</td>
+<td><code>"http://localhost:3000/api/admin/provisioning/notifications/reload"</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.skipReload</code></td>
+<td>Enabling this omits defining the REQ_URL and REQ_METHOD environment variables</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>sidecar.notifiers.initNotifiers</code></td>
+<td>Set to true to deploy the notifier sidecar as an initContainer in addition to a container. This is needed if skipReload is true, to load any notifiers defined at startup time.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>smtp.existingSecret</code></td>
+<td>The name of an existing secret containing the SMTP credentials.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>smtp.userKey</code></td>
+<td>The key in the existing SMTP secret containing the username.</td>
+<td><code>"user"</code></td>
+</tr>
+<tr>
+<td><code>smtp.passwordKey</code></td>
+<td>The key in the existing SMTP secret containing the password.</td>
+<td><code>"password"</code></td>
+</tr>
+<tr>
+<td><code>admin.existingSecret</code></td>
+<td>The name of an existing secret containing the admin credentials (can be templated).</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>admin.userKey</code></td>
+<td>The key in the existing admin secret containing the username.</td>
+<td><code>"admin-user"</code></td>
+</tr>
+<tr>
+<td><code>admin.passwordKey</code></td>
+<td>The key in the existing admin secret containing the password.</td>
+<td><code>"admin-password"</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.autoMount</code></td>
+<td>Automount the service account token in the pod</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.annotations</code></td>
+<td>ServiceAccount annotations</td>
+<td></td>
+</tr>
+<tr>
+<td><code>serviceAccount.create</code></td>
+<td>Create service account</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.labels</code></td>
+<td>ServiceAccount labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.name</code></td>
+<td>Service account name to use, when empty will be set to created account if <code>serviceAccount.create</code> is set else to <code>default</code></td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>serviceAccount.nameTest</code></td>
+<td>Service account name to use for test, when empty will be set to created account if <code>serviceAccount.create</code> is set else to <code>default</code></td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>rbac.create</code></td>
+<td>Create and use RBAC resources</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>rbac.namespaced</code></td>
+<td>Creates Role and Rolebinding instead of the default ClusterRole and ClusteRoleBindings for the grafana instance</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>rbac.useExistingRole</code></td>
+<td>Set to a rolename to use existing role - skipping role creating - but still doing serviceaccount and rolebinding to the rolename set here.</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>rbac.pspEnabled</code></td>
+<td>Create PodSecurityPolicy (with <code>rbac.create</code>, grant roles permissions as well)</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>rbac.pspUseAppArmor</code></td>
+<td>Enforce AppArmor in created PodSecurityPolicy (requires <code>rbac.pspEnabled</code>)</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>rbac.extraRoleRules</code></td>
+<td>Additional rules to add to the Role</td>
+<td>[]</td>
+</tr>
+<tr>
+<td><code>rbac.extraClusterRoleRules</code></td>
+<td>Additional rules to add to the ClusterRole</td>
+<td>[]</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>Define command to be executed by grafana container at startup</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td>Define additional args if command is used</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>testFramework.enabled</code></td>
+<td>Whether to create test-related resources</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>testFramework.image.registry</code></td>
+<td><code>test-framework</code> image registry.</td>
+<td><code>docker.io</code></td>
+</tr>
+<tr>
+<td><code>testFramework.image.repository</code></td>
+<td><code>test-framework</code> image repository.</td>
+<td><code>bats/bats</code></td>
+</tr>
+<tr>
+<td><code>testFramework.image.tag</code></td>
+<td><code>test-framework</code> image tag.</td>
+<td><code>v1.4.1</code></td>
+</tr>
+<tr>
+<td><code>testFramework.imagePullPolicy</code></td>
+<td><code>test-framework</code> image pull policy.</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>testFramework.securityContext</code></td>
+<td><code>test-framework</code> securityContext</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboards.env</code></td>
+<td>Environment variables to be passed to the <code>download-dashboards</code> container</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboards.envFromSecret</code></td>
+<td>Name of a Kubernetes secret (must be manually created in the same namespace) containing values to be added to the environment. Can be templated</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboards.resources</code></td>
+<td>Resources of <code>download-dashboards</code> container</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboardsImage.registry</code></td>
+<td>Curl docker image registry</td>
+<td><code>docker.io</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboardsImage.repository</code></td>
+<td>Curl docker image repository</td>
+<td><code>curlimages/curl</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboardsImage.tag</code></td>
+<td>Curl docker image tag</td>
+<td><code>7.73.0</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboardsImage.sha</code></td>
+<td>Curl docker image sha (optional)</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>downloadDashboardsImage.pullPolicy</code></td>
+<td>Curl docker image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>namespaceOverride</code></td>
+<td>Override the deployment namespace</td>
+<td><code>""</code> (<code>Release.Namespace</code>)</td>
+</tr>
+<tr>
+<td><code>serviceMonitor.enabled</code></td>
+<td>Use servicemonitor from prometheus operator</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.namespace</code></td>
+<td>Namespace this servicemonitor is installed in</td>
+<td></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.interval</code></td>
+<td>How frequently Prometheus should scrape</td>
+<td><code>1m</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.path</code></td>
+<td>Path to scrape</td>
+<td><code>/metrics</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.scheme</code></td>
+<td>Scheme to use for metrics scraping</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.tlsConfig</code></td>
+<td>TLS configuration block for the endpoint</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.labels</code></td>
+<td>Labels for the servicemonitor passed to Prometheus Operator</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.scrapeTimeout</code></td>
+<td>Timeout after which the scrape is ended</td>
+<td><code>30s</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.relabelings</code></td>
+<td>RelabelConfigs to apply to samples before scraping.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>serviceMonitor.metricRelabelings</code></td>
+<td>MetricRelabelConfigs to apply to samples before ingestion.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>revisionHistoryLimit</code></td>
+<td>Number of old ReplicaSets to retain</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.enabled</code></td>
+<td>Enable the image-renderer deployment &amp; service</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.image.registry</code></td>
+<td>image-renderer Image registry</td>
+<td><code>docker.io</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.image.repository</code></td>
+<td>image-renderer Image repository</td>
+<td><code>grafana/grafana-image-renderer</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.image.tag</code></td>
+<td>image-renderer Image tag</td>
+<td><code>latest</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.image.sha</code></td>
+<td>image-renderer Image sha (optional)</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.image.pullPolicy</code></td>
+<td>image-renderer ImagePullPolicy</td>
+<td><code>Always</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.env</code></td>
+<td>extra env-vars for image-renderer</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.envValueFrom</code></td>
+<td>Environment variables for image-renderer from alternate sources. See the API docs on <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#envvarsource-v1-core">EnvVarSource</a> for format details. Can be templated</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.serviceAccountName</code></td>
+<td>image-renderer deployment serviceAccountName</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.securityContext</code></td>
+<td>image-renderer deployment securityContext</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.podAnnotations</code></td>
+<td>image-renderer image-renderer pod annotation</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.hostAliases</code></td>
+<td>image-renderer deployment Host Aliases</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.priorityClassName</code></td>
+<td>image-renderer deployment priority class</td>
+<td><code>''</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.service.enabled</code></td>
+<td>Enable the image-renderer service</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.service.portName</code></td>
+<td>image-renderer service port name</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.service.port</code></td>
+<td>image-renderer port used by deployment</td>
+<td><code>8081</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.service.targetPort</code></td>
+<td>image-renderer service port used by service</td>
+<td><code>8081</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.appProtocol</code></td>
+<td>Adds the appProtocol field to the service</td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>imageRenderer.grafanaSubPath</code></td>
+<td>Grafana sub path to use for image renderer callback url</td>
+<td><code>''</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.podPortName</code></td>
+<td>name of the image-renderer port on the pod</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.revisionHistoryLimit</code></td>
+<td>number of image-renderer replica sets to keep</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.networkPolicy.limitIngress</code></td>
+<td>Enable a NetworkPolicy to limit inbound traffic from only the created grafana pods</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.networkPolicy.limitEgress</code></td>
+<td>Enable a NetworkPolicy to limit outbound traffic to only the created grafana pods</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.resources</code></td>
+<td>Set resource limits for image-renderer pods</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.nodeSelector</code></td>
+<td>Node labels for pod assignment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.tolerations</code></td>
+<td>Toleration labels for pod assignment</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>imageRenderer.affinity</code></td>
+<td>Affinity settings for pod assignment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.enabled</code></td>
+<td>Enable creation of NetworkPolicy resources.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.allowExternal</code></td>
+<td>Don't require client label for connections</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.explicitNamespacesSelector</code></td>
+<td>A Kubernetes LabelSelector to explicitly select namespaces from which traffic could be allowed</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.ingress</code></td>
+<td>Enable the creation of an ingress network policy</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.egress.enabled</code></td>
+<td>Enable the creation of an egress network policy</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>networkPolicy.egress.ports</code></td>
+<td>An array of ports to allow for the egress</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>enableKubeBackwardCompatibility</code></td>
+<td>Enable backward compatibility of kubernetes where pod's defintion version below 1.13 doesn't have the enableServiceLinks option</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-ingress-with-path">Example ingress with path</h3>
+<p>With grafana 6.3 and above</p>
+<pre><code class="language-yaml">grafana.ini:
+  server:
+    domain: monitoring.example.com
+    root_url: &quot;%(protocol)s://%(domain)s/grafana&quot;
+    serve_from_sub_path: true
+ingress:
+  enabled: true
+  hosts:
+    - &quot;monitoring.example.com&quot;
+  path: &quot;/grafana&quot;
+</code></pre>
+<h3 id="example-of-extravolumemounts-and-extravolumes">Example of extraVolumeMounts and extraVolumes</h3>
+<p>Configure additional volumes with <code>extraVolumes</code> and volume mounts with <code>extraVolumeMounts</code>.</p>
+<p>Example for <code>extraVolumeMounts</code> and corresponding <code>extraVolumes</code>:</p>
+<pre><code class="language-yaml">extraVolumeMounts:
+  - name: plugins
+    mountPath: /var/lib/grafana/plugins
+    subPath: configs/grafana/plugins
+    readOnly: false
+  - name: dashboards
+    mountPath: /var/lib/grafana/dashboards
+    hostPath: /usr/shared/grafana/dashboards
+    readOnly: false
+
+extraVolumes:
+  - name: plugins
+    existingClaim: existing-grafana-claim
+  - name: dashboards
+    hostPath: /usr/shared/grafana/dashboards
+</code></pre>
+<p>Volumes default to <code>emptyDir</code>. Set to <code>persistentVolumeClaim</code>,
+<code>hostPath</code>, <code>csi</code>, or <code>configMap</code> for other types. For a
+<code>persistentVolumeClaim</code>, specify an existing claim name with
+<code>existingClaim</code>.</p>
+<h2 id="import-dashboards">Import dashboards</h2>
+<p>There are a few methods to import dashboards to Grafana. Below are some examples and explanations as to how to use each method:</p>
+<pre><code class="language-yaml">dashboards:
+  default:
+    some-dashboard:
+      json: |
+        {
+          &quot;annotations&quot;:
+
+          ...
+          # Complete json file here
+          ...
+
+          &quot;title&quot;: &quot;Some Dashboard&quot;,
+          &quot;uid&quot;: &quot;abcd1234&quot;,
+          &quot;version&quot;: 1
+        }
+    custom-dashboard:
+      # This is a path to a file inside the dashboards directory inside the chart directory
+      file: dashboards/custom-dashboard.json
+    prometheus-stats:
+      # Ref: https://grafana.com/dashboards/2
+      gnetId: 2
+      revision: 2
+      datasource: Prometheus
+    loki-dashboard-quick-search:
+      gnetId: 12019
+      revision: 2
+      datasource:
+      - name: DS_PROMETHEUS
+        value: Prometheus
+      - name: DS_LOKI
+        value: Loki
+    local-dashboard:
+      url: https://raw.githubusercontent.com/user/repository/master/dashboards/dashboard.json
+</code></pre>
+<h2 id="base64-dashboards">BASE64 dashboards</h2>
+<p>Dashboards could be stored on a server that does not return JSON directly and instead of it returns a Base64 encoded file (e.g. Gerrit)
+A new parameter has been added to the url use case so if you specify a b64content value equals to true after the url entry a Base64 decoding is applied before save the file to disk.
+If this entry is not set or is equals to false not decoding is applied to the file before saving it to disk.</p>
+<h3 id="gerrit-use-case">Gerrit use case</h3>
+<p>Gerrit API for download files has the following schema: <a href="https://yourgerritserver/a/{project-name}/branches/{branch-id}/files/{file-id}/content">https://yourgerritserver/a/{project-name}/branches/{branch-id}/files/{file-id}/content</a> where {project-name} and
+{file-id} usually has '/' in their values and so they MUST be replaced by %2F so if project-name is user/repo, branch-id is master and file-id is equals to dir1/dir2/dashboard
+the url value is <a href="https://yourgerritserver/a/user%2Frepo/branches/master/files/dir1%2Fdir2%2Fdashboard/content">https://yourgerritserver/a/user%2Frepo/branches/master/files/dir1%2Fdir2%2Fdashboard/content</a></p>
+<h2 id="sidecar-for-dashboards">Sidecar for dashboards</h2>
+<p>If the parameter <code>sidecar.dashboards.enabled</code> is set, a sidecar container is deployed in the grafana
+pod. This container watches all configmaps (or secrets) in the cluster and filters out the ones with
+a label as defined in <code>sidecar.dashboards.label</code>. The files defined in those configmaps are written
+to a folder and accessed by grafana. Changes to the configmaps are monitored and the imported
+dashboards are deleted/updated.</p>
+<p>A recommendation is to use one configmap per dashboard, as a reduction of multiple dashboards inside
+one configmap is currently not properly mirrored in grafana.</p>
+<p>Example dashboard config:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-grafana-dashboard
+  labels:
+     grafana_dashboard: &quot;1&quot;
+data:
+  k8s-dashboard.json: |-
+  [...]
+</code></pre>
+<h2 id="sidecar-for-datasources">Sidecar for datasources</h2>
+<p>If the parameter <code>sidecar.datasources.enabled</code> is set, an init container is deployed in the grafana
+pod. This container lists all secrets (or configmaps, though not recommended) in the cluster and
+filters out the ones with a label as defined in <code>sidecar.datasources.label</code>. The files defined in
+those secrets are written to a folder and accessed by grafana on startup. Using these yaml files,
+the data sources in grafana can be imported.</p>
+<p>Should you aim for reloading datasources in Grafana each time the config is changed, set <code>sidecar.datasources.skipReload: false</code> and adjust <code>sidecar.datasources.reloadURL</code> to <code>http://&lt;svc-name&gt;.&lt;namespace&gt;.svc.cluster.local/api/admin/provisioning/datasources/reload</code>.</p>
+<p>Secrets are recommended over configmaps for this usecase because datasources usually contain private
+data like usernames and passwords. Secrets are the more appropriate cluster resource to manage those.</p>
+<p>Example values to add a postgres datasource as a kubernetes secret:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasources
+  labels:
+    grafana_datasource: 'true' # default value for: sidecar.datasources.label
+stringData:
+  pg-db.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: My pg db datasource
+        type: postgres
+        url: my-postgresql-db:5432
+        user: db-readonly-user
+        secureJsonData:
+          password: 'SUperSEcretPa$$word'
+        jsonData:
+          database: my_datase
+          sslmode: 'disable' # disable/require/verify-ca/verify-full
+          maxOpenConns: 0 # Grafana v5.4+
+          maxIdleConns: 2 # Grafana v5.4+
+          connMaxLifetime: 14400 # Grafana v5.4+
+          postgresVersion: 1000 # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
+          timescaledb: false
+        # &lt;bool&gt; allow users to edit datasources from the UI.
+        editable: false
+</code></pre>
+<p>Example values to add a datasource adapted from <a href="http://docs.grafana.org/administration/provisioning/#example-datasource-config-file">Grafana</a>:</p>
+<pre><code class="language-yaml">datasources:
+ datasources.yaml:
+   apiVersion: 1
+   datasources:
+      # &lt;string, required&gt; name of the datasource. Required
+    - name: Graphite
+      # &lt;string, required&gt; datasource type. Required
+      type: graphite
+      # &lt;string, required&gt; access mode. proxy or direct (Server or Browser in the UI). Required
+      access: proxy
+      # &lt;int&gt; org id. will default to orgId 1 if not specified
+      orgId: 1
+      # &lt;string&gt; url
+      url: http://localhost:8080
+      # &lt;string&gt; database password, if used
+      password:
+      # &lt;string&gt; database user, if used
+      user:
+      # &lt;string&gt; database name, if used
+      database:
+      # &lt;bool&gt; enable/disable basic auth
+      basicAuth:
+      # &lt;string&gt; basic auth username
+      basicAuthUser:
+      # &lt;string&gt; basic auth password
+      basicAuthPassword:
+      # &lt;bool&gt; enable/disable with credentials headers
+      withCredentials:
+      # &lt;bool&gt; mark as default datasource. Max one per org
+      isDefault:
+      # &lt;map&gt; fields that will be converted to json and stored in json_data
+      jsonData:
+         graphiteVersion: &quot;1.1&quot;
+         tlsAuth: true
+         tlsAuthWithCACert: true
+      # &lt;string&gt; json object of data that will be encrypted.
+      secureJsonData:
+        tlsCACert: &quot;...&quot;
+        tlsClientCert: &quot;...&quot;
+        tlsClientKey: &quot;...&quot;
+      version: 1
+      # &lt;bool&gt; allow users to edit datasources from the UI.
+      editable: false
+</code></pre>
+<h2 id="sidecar-for-notifiers">Sidecar for notifiers</h2>
+<p>If the parameter <code>sidecar.notifiers.enabled</code> is set, an init container is deployed in the grafana
+pod. This container lists all secrets (or configmaps, though not recommended) in the cluster and
+filters out the ones with a label as defined in <code>sidecar.notifiers.label</code>. The files defined in
+those secrets are written to a folder and accessed by grafana on startup. Using these yaml files,
+the notification channels in grafana can be imported. The secrets must be created before
+<code>helm install</code> so that the notifiers init container can list the secrets.</p>
+<p>Secrets are recommended over configmaps for this usecase because alert notification channels usually contain
+private data like SMTP usernames and passwords. Secrets are the more appropriate cluster resource to manage those.</p>
+<p>Example datasource config adapted from <a href="https://grafana.com/docs/grafana/latest/administration/provisioning/#alert-notification-channels">Grafana</a>:</p>
+<pre><code class="language-yaml">notifiers:
+  - name: notification-channel-1
+    type: slack
+    uid: notifier1
+    # either
+    org_id: 2
+    # or
+    org_name: Main Org.
+    is_default: true
+    send_reminder: true
+    frequency: 1h
+    disable_resolve_message: false
+    # See `Supported Settings` section for settings supporter for each
+    # alert notification type.
+    settings:
+      recipient: 'XXX'
+      token: 'xoxb'
+      uploadImage: true
+      url: https://slack.com
+
+delete_notifiers:
+  - name: notification-channel-1
+    uid: notifier1
+    org_id: 2
+  - name: notification-channel-2
+    # default org_id: 1
+</code></pre>
+<h2 id="sidecar-for-alerting-resources">Sidecar for alerting resources</h2>
+<p>If the parameter <code>sidecar.alerts.enabled</code> is set, a sidecar container is deployed in the grafana
+pod. This container watches all configmaps (or secrets) in the cluster (namespace defined by <code>sidecar.alerts.searchNamespace</code>) and filters out the ones with
+a label as defined in <code>sidecar.alerts.label</code> (default is <code>grafana_alert</code>). The files defined in those configmaps are written
+to a folder and accessed by grafana. Changes to the configmaps are monitored and the imported alerting resources are updated, however, deletions are a little more complicated (see below).</p>
+<p>This sidecar can be used to provision alert rules, contact points, notification policies, notification templates and mute timings as shown in <a href="https://grafana.com/docs/grafana/next/alerting/set-up/provision-alerting-resources/file-provisioning/">Grafana Documentation</a>.</p>
+<p>To fetch the alert config which will be provisioned, use the alert provisioning API (<a href="https://grafana.com/docs/grafana/next/developers/http_api/alerting_provisioning/">Grafana Documentation</a>).
+You can use either JSON or YAML format.</p>
+<p>Example config for an alert rule:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-grafana-alert
+  labels:
+     grafana_alert: &quot;1&quot;
+data:
+  k8s-alert.yml: |-
+    apiVersion: 1
+    groups:
+        - orgId: 1
+          name: k8s-alert
+          [...]
+</code></pre>
+<p>To delete provisioned alert rules is a two step process, you need to delete the configmap which defined the alert rule
+and then create a configuration which deletes the alert rule.</p>
+<p>Example deletion configuration:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: delete-sample-grafana-alert
+  namespace: monitoring
+  labels:
+    grafana_alert: &quot;1&quot;
+data:
+  delete-k8s-alert.yml: |-
+    apiVersion: 1
+    deleteRules:
+      - orgId: 1
+        uid: 16624780-6564-45dc-825c-8bded4ad92d3
+</code></pre>
+<h2 id="statically-provision-alerting-resources">Statically provision alerting resources</h2>
+<p>If you don't need to change alerting resources (alert rules, contact points, notification policies and notification templates) regularly you could use the <code>alerting</code> config option instead of the sidecar option above.
+This will grab the alerting config and apply it statically at build time for the helm file.</p>
+<p>There are two methods to statically provision alerting configuration in Grafana. Below are some examples and explanations as to how to use each method:</p>
+<pre><code class="language-yaml">alerting:
+  team1-alert-rules.yaml:
+    file: alerting/team1/rules.yaml
+  team2-alert-rules.yaml:
+    file: alerting/team2/rules.yaml
+  team3-alert-rules.yaml:
+    file: alerting/team3/rules.yaml
+  notification-policies.yaml:
+    file: alerting/shared/notification-policies.yaml
+  notification-templates.yaml:
+    file: alerting/shared/notification-templates.yaml
+  contactpoints.yaml:
+    apiVersion: 1
+    contactPoints:
+      - orgId: 1
+        name: Slack channel
+        receivers:
+          - uid: default-receiver
+            type: slack
+            settings:
+              # Webhook URL to be filled in
+              url: &quot;&quot;
+              # We need to escape double curly braces for the tpl function.
+              text: '{{ `{{ template &quot;default.message&quot; . }}` }}'
+              title: '{{ `{{ template &quot;default.title&quot; . }}` }}'
+</code></pre>
+<p>The two possibilities for static alerting resource provisioning are:</p>
+<ul>
+<li>Inlining the file contents as shown for contact points in the above example.</li>
+<li>Importing a file using a relative path starting from the chart root directory as shown for the alert rules in the above example.</li>
+</ul>
+<h3 id="important-notes-on-file-provisioning">Important notes on file provisioning</h3>
+<ul>
+<li>The format of the files is defined in the <a href="https://grafana.com/docs/grafana/next/alerting/set-up/provision-alerting-resources/file-provisioning/">Grafana documentation</a> on file provisioning.</li>
+<li>The chart supports importing YAML and JSON files.</li>
+<li>The filename must be unique, otherwise one volume mount will overwrite the other.</li>
+<li>In case of inlining, double curly braces that arise from the Grafana configuration format and are not intended as templates for the chart must be escaped.</li>
+<li>The number of total files under <code>alerting:</code> is not limited. Each file will end up as a volume mount in the corresponding provisioning folder of the deployed Grafana instance.</li>
+<li>The file size for each import is limited by what the function <code>.Files.Get</code> can handle, which suffices for most cases.</li>
+</ul>
+<h2 id="how-to-serve-grafana-with-a-path-prefix-grafana">How to serve Grafana with a path prefix (/grafana)</h2>
+<p>In order to serve Grafana with a prefix (e.g., <a href="http://example.com/grafana">http://example.com/grafana</a>), add the following to your values.yaml.</p>
+<pre><code class="language-yaml">ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: &quot;nginx&quot;
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: &quot;true&quot;
+
+  path: /grafana/?(.*)
+  hosts:
+    - k8s.example.dev
+
+grafana.ini:
+  server:
+    root_url: http://localhost:3000/grafana # this host can be localhost
+</code></pre>
+<h2 id="how-to-securely-reference-secrets-in-grafanaini">How to securely reference secrets in grafana.ini</h2>
+<p>This example uses Grafana <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#file-provider">file providers</a> for secret values and the <code>extraSecretMounts</code> configuration flag (Additional grafana server secret mounts) to mount the secrets.</p>
+<p>In grafana.ini:</p>
+<pre><code class="language-yaml">grafana.ini:
+  [auth.generic_oauth]
+  enabled = true
+  client_id = $__file{/etc/secrets/auth_generic_oauth/client_id}
+  client_secret = $__file{/etc/secrets/auth_generic_oauth/client_secret}
+</code></pre>
+<p>Existing secret, or created along with helm:</p>
+<pre><code class="language-yaml">---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auth-generic-oauth-secret
+type: Opaque
+stringData:
+  client_id: &lt;value&gt;
+  client_secret: &lt;value&gt;
+</code></pre>
+<p>Include in the <code>extraSecretMounts</code> configuration flag:</p>
+<pre><code class="language-yaml">- extraSecretMounts:
+  - name: auth-generic-oauth-secret-mount
+    secretName: auth-generic-oauth-secret
+    defaultMode: 0440
+    mountPath: /etc/secrets/auth_generic_oauth
+    readOnly: true
+</code></pre>
+<h3 id="extrasecretmounts-using-a-container-storage-interface-csi-provider">extraSecretMounts using a Container Storage Interface (CSI) provider</h3>
+<p>This example uses a CSI driver e.g. retrieving secrets using <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault Provider</a></p>
+<pre><code class="language-yaml">- extraSecretMounts:
+  - name: secrets-store-inline
+    mountPath: /run/secrets
+    readOnly: true
+    csi:
+      driver: secrets-store.csi.k8s.io
+      readOnly: true
+      volumeAttributes:
+        secretProviderClass: &quot;my-provider&quot;
+      nodePublishSecretRef:
+        name: akv-creds
+</code></pre>
+<h2 id="image-renderer-plug-in">Image Renderer Plug-In</h2>
+<p>This chart supports enabling <a href="https://github.com/grafana/grafana-image-renderer/blob/master/README.md#run-in-docker">remote image rendering</a></p>
+<pre><code class="language-yaml">imageRenderer:
+  enabled: true
+</code></pre>
+<h3 id="image-renderer-networkpolicy">Image Renderer NetworkPolicy</h3>
+<p>By default the image-renderer pods will have a network policy which only allows ingress traffic from the created grafana instance</p>
+<h3 id="high-availability-for-unified-alerting">High Availability for unified alerting</h3>
+<p>If you want to run Grafana in a high availability cluster you need to enable
+the headless service by setting <code>headlessService: true</code> in your <code>values.yaml</code>
+file.</p>
+<p>As next step you have to setup the <code>grafana.ini</code> in your <code>values.yaml</code> in a way
+that it will make use of the headless service to obtain all the IPs of the
+cluster. You should replace <code>{{ Name }}</code> with the name of your helm deployment.</p>
+<pre><code class="language-yaml">grafana.ini:
+  ...
+  unified_alerting:
+    enabled: true
+    ha_peers: {{ Name }}-headless:9094
+    ha_listen_address: ${POD_IP}:9094
+    ha_advertise_address: ${POD_IP}:9094
+
+  alerting:
+    enabled: false
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
