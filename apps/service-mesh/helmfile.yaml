@@ -1,0 +1,40 @@
+missingFileHandler: Error
+
+releases:
+
+- name: istio-base
+  namespace: istio-system
+  chart: ../../external-charts/base
+  wait: true
+
+- name: istiod
+  namespace: istio-system
+  chart: ../../external-charts/istiod
+  wait: true
+  values:
+  - values/istiod.yaml.gotmpl
+
+- name: istio-ingress-gateway
+  namespace: istio-system
+  chart: ../../external-charts/gateway
+  values:
+  - values/istio-ingress-gateway.yaml.gotmpl
+  needs:
+  - istio-system/istiod
+
+- name: istio-etc
+  namespace: istio-system
+  chart: charts/istio-etc
+  values:
+  - values/istio-etc.yaml.gotmpl
+  needs:
+  - istio-system/istio-ingress-gateway
+
+- name: istio-tls-certs
+  namespace: istio-system
+  chart: charts/istio-tls-certs
+  values:
+  - values/istio-tls-certs.yaml.gotmpl
+
+commonLabels:
+  app: service-mesh

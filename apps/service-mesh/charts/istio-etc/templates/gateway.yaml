@@ -1,0 +1,30 @@
+# ref: https://istio.io/latest/docs/reference/config/networking/gateway/
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: istio-ingress-gateway
+spec:
+  selector:
+    istio: ingress-gateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "{{ .Values.domain }}"
+    - "*.{{ .Values.domain }}"
+    tls:
+      # sends 301 redirect for http requests
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https-internal
+      protocol: HTTPS
+    hosts:
+    - "{{ .Values.domain }}"
+    - "*.{{ .Values.domain }}"
+    tls:
+      credentialName: tls-cert
+      # enables HTTPS on this port
+      mode: SIMPLE

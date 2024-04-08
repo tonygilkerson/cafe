@@ -1,2 +1,5 @@
 kube-prometheus-stack,https://prometheus-community.github.io/helm-charts,55.5.1
 mariadb,https://groundhog2k.github.io/helm-charts,2.1.2
+base,https://istio-release.storage.googleapis.com/charts,1.21.0
+istiod,https://istio-release.storage.googleapis.com/charts,1.21.0
+gateway,https://istio-release.storage.googleapis.com/charts,1.21.0

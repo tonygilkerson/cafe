@@ -2,6 +2,9 @@ missingFileHandler: Error
 
 helmfiles:
 
+- path: ../../apps/service-mesh
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 - path: ../../apps/kps
   values:
   - {{ $.Values | toYaml | nindent 4}}
@@ -24,6 +27,9 @@ environments:
   default:
     values:
       - clusterName: weeble
+      - domain: tonygilkerson.us
+      - oidc:
+          clientID: xxxxx
       
 
 

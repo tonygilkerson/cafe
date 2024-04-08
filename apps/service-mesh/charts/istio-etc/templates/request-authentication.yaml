@@ -1,0 +1,28 @@
+# apiVersion: security.istio.io/v1
+# kind: RequestAuthentication
+# metadata:
+#   name: istio-ingress-gateway
+# spec:
+#   selector:
+#     matchLabels:
+#       app: istio-ingress-gateway
+#   jwtRules:
+#   - issuer: {{ .Values.oidcHostName }}
+#     jwksUri: {{ .Values.jwksUri }}
+#     # Forward JWT to httpbin sidecar
+#     forwardOriginalToken: false
+#     # outputPayloadToHeader: x-jwt-payload
+#     outputClaimToHeaders:
+#     - header: "x-jwt-claim-sub"
+#       claim: "sub"    
+#     - header: "x-jwt-claim-iss"
+#       claim: "iss"    
+#     - header: "x-jwt-claim-email"
+#       claim: "email"    
+#     - header: "x-jwt-claim-preferred-username"
+#       claim: "preferred_username"    
+#     - header: "x-jwt-claim-name"
+#       claim: "preferred_name"    
+#     - header: "x-jwt-claim-picture"
+#       claim: "picture"    
+

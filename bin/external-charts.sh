@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x # trace
+# set -x # trace
 set -e # exit when any command fails
 
 tmpdir=".temp/external-charts-ace"

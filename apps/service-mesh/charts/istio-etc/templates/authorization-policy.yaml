@@ -1,0 +1,29 @@
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: istio-ingress-gateway
+# spec:
+#   selector:
+#     matchLabels:
+#       app: istio-ingress-gateway
+#   action: CUSTOM
+#   provider:
+#     # Extension provider configured when we installed Istio
+#     name: oauth2-proxy
+#   rules:
+#   - {}
+# ---
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: istio-ingress-gateway-audience
+# spec:
+#   selector:
+#     matchLabels:
+#       app: istio-ingress-gateway
+#   rules:
+#   - when:
+#     - key: request.auth.audiences
+#       values:
+#       # ClientID
+#       - { { .Values.clientID } }
