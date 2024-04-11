@@ -114,7 +114,7 @@ git clone git@github.com:tonygilkerson/dotfiles.git
 # If microk8s is already installed an you want to start over run reset
 microk8s reset --destroy-storage
 
-microk8s enable ingress dns cert-manager hostpath-storage metrics-server
+microk8s enable dns cert-manager hostpath-storage metrics-server
 microk8s config > ~/.kube/config
 ```
 
