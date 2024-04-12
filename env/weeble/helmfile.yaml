@@ -5,6 +5,9 @@ helmfiles:
 - path: ../../apps/service-mesh
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/oauth2-proxy
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 - path: ../../apps/kps
   values:
   - {{ $.Values | toYaml | nindent 4}}
@@ -28,8 +31,6 @@ environments:
     values:
       - clusterName: weeble
       - domain: tonygilkerson.us
-      - oidc:
-          clientID: xxxxx
       
 
 

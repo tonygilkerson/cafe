@@ -1,0 +1,12 @@
+missingFileHandler: Error
+
+releases:
+
+- name: oauth2-proxy
+  namespace: oauth2-proxy
+  chart: ../../external-charts/oauth2-proxy
+  values:
+  - values/oauth2-proxy.yaml.gotmpl
+
+commonLabels:
+  app: oauth2-proxy
