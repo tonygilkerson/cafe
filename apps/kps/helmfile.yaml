@@ -12,6 +12,11 @@ releases:
   values:
   - values/kps.yaml.gotmpl
 
+- name: kps-mesh
+  namespace: kps
+  chart: charts/kps-mesh
+  values:
+  - values/kps-mesh.yaml.gotmpl
 
 commonLabels:
   app: kps

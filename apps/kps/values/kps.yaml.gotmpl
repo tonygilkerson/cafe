@@ -3,16 +3,7 @@ grafana:
   
 prometheus:    
   ingress:
-    enabled: true
-    path: /
-    hosts:
-      - prometheus.tonygilkerson.us
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-    tls:
-    - hosts:
-      - prometheus.tonygilkerson.us
-      secretName: prometheus-tls 
+    enabled: false
 
   prometheusSpec:
     # To enable run this on the target namespace 
@@ -57,16 +48,7 @@ alertmanager:
   enabled: true
 
   ingress:
-    enabled: true
-    path: /
-    hosts:
-      - alert.tonygilkerson.us
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-    tls:
-    - hosts:
-      - alert.tonygilkerson.us
-      secretName: alert-tls 
+    enabled: false 
   alertmanagerSpec:
 
     # To enable run this on the target namespace 

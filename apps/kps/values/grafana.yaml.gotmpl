@@ -1,14 +1,5 @@
 ingress:
-  enabled: true
-  path: /
-  hosts:
-    - grafana.tonygilkerson.us
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-  tls:
-  - hosts:
-    - grafana.tonygilkerson.us
-    secretName: grafana-tls
+  enabled: false
 grafana.ini:
   server:
     domain: grafana.tonygilkerson.us

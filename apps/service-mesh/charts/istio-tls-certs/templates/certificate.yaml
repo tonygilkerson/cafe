@@ -16,7 +16,7 @@ spec:
     - server auth
     - client auth
   dnsNames:
-    - "ispi.{{ .Values.domain }}"
+    - "ispy.{{ .Values.domain }}"
     - "grafana.{{ .Values.domain }}"
     - "alert.{{ .Values.domain }}"
     - "prometheus.{{ .Values.domain }}"
