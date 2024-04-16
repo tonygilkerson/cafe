@@ -51,26 +51,11 @@ metadata:
 spec:
   limits:
   - default: # this section defines default limits
-      cpu: 32m
-      memory: 64Mi
-    defaultRequest: # this section defines default requests
-      cpu: 32m
-      memory: 32Mi
-    type: Container
----
-apiVersion: v1
-kind: LimitRange
-metadata:
-  name: limit-range
-  namespace: ingress
-spec:
-  limits:
-  - default: # this section defines default limits
       cpu: 64m
       memory: 128Mi
     defaultRequest: # this section defines default requests
-      cpu: 32m
-      memory: 32Mi
+      cpu: 64m
+      memory: 128Mi
     type: Container
 ---
 apiVersion: v1

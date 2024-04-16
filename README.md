@@ -219,7 +219,10 @@ This no longer applies but might be useful as a reference. If you have not used 
 
 Add DNS entries in the cert-manager deployment at `spec.template.spec.dnsConfig`
 
+
 ```yaml
+# DEVTODO - dont install cert-manager as a addon, instead vendor the cart and make this change to the chart
+
 dnsConfig:
   nameservers:
     - 1.1.1.1
