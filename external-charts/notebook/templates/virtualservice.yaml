@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: notebook
+spec:
+  gateways:
+  - istio-system/istio-ingress-gateway
+  hosts:
+  - notebook.{{ .Values.domain }}
+  http:
+  - name: ispy
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: notebook

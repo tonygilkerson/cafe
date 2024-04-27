@@ -72,3 +72,18 @@ spec:
       cpu: 32m
       memory: 32Mi
     type: Container
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range
+  namespace: notebook
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 100m
+      memory: 128Mi
+    defaultRequest: # this section defines default requests
+      cpu: 32m
+      memory: 32Mi
+    type: Container

@@ -43,4 +43,12 @@ getISpy:
 	mkdir -p .temp
 	git -C .temp clone git@github.com:tonygilkerson/ispy.git
 	cp -r .temp/ispy/charts/ispy external-charts/
+
+getNotebook:
+	@echo "Get Notebook"
+	rm -fr .temp/notebook || true
+	rm -rf external-charts/notebook || true
+	mkdir -p .temp
+	git -C .temp clone git@github.com:tonygilkerson/notebook.git
+	cp -r .temp/notebook/charts/notebook external-charts/
 	

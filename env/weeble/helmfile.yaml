@@ -23,6 +23,9 @@ helmfiles:
 - path: ../../apps/ispy
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/notebook
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

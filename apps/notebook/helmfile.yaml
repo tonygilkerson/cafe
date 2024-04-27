@@ -1,0 +1,10 @@
+
+releases:
+- name: notebook
+  namespace: notebook
+  chart: ../../external-charts/notebook
+  values:
+  - values/notebook.yaml.gotmpl
+
+commonLabels:
+  app: notebook

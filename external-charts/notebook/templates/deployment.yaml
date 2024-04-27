@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notebook
+  name: notebook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notebook
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: notebook
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: notebook
+        resources: {}
+        # securityContext:
+        #   runAsUser: 65534
+        #   runAsGroup: 65534
+        #   allowPrivilegeEscalation: false
+        #   capabilities:
+        #     drop: ["ALL"]
+        #   runAsNonRoot: true
+        #   seccompProfile:
+        #     type: RuntimeDefault
