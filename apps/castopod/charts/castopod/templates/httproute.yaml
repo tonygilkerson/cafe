@@ -6,9 +6,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: https
-  hostnames:
-  - "castopod.{{ .Values.domain }}"    
+    sectionName: https-castopod
   rules:
   - backendRefs:
     - name: castopod
@@ -23,9 +21,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: http
-  hostnames:
-  - "castopod.{{ .Values.domain }}"       
+    sectionName: http-castopod
   rules:
   - filters:
     - type: RequestRedirect

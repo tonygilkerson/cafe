@@ -28,11 +28,5 @@ releases:
   values:
   - values/istio-etc.yaml.gotmpl
 
-- name: istio-tls-certs
-  namespace: istio-system
-  chart: charts/istio-tls-certs
-  values:
-  - values/istio-tls-certs.yaml.gotmpl
-
 commonLabels:
   app: service-mesh

@@ -9,9 +9,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: https
-  hostnames:
-  - "grafana.{{ .Values.domain }}"    
+    sectionName: https-grafana  
   rules:
   - backendRefs:
     - name: grafana
@@ -26,9 +24,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: http
-  hostnames:
-  - "grafana.{{ .Values.domain }}"       
+    sectionName: http-grafana     
   rules:
   - filters:
     - type: RequestRedirect
@@ -47,9 +43,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: https
-  hostnames:
-  - "alert.{{ .Values.domain }}"    
+    sectionName: https-alert
   rules:
   - backendRefs:
     - name: kps-kube-prometheus-stack-alertmanager
@@ -64,9 +58,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: http
-  hostnames:
-  - "alert.{{ .Values.domain }}"       
+    sectionName: http-alert   
   rules:
   - filters:
     - type: RequestRedirect
@@ -85,9 +77,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: https
-  hostnames:
-  - "prometheus.{{ .Values.domain }}"    
+    sectionName: https-prometheus  
   rules:
   - backendRefs:
     - name: kps-kube-prometheus-stack-prometheus
@@ -102,9 +92,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: http
-  hostnames:
-  - "prometheus.{{ .Values.domain }}"       
+    sectionName: http-prometheus     
   rules:
   - filters:
     - type: RequestRedirect

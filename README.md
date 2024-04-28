@@ -118,6 +118,14 @@ microk8s enable dns cert-manager hostpath-storage metrics-server
 microk8s config > ~/.kube/config
 ```
 
+## Cert Manager
+
+Install CRDs to break chicken and egg. See [cert-manager doc](https://cert-manager.io/docs/installation/helm/)
+
+```sh
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml
+```
+
 ## Docs Dev
 
 Install themes
@@ -139,24 +147,6 @@ mkdocs serve
 ```
 
 Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
-
-## ArgoCD UI
-
-Bootstrap the cluster
-
-* Manually install argocd see [argocd README](apps/argocd/README.md)
-* Manually install kps see [kps README](apps/kps/README.md)
-* Manually install the apps of apps
-
-   ```sh
-   # create app namespaces
-   kubectl create ns cafe
-   kubectl create ns iot
-   kubectl create ns kps
-
-   # Deploy the app of apps
-   kubectl apply -f env/weeble/weeble.yaml
-   ```
 
 ## kps
 
@@ -213,6 +203,10 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 
 # After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
 kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
+
+# Allow access to cafe-gateway
+# DEVTODO - I should add this to the namespace chart
+kubectl label ns istio-system cafe-gateway=enabled
 ```
 
 ---

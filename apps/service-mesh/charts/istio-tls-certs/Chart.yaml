@@ -1,6 +1,0 @@
-apiVersion: v2
-name: istio-tls-certs
-description: Istio tls certs
-type: application
-version: 0.1.0
-appVersion: "0.1.0"

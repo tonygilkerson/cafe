@@ -1,0 +1,72 @@
+installCRDs: true
+
+# ref: https://github.com/cert-manager/cert-manager/issues/5515#issuecomment-1479054700
+extraArgs:
+- --enable-certificate-owner-ref=true
+- --dns01-recursive-nameservers-only
+- --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
+- --feature-gates=ExperimentalGatewayAPISupport=true
+
+securityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 200Mi
+  limits:
+    cpu: 500m
+    memory: 600Mi
+
+cainjector:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 170Mi
+    limits:
+      cpu: 500m
+      memory: 600Mi
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+webhook:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 95Mi
+    limits:
+      cpu: 500m
+      memory: 300Mi
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+
+startupapicheck:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL

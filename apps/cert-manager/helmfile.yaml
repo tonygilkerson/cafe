@@ -1,0 +1,14 @@
+missingFileHandler: Error
+
+releases:
+
+- name: cert-manager
+  namespace: cert-manager
+  chart: ../../external-charts/cert-manager
+  wait: true
+  waitForJobs: true
+  values:
+  - values/cert-manager.yaml.gotmpl
+
+commonLabels:
+  app: cert-manager

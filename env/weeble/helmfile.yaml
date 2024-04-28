@@ -2,6 +2,9 @@ missingFileHandler: Error
 
 helmfiles:
 
+- path: ../../apps/cert-manager
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 - path: ../../apps/service-mesh
   values:
   - {{ $.Values | toYaml | nindent 4}}

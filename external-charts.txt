@@ -4,3 +4,4 @@ base,https://istio-release.storage.googleapis.com/charts,1.21.0
 istiod,https://istio-release.storage.googleapis.com/charts,1.21.0
 gateway,https://istio-release.storage.googleapis.com/charts,1.21.0
 oauth2-proxy,https://oauth2-proxy.github.io/manifests,7.1.0
+cert-manager,https://charts.jetstack.io,v1.14.5

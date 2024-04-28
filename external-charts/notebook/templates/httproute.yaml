@@ -6,10 +6,9 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    # sectionName: https
-    sectionName: https # Open up http until I figue out how to get the tls working
-  hostnames:
-  - "notebook.{{ .Values.domain }}"    
+    sectionName: https-notebook
+  # hostnames:
+  # - "notebook.{{ .Values.domain }}"    
   rules:
   - backendRefs:
     - name: notebook
@@ -24,9 +23,9 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: http
-  hostnames:
-  - "notebook.{{ .Values.domain }}"       
+    sectionName: http-notebook
+  # hostnames:
+  # - "notebook.{{ .Values.domain }}"       
   rules:
   - filters:
     - type: RequestRedirect
