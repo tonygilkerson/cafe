@@ -1,0 +1,34 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: castopod
+spec:
+  parentRefs:
+  - name: cafe-gateway
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - "castopod.{{ .Values.domain }}"    
+  rules:
+  - backendRefs:
+    - name: castopod
+      weight: 1
+      port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: castopod-http-redirect
+spec:
+  parentRefs:
+  - name: cafe-gateway
+    namespace: istio-system
+    sectionName: http
+  hostnames:
+  - "castopod.{{ .Values.domain }}"       
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301

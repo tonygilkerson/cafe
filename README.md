@@ -205,6 +205,16 @@ Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
 
 Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
 
+## GatewayAPI
+
+```sh
+# Install CRDs
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml
+
+# After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
+kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
+```
+
 ---
 
 ## Old Archive Stuff
@@ -218,7 +228,6 @@ This no longer applies but might be useful as a reference. If you have not used 
 >"error"="failed to perform self check GET request ...
 
 Add DNS entries in the cert-manager deployment at `spec.template.spec.dnsConfig`
-
 
 ```yaml
 # DEVTODO - dont install cert-manager as a addon, instead vendor the cart and make this change to the chart

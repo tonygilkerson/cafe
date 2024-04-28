@@ -1,6 +1,7 @@
 {{- define "ns-common.labels" -}}
 act3-ace.io/part-of: cafe
 tonygilkerson.us/alerting: enabled
+cafe-gateway: enabled
 {{- end }}
 
 {{- define "ns-pod-security-baseline.labels" -}}

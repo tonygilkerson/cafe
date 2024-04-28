@@ -1,30 +1,68 @@
-# ref: https://istio.io/latest/docs/reference/config/networking/gateway/
-apiVersion: networking.istio.io/v1beta1
+#
+# GatewayAPI Gateway - This will create an Envoy edge proxy
+#
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: istio-ingress-gateway
+  name: cafe-gateway
+  namespace: istio-system
 spec:
-  selector:
-    istio: ingress-gateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "{{ .Values.domain }}"
-    - "*.{{ .Values.domain }}"
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    # hostname: "notebook.{{ .Values.domain }}"
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            cafe-gateway: enabled
+
+  - name: https
+    # hostname: "notebook.{{ .Values.domain }}"
+    protocol: HTTPS
+    port: 443
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            cafe-gateway: enabled
     tls:
-      # sends 301 redirect for http requests
-      httpsRedirect: true
-  - port:
-      number: 443
-      name: https-internal
-      protocol: HTTPS
-    hosts:
-    - "{{ .Values.domain }}"
-    - "*.{{ .Values.domain }}"
-    tls:
-      credentialName: tls-cert
-      # enables HTTPS on this port
-      mode: SIMPLE
+      mode: Terminate
+      certificateRefs:
+      - name: tls-cert
+---
+# # ref: https://istio.io/latest/docs/reference/config/networking/gateway/
+# apiVersion: networking.istio.io/v1beta1
+# kind: Gateway
+# metadata:
+#   name: istio-ingress-gateway
+# spec:
+#   selector:
+#     istio: ingress-gateway
+#   servers:
+#   - port:
+#       number: 80
+#       name: http
+#       protocol: HTTP
+#     hosts:
+#     - "{{ .Values.domain }}"
+#     - "*.{{ .Values.domain }}"
+#     tls:
+#       # sends 301 redirect for http requests
+#       httpsRedirect: true
+#   - port:
+#       number: 443
+#       name: https-internal
+#       protocol: HTTPS
+#     hosts:
+#     - "{{ .Values.domain }}"
+#     - "*.{{ .Values.domain }}"
+#     tls:
+#       credentialName: tls-cert
+#       # enables HTTPS on this port
+#       mode: SIMPLE
+# ---
