@@ -1,0 +1,12 @@
+missingFileHandler: Error
+
+releases:
+
+- name: httpbin
+  namespace: httpbin
+  chart: charts/httpbin
+  values:
+  - values/httpbin.yaml.gotmpl
+
+commonLabels:
+  app: httpbin

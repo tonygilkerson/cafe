@@ -29,6 +29,9 @@ helmfiles:
 - path: ../../apps/notebook
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/httpbin
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

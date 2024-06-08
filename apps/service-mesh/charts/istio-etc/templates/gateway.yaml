@@ -12,6 +12,34 @@ spec:
   gatewayClassName: istio
   listeners:
   #
+  # httpbin
+  #
+  - name: httpbin-http
+    hostname: "httpbin.{{ .Values.domain }}"
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            cafe-gateway: enabled
+
+  - name: httpbin-https
+    hostname: "httpbin.{{ .Values.domain }}"
+    protocol: HTTPS
+    port: 443
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            cafe-gateway: enabled
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: tls-cert-httpbin
+  #
   # Notebook
   #
   - name: http-notebook

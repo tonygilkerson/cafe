@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: istio-ingress-gateway
+      istio.io/gateway-name: cafe-gateway
   action: CUSTOM
   provider:
     # Extension provider configured when we installed Istio
