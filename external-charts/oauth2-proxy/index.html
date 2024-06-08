@@ -1,0 +1,1216 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>oauth2-proxy - The Cafe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#oauth2-proxy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Cafe" class="md-header__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Cafe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              oauth2-proxy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Cafe" class="md-nav__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    The Cafe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inf/" class="md-nav__link">
+        Infrastructure
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iot/" class="md-nav__link">
+        IoT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    TL;DR;
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-chart" class="md-nav__link">
+    Installing the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-the-chart" class="md-nav__link">
+    Uninstalling the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-an-existing-release-to-a-new-major-version" class="md-nav__link">
+    Upgrading an existing Release to a new major version
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading an existing Release to a new major version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-100" class="md-nav__link">
+    To 1.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-200" class="md-nav__link">
+    To 2.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-300" class="md-nav__link">
+    To 3.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-400" class="md-nav__link">
+    To 4.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-500" class="md-nav__link">
+    To 5.0.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-600" class="md-nav__link">
+    To 6.0.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-configuration" class="md-nav__link">
+    TLS Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-environment-variable-templating" class="md-nav__link">
+    Extra environment variable templating
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-templates-configuration" class="md-nav__link">
+    Custom templates configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-whitelist-domain-configuration" class="md-nav__link">
+    Multi whitelist-domain configuration
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="oauth2-proxy">oauth2-proxy</h1>
+<p><a href="https://github.com/oauth2-proxy/oauth2-proxy">oauth2-proxy</a> is a reverse proxy and static file server that provides authentication using Providers (Google, GitHub, and others) to validate accounts by email, domain or group.</p>
+<h2 id="tldr">TL;DR;</h2>
+<pre><code class="language-console">$ helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+$ helm install my-release oauth2-proxy/oauth2-proxy
+</code></pre>
+<h2 id="introduction">Introduction</h2>
+<p>This chart bootstraps an oauth2-proxy deployment on a <a href="http://kubernetes.io">Kubernetes</a> cluster using the <a href="https://helm.sh">Helm</a> package manager.</p>
+<h2 id="installing-the-chart">Installing the Chart</h2>
+<p>To install the chart with the release name <code>my-release</code>:</p>
+<pre><code class="language-console">$ helm install my-release oauth2-proxy/oauth2-proxy
+</code></pre>
+<p>The command deploys oauth2-proxy on the Kubernetes cluster in the default configuration. The <a href="#configuration">configuration</a> section lists the parameters that can be configured during installation.</p>
+<h2 id="uninstalling-the-chart">Uninstalling the Chart</h2>
+<p>To uninstall/delete the <code>my-release</code> deployment:</p>
+<pre><code class="language-console">$ helm uninstall my-release
+</code></pre>
+<p>The command removes all the Kubernetes components associated with the chart and deletes the release.</p>
+<h2 id="upgrading-an-existing-release-to-a-new-major-version">Upgrading an existing Release to a new major version</h2>
+<p>A major chart version change (like v1.2.3 -&gt; v2.0.0) indicates that there is an
+incompatible breaking change needing manual actions.</p>
+<h3 id="to-100">To 1.0.0</h3>
+<p>This version upgrades oauth2-proxy to v4.0.0. Please see the <a href="https://github.com/oauth2-proxy/oauth2-proxy/blob/v4.0.0/CHANGELOG.md#v400">changelog</a> in order to upgrade.</p>
+<h3 id="to-200">To 2.0.0</h3>
+<p>Version 2.0.0 of this chart introduces support for Kubernetes v1.16.x by way of addressing the deprecation of the Deployment object apiVersion <code>apps/v1beta2</code>.  See <a href="https://kubernetes.io/blog/2019/07/18/api-deprecations-in-1-16/">the v1.16 API deprecations page</a> for more information.</p>
+<p>Due to <a href="https://github.com/helm/helm/issues/6583">this issue</a> there may be errors performing a <code>helm upgrade</code> of this chart from versions earlier than 2.0.0.</p>
+<h3 id="to-300">To 3.0.0</h3>
+<p>Version 3.0.0 introduces support for <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">EKS IAM roles for service accounts</a> by adding a managed service account to the chart.  This is a breaking change since the service account is enabled by default.  To disable this behaviour set <code>serviceAccount.enabled</code> to <code>false</code></p>
+<h3 id="to-400">To 4.0.0</h3>
+<p>Version 4.0.0 adds support for the new Ingress apiVersion <strong>networking.k8s.io/v1</strong>.
+Therefore the <code>ingress.extraPaths</code> parameter needs to be updated to the new format.
+See the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#ingress-v122">v1.22 API deprecations guide</a> for more information.</p>
+<p>For the same reason <code>service.port</code> was renamed to <code>service.portNumber</code>.</p>
+<h3 id="to-500">To 5.0.0</h3>
+<p>Version 5.0.0 introduces support for custom labels and refactor <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/">Kubernetes recommended labels</a>. This is a breaking change because many labels of all resources need to be updated to stay consistent.</p>
+<p>In order to upgrade, delete the Deployment before upgrading:</p>
+<pre><code class="language-bash">kubectl delete deployment my-release-oauth2-proxy
+</code></pre>
+<p>This will introduce a slight downtime.</p>
+<p>For users who don't want downtime, you can perform these actions:</p>
+<ul>
+<li>Perform a non-cascading removal of the deployment that keeps the pods running</li>
+<li>Add new labels to pods</li>
+<li>Perform <code>helm upgrade</code></li>
+</ul>
+<h3 id="to-600">To 6.0.0</h3>
+<p>Version 6.0.0 bumps the version of the redis subchart from ~10.6.0 to ~16.4.0. You probably need to adjust your redis config. See <a href="https://github.com/bitnami/charts/tree/master/bitnami/redis#upgrading">here</a> for detailed upgrade instructions.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The following table lists the configurable parameters of the oauth2-proxy chart and their default values.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>affinity</code></td>
+<td>node/pod affinities</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.enabled</code></td>
+<td>Enables authorize individual email addresses</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.persistence</code></td>
+<td>Defines how the email addresses file will be projected, via a configmap or secret</td>
+<td><code>configmap</code></td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.template</code></td>
+<td>Name of the configmap or secret that is handled outside of that chart</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.restrictedUserAccessKey</code></td>
+<td>The key of the configmap or secret that holds the email addresses list</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.restricted_access</code></td>
+<td><a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider#email-authentication">email addresses</a> list config</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>authenticatedEmailsFile.annotations</code></td>
+<td>configmap or secret annotations</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>config.clientID</code></td>
+<td>oauth client ID</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.clientSecret</code></td>
+<td>oauth client secret</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.cookieSecret</code></td>
+<td>server specific cookie for the secret; create a new one with <code>openssl rand -base64 32 \| head -c 32 \| base64</code></td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.existingSecret</code></td>
+<td>existing Kubernetes secret to use for OAuth2 credentials. See <a href="https://github.com/oauth2-proxy/manifests/blob/master/helm/oauth2-proxy/templates/secret.yaml">secret template</a> for the required values</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>config.configFile</code></td>
+<td>custom <a href="https://github.com/oauth2-proxy/oauth2-proxy/blob/master/contrib/oauth2-proxy.cfg.example">oauth2_proxy.cfg</a> contents for settings not overridable via environment nor command line</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.existingConfig</code></td>
+<td>existing Kubernetes configmap to use for the configuration file. See <a href="https://github.com/oauth2-proxy/manifests/blob/master/helm/oauth2-proxy/templates/configmap.yaml">config template</a> for the required values</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>config.cookieName</code></td>
+<td>The name of the cookie that oauth2-proxy will create.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.enabled</code></td>
+<td>Flag to toggle any alpha config related logic</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.annotations</code></td>
+<td>Configmap annotations</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.serverConfigData</code></td>
+<td>Arbitrary configuration data to append to the server section</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.metricsConfigData</code></td>
+<td>Arbitrary configuration data to append to the metrics section</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.configData</code></td>
+<td>Arbitrary configuration data to append</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.configFile</code></td>
+<td>Arbitrary configuration to append, treated as a Go template and rendered with the root context</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.existingConfig</code></td>
+<td>existing Kubernetes configmap to use for the alpha configuration file. See <a href="https://github.com/oauth2-proxy/manifests/blob/master/helm/oauth2-proxy/templates/secret-alpha.yaml">config template</a> for the required values</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>alphaConfig.existingSecret</code></td>
+<td>existing Kubernetes secret to use for the alpha configuration file. See <a href="https://github.com/oauth2-proxy/manifests/blob/master/helm/oauth2-proxy/templates/secret-alpha.yaml">config template</a> for the required values</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>customLabels</code></td>
+<td>Custom labels to add into metadata</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>config.google.adminEmail</code></td>
+<td>user impersonated by the google service account</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.google.useApplicationDefaultCredentials</code></td>
+<td>use the application-default credentials (i.e. Workload Identity on GKE) instead of providing a service account json</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>config.google.targetPrincipal</code></td>
+<td>service account to use/impersonate</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.google.serviceAccountJson</code></td>
+<td>google service account json contents</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>config.google.existingConfig</code></td>
+<td>existing Kubernetes configmap to use for the service account file. See <a href="https://github.com/oauth2-proxy/manifests/blob/master/helm/oauth2-proxy/templates/google-secret.yaml">google secret template</a> for the required values</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>config.google.groups</code></td>
+<td>restrict logins to members of these google groups</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>containerPort</code></td>
+<td>used to customise port on the deployment</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>extraArgs</code></td>
+<td>Extra arguments to give the binary. Either as a map with key:value pairs or as a list type, which allows to configure the same flag multiple times. (e.g. <code>["--allowed-role=CLIENT_ID:CLIENT_ROLE_NAME_A", "--allowed-role=CLIENT_ID:CLIENT_ROLE_NAME_B"]</code>).</td>
+<td><code>{}</code> or <code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraContainers</code></td>
+<td>List of extra containers to be added to the pod</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraEnv</code></td>
+<td>key:value list of extra environment variables to give the binary</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraVolumes</code></td>
+<td>list of extra volumes</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraVolumeMounts</code></td>
+<td>list of extra volumeMounts</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>hostAliases</code></td>
+<td>hostAliases is a list of aliases to be added to /etc/hosts for network name resolution.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>htpasswdFile.enabled</code></td>
+<td>enable htpasswd-file option</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>htpasswdFile.entries</code></td>
+<td>list of <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview#command-line-options">encrypted user:passwords</a></td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>htpasswdFile.existingSecret</code></td>
+<td>existing Kubernetes secret to use for OAuth2 htpasswd file</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>httpScheme</code></td>
+<td><code>http</code> or <code>https</code>. <code>name</code> used for port on the deployment. <code>httpGet</code> port <code>name</code> and <code>scheme</code> used for <code>liveness</code>- and <code>readinessProbes</code>. <code>name</code> and <code>targetPort</code> used for the service.</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>image.pullPolicy</code></td>
+<td>Image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>image.repository</code></td>
+<td>Image repository</td>
+<td><code>quay.io/oauth2-proxy/oauth2-proxy</code></td>
+</tr>
+<tr>
+<td><code>image.tag</code></td>
+<td>Image tag</td>
+<td><code>""</code> (defaults to appVersion)</td>
+</tr>
+<tr>
+<td><code>imagePullSecrets</code></td>
+<td>Specify image pull secrets</td>
+<td><code>nil</code> (does not add image pull secrets to deployed pods)</td>
+</tr>
+<tr>
+<td><code>ingress.enabled</code></td>
+<td>Enable Ingress</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>ingress.className</code></td>
+<td>name referencing IngressClass</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>ingress.path</code></td>
+<td>Ingress accepted path</td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td><code>ingress.pathType</code></td>
+<td>Ingress <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types">path type</a></td>
+<td><code>ImplementationSpecific</code></td>
+</tr>
+<tr>
+<td><code>ingress.extraPaths</code></td>
+<td>Ingress extra paths to prepend to every host configuration. Useful when configuring <a href="https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/#actions">custom actions with AWS ALB Ingress Controller</a>.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>ingress.labels</code></td>
+<td>Ingress extra labels</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>ingress.annotations</code></td>
+<td>Ingress annotations</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>ingress.hosts</code></td>
+<td>Ingress accepted hostnames</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>ingress.tls</code></td>
+<td>Ingress TLS configuration</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.enabled</code></td>
+<td>if <code>redis.enabled</code> is true, use an init container to wait for the redis master pod to be ready. If <code>serviceAccount.enabled</code> is true, create additionally a role/binding to get, list and watch the redis master pod</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.image.pullPolicy</code></td>
+<td>kubectl image pull policy</td>
+<td><code>IfNotPresent</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.image.repository</code></td>
+<td>kubectl image repository</td>
+<td><code>docker.io/bitnami/kubectl</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.kubectlVersion</code></td>
+<td>kubectl version to use for the init container</td>
+<td><code>printf "%s.%s" .Capabilities.KubeVersion.Major (.Capabilities.KubeVersion.Minor | replace "+" "")</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.securityContext.enabled</code></td>
+<td>enable Kubernetes security context on container</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.timeout</code></td>
+<td>number of seconds</td>
+<td>180</td>
+</tr>
+<tr>
+<td><code>initContainers.waitForRedis.resources</code></td>
+<td>pod resource requests &amp; limits</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>livenessProbe.enabled</code></td>
+<td>enable Kubernetes livenessProbe. Disable to use oauth2-proxy with Istio mTLS. See <a href="https://istio.io/help/faq/security/#k8s-health-checks">Istio FAQ</a></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>livenessProbe.initialDelaySeconds</code></td>
+<td>number of seconds</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>livenessProbe.timeoutSeconds</code></td>
+<td>number of seconds</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>namespaceOverride</code></td>
+<td>Override the deployment namespace</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>nodeSelector</code></td>
+<td>node labels for pod assignment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>deploymentAnnotations</code></td>
+<td>annotations to add to the deployment</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podAnnotations</code></td>
+<td>annotations to add to each pod</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podLabels</code></td>
+<td>additional labesl to add to each pod</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>podDisruptionBudget.enabled</code></td>
+<td>Enabled creation of PodDisruptionBudget (only if replicaCount &gt; 1)</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>podDisruptionBudget.minAvailable</code></td>
+<td>minAvailable parameter for PodDisruptionBudget</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>podSecurityContext</code></td>
+<td>Kubernetes security context to apply to pod</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>priorityClassName</code></td>
+<td>priorityClassName</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>readinessProbe.enabled</code></td>
+<td>enable Kubernetes readinessProbe. Disable to use oauth2-proxy with Istio mTLS. See <a href="https://istio.io/help/faq/security/#k8s-health-checks">Istio FAQ</a></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>readinessProbe.initialDelaySeconds</code></td>
+<td>number of seconds</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>readinessProbe.timeoutSeconds</code></td>
+<td>number of seconds</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>readinessProbe.periodSeconds</code></td>
+<td>number of seconds</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>readinessProbe.successThreshold</code></td>
+<td>number of successes</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>replicaCount</code></td>
+<td>desired number of pods</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>resources</code></td>
+<td>pod resource requests &amp; limits</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>revisionHistoryLimit</code></td>
+<td>maximum number of revisions maintained</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>service.portNumber</code></td>
+<td>port number for the service</td>
+<td><code>80</code></td>
+</tr>
+<tr>
+<td><code>service.appProtocol</code></td>
+<td>application protocol on the port of the service</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>service.type</code></td>
+<td>type of service</td>
+<td><code>ClusterIP</code></td>
+</tr>
+<tr>
+<td><code>service.clusterIP</code></td>
+<td>cluster ip address</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.loadBalancerIP</code></td>
+<td>ip of load balancer</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.loadBalancerSourceRanges</code></td>
+<td>allowed source ranges in load balancer</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>service.nodePort</code></td>
+<td>external port number for the service when service.type is <code>NodePort</code></td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.enabled</code></td>
+<td>create a service account</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>serviceAccount.name</code></td>
+<td>the service account name</td>
+<td>``</td>
+</tr>
+<tr>
+<td><code>serviceAccount.annotations</code></td>
+<td>(optional) annotations for the service account</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>strategy</code></td>
+<td>configure deployment strategy</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>tolerations</code></td>
+<td>list of node taints to tolerate</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>securityContext.enabled</code></td>
+<td>enable Kubernetes security context on container</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>proxyVarsAsSecrets</code></td>
+<td>choose between environment values or secrets for setting up OAUTH2_PROXY variables. When set to false, remember to add the variables OAUTH2_PROXY_CLIENT_ID, OAUTH2_PROXY_CLIENT_SECRET, OAUTH2_PROXY_COOKIE_SECRET in extraEnv</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.type</code></td>
+<td>Session storage type which can be one of the following: cookie or redis</td>
+<td><code>cookie</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.existingSecret</code></td>
+<td>Name of the Kubernetes secret containing the redis &amp; redis sentinel password values (see also <code>sessionStorage.redis.passwordKey</code>)</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.password</code></td>
+<td>Redis password. Applicable for all Redis configurations. Taken from redis subchart secret if not set. sessionStorage.redis.existingSecret takes precedence</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.passwordKey</code></td>
+<td>Key of the Kubernetes secret data containing the redis password value</td>
+<td><code>redis-password</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.clientType</code></td>
+<td>Allows the user to select which type of client will be used for redis instance. Possible options are: <code>sentinel</code>, <code>cluster</code> or <code>standalone</code></td>
+<td><code>standalone</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.standalone.connectionUrl</code></td>
+<td>URL of redis standalone server for redis session storage (e.g. <code>redis://HOST[:PORT]</code>). Automatically generated if not set.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.cluster.connectionUrls</code></td>
+<td>List of Redis cluster connection URLs (e.g. <code>["redis://127.0.0.1:8000", "redis://127.0.0.1:8000"]</code>)</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.sentinel.existingSecret</code></td>
+<td>Name of the Kubernetes secret containing the redis sentinel password value (see also <code>sessionStorage.redis.sentinel.passwordKey</code>). Default: <code>sessionStorage.redis.existingSecret</code></td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.sentinel.password</code></td>
+<td>Redis sentinel password. Used only for sentinel connection; any redis node passwords need to use <code>sessionStorage.redis.password</code></td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.sentinel.passwordKey</code></td>
+<td>Key of the Kubernetes secret data containing the redis sentinel password value</td>
+<td><code>redis-sentinel-password</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.sentinel.masterName</code></td>
+<td>Redis sentinel master name</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>sessionStorage.redis.sentinel.connectionUrls</code></td>
+<td>List of Redis sentinel connection URLs (e.g. <code>["redis://127.0.0.1:8000", "redis://127.0.0.1:8000"]</code>)</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>topologySpreadConstraints</code></td>
+<td>List of pod topology spread constraints</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>redis.enabled</code></td>
+<td>Enable the redis subchart deployment</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>checkDeprecation</code></td>
+<td>Enable deprecation checks</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>metrics.enabled</code></td>
+<td>Enable Prometheus metrics endpoint</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>metrics.port</code></td>
+<td>Serve Prometheus metrics on this port</td>
+<td><code>44180</code></td>
+</tr>
+<tr>
+<td><code>metrics.nodePort</code></td>
+<td>External port for the metrics when service.type is <code>NodePort</code></td>
+<td><code>nil</code></td>
+</tr>
+<tr>
+<td><code>metrics.service.appProtocol</code></td>
+<td>application protocol of the metrics port in the service</td>
+<td><code>http</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.enabled</code></td>
+<td>Enable Prometheus Operator ServiceMonitor</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.namespace</code></td>
+<td>Define the namespace where to deploy the ServiceMonitor resource</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.prometheusInstance</code></td>
+<td>Prometheus Instance definition</td>
+<td><code>default</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.interval</code></td>
+<td>Prometheus scrape interval</td>
+<td><code>60s</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.scrapeTimeout</code></td>
+<td>Prometheus scrape timeout</td>
+<td><code>30s</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.labels</code></td>
+<td>Add custom labels to the ServiceMonitor resource</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.scheme</code></td>
+<td>HTTP scheme to use for scraping. Can be used with <code>tlsConfig</code> for example if using istio mTLS.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.tlsConfig</code></td>
+<td>TLS configuration to use when scraping the endpoint. For example if using istio mTLS.</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.bearerTokenFile</code></td>
+<td>Path to bearer token file.</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.annotations</code></td>
+<td>Used to pass annotations that are used by the Prometheus installed in your cluster</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.metricRelabelings</code></td>
+<td>Metric relabel configs to apply to samples before ingestion.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>metrics.serviceMonitor.relabelings</code></td>
+<td>Relabel configs to apply to samples before ingestion.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>extraObjects</code></td>
+<td>Extra K8s manifests to deploy</td>
+<td><code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Specify each parameter using the <code>--set key=value[,key=value]</code> argument to <code>helm install</code>. For example,</p>
+<pre><code class="language-console">$ helm install my-release oauth2-proxy/oauth2-proxy \
+  --set=image.tag=v0.0.2,resources.limits.cpu=200m
+</code></pre>
+<p>Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,</p>
+<pre><code class="language-console">$ helm install my-release oauth2-proxy/oauth2-proxy -f values.yaml
+</code></pre>
+<blockquote>
+<p><strong>Tip</strong>: You can use the default <a href="values.yaml">values.yaml</a></p>
+</blockquote>
+<h2 id="tls-configuration">TLS Configuration</h2>
+<p>See: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/tls">TLS Configuration</a>.
+Use <code>values.yaml</code> like:</p>
+<pre><code class="language-yaml">...
+extraArgs:
+  tls-cert-file: /path/to/cert.pem
+  tls-key-file: /path/to/cert.key
+
+extraVolumes:
+  - name: ssl-cert
+    secret:
+      secretName: my-ssl-secret
+
+extraVolumeMounts:
+  - mountPath: /path/to/
+    name: ssl-cert
+...
+</code></pre>
+<p>With a secret called <code>my-ssl-secret</code>:</p>
+<pre><code class="language-yaml">...
+data:
+  cert.pem: AB..==
+  cert.key: CD..==
+</code></pre>
+<h2 id="extra-environment-variable-templating">Extra environment variable templating</h2>
+<p>The extraEnv value supports the tpl function which evaluate strings as templates inside the deployment template.
+This is useful to pass a template string as a value to the chart's extra environment variables and to render external configuration environment values</p>
+<pre><code class="language-yaml">...
+tplValue: &quot;This is a test value for the tpl function&quot;
+extraEnv:
+  - name: TEST_ENV_VAR_1
+    value: test_value_1
+  - name: TEST_ENV_VAR_2
+    value: '{{ .Values.tplValue }}'
+</code></pre>
+<h2 id="custom-templates-configuration">Custom templates configuration</h2>
+<p>You can replace the default template files using a Kubernetes <code>configMap</code> volume. The default templates are the two files <a href="https://github.com/oauth2-proxy/oauth2-proxy/blob/master/pkg/app/pagewriter/sign_in.html">sign_in.html</a> and <a href="https://github.com/oauth2-proxy/oauth2-proxy/blob/master/pkg/app/pagewriter/error.html">error.html</a>.</p>
+<pre><code class="language-yaml">config:
+  configFile: |
+    ...
+    custom_templates_dir = &quot;/data/custom-templates&quot;
+
+extraVolumes:
+  - name: custom-templates
+    configMap:
+      name: oauth2-proxy-custom-templates
+
+extraVolumeMounts:
+  - name: custom-templates
+    mountPath: &quot;/data/custom-templates&quot;
+    readOnly: true
+
+extraObjects:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: oauth2-proxy-custom-templates
+    data:
+      sign_in.html: |
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;body&gt;sign_in&lt;/body&gt;
+        &lt;/html&gt;
+      error.html: |
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;body&gt;
+        &lt;h1&gt;error&lt;/h1&gt;
+        &lt;p&gt;{{.StatusCode}}&lt;/p&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+</code></pre>
+<h2 id="multi-whitelist-domain-configuration">Multi whitelist-domain configuration</h2>
+<p>For using multi whitelist-domain configuration for one Oauth2-proxy instance, you have to use the config.configFile section.</p>
+<p>It will be overwriting the <code>/etc/oauth2_proxy/oauth2_proxy.cfg</code> configuration file.
+In this example, Google provider is used, but you can find all other provider configuration here <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/">oauth_provider</a></p>
+<pre><code class="language-yaml">config:
+  ...
+  clientID=&quot;$YOUR_GOOGLE_CLIENT_ID&quot;
+  clientSecret=&quot;$YOUR_GOOGLE_CLIENT_SECRET&quot;
+  cookieSecret=&quot;$YOUR_COOKIE_SECRET&quot;
+  configFile: |
+    ...
+    email_domains = [ &quot;*&quot; ]
+    upstreams = [ &quot;file:///dev/null&quot; ]
+    cookie_secure = &quot;false&quot;
+    cookie_domains = [ &quot;.domain.com&quot;, &quot;.otherdomain.io&quot; ]
+    whitelist_domains = [ &quot;.domain.com&quot;, &quot;.otherdomain.io&quot;]
+    provider = &quot;google&quot;
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>

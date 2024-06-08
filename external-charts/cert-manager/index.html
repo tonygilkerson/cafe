@@ -1,0 +1,3371 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>cert-manager - The Cafe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cert-manager" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Cafe" class="md-header__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Cafe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              cert-manager
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Cafe" class="md-nav__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    The Cafe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inf/" class="md-nav__link">
+        Infrastructure
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iot/" class="md-nav__link">
+        IoT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-chart" class="md-nav__link">
+    Installing the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-the-chart" class="md-nav__link">
+    Upgrading the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-the-chart" class="md-nav__link">
+    Uninstalling the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global" class="md-nav__link">
+    Global
+  </a>
+  
+    <nav class="md-nav" aria-label="Global">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#globalimagepullsecrets-array" class="md-nav__link">
+    global.imagePullSecrets ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalcommonlabels-object" class="md-nav__link">
+    global.commonLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalrevisionhistorylimit-number" class="md-nav__link">
+    global.revisionHistoryLimit ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalpriorityclassname-string" class="md-nav__link">
+    global.priorityClassName ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalrbaccreate-bool" class="md-nav__link">
+    global.rbac.create ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalrbacaggregateclusterroles-bool" class="md-nav__link">
+    global.rbac.aggregateClusterRoles ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalpodsecuritypolicyenabled-bool" class="md-nav__link">
+    global.podSecurityPolicy.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalpodsecuritypolicyuseapparmor-bool" class="md-nav__link">
+    global.podSecurityPolicy.useAppArmor ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalloglevel-number" class="md-nav__link">
+    global.logLevel ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalleaderelectionnamespace-string" class="md-nav__link">
+    global.leaderElection.namespace ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalleaderelectionleaseduration-string" class="md-nav__link">
+    global.leaderElection.leaseDuration ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalleaderelectionrenewdeadline-string" class="md-nav__link">
+    global.leaderElection.renewDeadline ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalleaderelectionretryperiod-string" class="md-nav__link">
+    global.leaderElection.retryPeriod ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installcrds-bool" class="md-nav__link">
+    installCRDs ~ bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#replicacount-number" class="md-nav__link">
+    replicaCount ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategy-object" class="md-nav__link">
+    strategy ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poddisruptionbudgetenabled-bool" class="md-nav__link">
+    podDisruptionBudget.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poddisruptionbudgetminavailable-number" class="md-nav__link">
+    podDisruptionBudget.minAvailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poddisruptionbudgetmaxunavailable-number" class="md-nav__link">
+    podDisruptionBudget.maxUnavailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuregates-string" class="md-nav__link">
+    featureGates ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxconcurrentchallenges-number" class="md-nav__link">
+    maxConcurrentChallenges ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imageregistry-string" class="md-nav__link">
+    image.registry ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagerepository-string" class="md-nav__link">
+    image.repository ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagetag-string" class="md-nav__link">
+    image.tag ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagedigest-string" class="md-nav__link">
+    image.digest ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagepullpolicy-string" class="md-nav__link">
+    image.pullPolicy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clusterresourcenamespace-string" class="md-nav__link">
+    clusterResourceNamespace ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespace-string" class="md-nav__link">
+    namespace ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceaccountcreate-bool" class="md-nav__link">
+    serviceAccount.create ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceaccountname-string" class="md-nav__link">
+    serviceAccount.name ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceaccountannotations-object" class="md-nav__link">
+    serviceAccount.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceaccountlabels-object" class="md-nav__link">
+    serviceAccount.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceaccountautomountserviceaccounttoken-bool" class="md-nav__link">
+    serviceAccount.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automountserviceaccounttoken-bool" class="md-nav__link">
+    automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enablecertificateownerref-bool" class="md-nav__link">
+    enableCertificateOwnerRef ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-object" class="md-nav__link">
+    config ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns01recursivenameservers-string" class="md-nav__link">
+    dns01RecursiveNameservers ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns01recursivenameserversonly-bool" class="md-nav__link">
+    dns01RecursiveNameserversOnly ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraargs-array" class="md-nav__link">
+    extraArgs ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraenv-array" class="md-nav__link">
+    extraEnv ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-object" class="md-nav__link">
+    resources ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securitycontext-object" class="md-nav__link">
+    securityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containersecuritycontext-object" class="md-nav__link">
+    containerSecurityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumes-array" class="md-nav__link">
+    volumes ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumemounts-array" class="md-nav__link">
+    volumeMounts ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploymentannotations-object" class="md-nav__link">
+    deploymentAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#podannotations-object" class="md-nav__link">
+    podAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#podlabels-object" class="md-nav__link">
+    podLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serviceannotations-object" class="md-nav__link">
+    serviceAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicelabels-object" class="md-nav__link">
+    serviceLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poddnspolicy-string" class="md-nav__link">
+    podDnsPolicy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poddnsconfig-object" class="md-nav__link">
+    podDnsConfig ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodeselector-object" class="md-nav__link">
+    nodeSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingressshimdefaultissuername-string" class="md-nav__link">
+    ingressShim.defaultIssuerName ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingressshimdefaultissuerkind-string" class="md-nav__link">
+    ingressShim.defaultIssuerKind ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingressshimdefaultissuergroup-string" class="md-nav__link">
+    ingressShim.defaultIssuerGroup ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http_proxy-string" class="md-nav__link">
+    http_proxy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https_proxy-string" class="md-nav__link">
+    https_proxy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no_proxy-string" class="md-nav__link">
+    no_proxy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#affinity-object" class="md-nav__link">
+    affinity ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tolerations-array" class="md-nav__link">
+    tolerations ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topologyspreadconstraints-array" class="md-nav__link">
+    topologySpreadConstraints ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#livenessprobe-object" class="md-nav__link">
+    livenessProbe ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enableservicelinks-bool" class="md-nav__link">
+    enableServiceLinks ~ bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus" class="md-nav__link">
+    Prometheus
+  </a>
+  
+    <nav class="md-nav" aria-label="Prometheus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheusenabled-bool" class="md-nav__link">
+    prometheus.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorenabled-bool" class="md-nav__link">
+    prometheus.servicemonitor.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorprometheusinstance-string" class="md-nav__link">
+    prometheus.servicemonitor.prometheusInstance ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitortargetport-number" class="md-nav__link">
+    prometheus.servicemonitor.targetPort ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorpath-string" class="md-nav__link">
+    prometheus.servicemonitor.path ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorinterval-string" class="md-nav__link">
+    prometheus.servicemonitor.interval ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorscrapetimeout-string" class="md-nav__link">
+    prometheus.servicemonitor.scrapeTimeout ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorlabels-object" class="md-nav__link">
+    prometheus.servicemonitor.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorannotations-object" class="md-nav__link">
+    prometheus.servicemonitor.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorhonorlabels-bool" class="md-nav__link">
+    prometheus.servicemonitor.honorLabels ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheusservicemonitorendpointadditionalproperties-object" class="md-nav__link">
+    prometheus.servicemonitor.endpointAdditionalProperties ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorenabled-bool" class="md-nav__link">
+    prometheus.podmonitor.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorprometheusinstance-string" class="md-nav__link">
+    prometheus.podmonitor.prometheusInstance ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorpath-string" class="md-nav__link">
+    prometheus.podmonitor.path ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorinterval-string" class="md-nav__link">
+    prometheus.podmonitor.interval ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorscrapetimeout-string" class="md-nav__link">
+    prometheus.podmonitor.scrapeTimeout ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorlabels-object" class="md-nav__link">
+    prometheus.podmonitor.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorannotations-object" class="md-nav__link">
+    prometheus.podmonitor.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorhonorlabels-bool" class="md-nav__link">
+    prometheus.podmonitor.honorLabels ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheuspodmonitorendpointadditionalproperties-object" class="md-nav__link">
+    prometheus.podmonitor.endpointAdditionalProperties ~ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhook" class="md-nav__link">
+    Webhook
+  </a>
+  
+    <nav class="md-nav" aria-label="Webhook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webhookreplicacount-number" class="md-nav__link">
+    webhook.replicaCount ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooktimeoutseconds-number" class="md-nav__link">
+    webhook.timeoutSeconds ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookconfig-object" class="md-nav__link">
+    webhook.config ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookstrategy-object" class="md-nav__link">
+    webhook.strategy ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooksecuritycontext-object" class="md-nav__link">
+    webhook.securityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookcontainersecuritycontext-object" class="md-nav__link">
+    webhook.containerSecurityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookpoddisruptionbudgetenabled-bool" class="md-nav__link">
+    webhook.podDisruptionBudget.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookpoddisruptionbudgetminavailable-number" class="md-nav__link">
+    webhook.podDisruptionBudget.minAvailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookpoddisruptionbudgetmaxunavailable-number" class="md-nav__link">
+    webhook.podDisruptionBudget.maxUnavailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookdeploymentannotations-object" class="md-nav__link">
+    webhook.deploymentAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookpodannotations-object" class="md-nav__link">
+    webhook.podAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceannotations-object" class="md-nav__link">
+    webhook.serviceAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookmutatingwebhookconfigurationannotations-object" class="md-nav__link">
+    webhook.mutatingWebhookConfigurationAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookvalidatingwebhookconfigurationannotations-object" class="md-nav__link">
+    webhook.validatingWebhookConfigurationAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookvalidatingwebhookconfigurationnamespaceselector-object" class="md-nav__link">
+    webhook.validatingWebhookConfiguration.namespaceSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookmutatingwebhookconfigurationnamespaceselector-object" class="md-nav__link">
+    webhook.mutatingWebhookConfiguration.namespaceSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookextraargs-array" class="md-nav__link">
+    webhook.extraArgs ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookfeaturegates-string" class="md-nav__link">
+    webhook.featureGates ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookresources-object" class="md-nav__link">
+    webhook.resources ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooklivenessprobe-object" class="md-nav__link">
+    webhook.livenessProbe ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookreadinessprobe-object" class="md-nav__link">
+    webhook.readinessProbe ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooknodeselector-object" class="md-nav__link">
+    webhook.nodeSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookaffinity-object" class="md-nav__link">
+    webhook.affinity ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooktolerations-array" class="md-nav__link">
+    webhook.tolerations ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooktopologyspreadconstraints-array" class="md-nav__link">
+    webhook.topologySpreadConstraints ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookpodlabels-object" class="md-nav__link">
+    webhook.podLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookservicelabels-object" class="md-nav__link">
+    webhook.serviceLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookimageregistry-string" class="md-nav__link">
+    webhook.image.registry ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookimagerepository-string" class="md-nav__link">
+    webhook.image.repository ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookimagetag-string" class="md-nav__link">
+    webhook.image.tag ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookimagedigest-string" class="md-nav__link">
+    webhook.image.digest ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookimagepullpolicy-string" class="md-nav__link">
+    webhook.image.pullPolicy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceaccountcreate-bool" class="md-nav__link">
+    webhook.serviceAccount.create ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceaccountname-string" class="md-nav__link">
+    webhook.serviceAccount.name ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceaccountannotations-object" class="md-nav__link">
+    webhook.serviceAccount.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceaccountlabels-object" class="md-nav__link">
+    webhook.serviceAccount.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookserviceaccountautomountserviceaccounttoken-bool" class="md-nav__link">
+    webhook.serviceAccount.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookautomountserviceaccounttoken-bool" class="md-nav__link">
+    webhook.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooksecureport-number" class="md-nav__link">
+    webhook.securePort ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookhostnetwork-bool" class="md-nav__link">
+    webhook.hostNetwork ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookservicetype-string" class="md-nav__link">
+    webhook.serviceType ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookloadbalancerip-string" class="md-nav__link">
+    webhook.loadBalancerIP ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookurl-object" class="md-nav__link">
+    webhook.url ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooknetworkpolicyenabled-bool" class="md-nav__link">
+    webhook.networkPolicy.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooknetworkpolicyingress-array" class="md-nav__link">
+    webhook.networkPolicy.ingress ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhooknetworkpolicyegress-array" class="md-nav__link">
+    webhook.networkPolicy.egress ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookvolumes-array" class="md-nav__link">
+    webhook.volumes ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookvolumemounts-array" class="md-nav__link">
+    webhook.volumeMounts ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhookenableservicelinks-bool" class="md-nav__link">
+    webhook.enableServiceLinks ~ bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ca-injector" class="md-nav__link">
+    CA Injector
+  </a>
+  
+    <nav class="md-nav" aria-label="CA Injector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorenabled-bool" class="md-nav__link">
+    cainjector.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorreplicacount-number" class="md-nav__link">
+    cainjector.replicaCount ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorconfig-object" class="md-nav__link">
+    cainjector.config ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorstrategy-object" class="md-nav__link">
+    cainjector.strategy ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorsecuritycontext-object" class="md-nav__link">
+    cainjector.securityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorcontainersecuritycontext-object" class="md-nav__link">
+    cainjector.containerSecurityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorpoddisruptionbudgetenabled-bool" class="md-nav__link">
+    cainjector.podDisruptionBudget.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorpoddisruptionbudgetminavailable-number" class="md-nav__link">
+    cainjector.podDisruptionBudget.minAvailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorpoddisruptionbudgetmaxunavailable-number" class="md-nav__link">
+    cainjector.podDisruptionBudget.maxUnavailable ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectordeploymentannotations-object" class="md-nav__link">
+    cainjector.deploymentAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorpodannotations-object" class="md-nav__link">
+    cainjector.podAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorextraargs-array" class="md-nav__link">
+    cainjector.extraArgs ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorfeaturegates-string" class="md-nav__link">
+    cainjector.featureGates ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorresources-object" class="md-nav__link">
+    cainjector.resources ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectornodeselector-object" class="md-nav__link">
+    cainjector.nodeSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectoraffinity-object" class="md-nav__link">
+    cainjector.affinity ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectortolerations-array" class="md-nav__link">
+    cainjector.tolerations ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectortopologyspreadconstraints-array" class="md-nav__link">
+    cainjector.topologySpreadConstraints ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorpodlabels-object" class="md-nav__link">
+    cainjector.podLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorimageregistry-string" class="md-nav__link">
+    cainjector.image.registry ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorimagerepository-string" class="md-nav__link">
+    cainjector.image.repository ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorimagetag-string" class="md-nav__link">
+    cainjector.image.tag ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorimagedigest-string" class="md-nav__link">
+    cainjector.image.digest ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorimagepullpolicy-string" class="md-nav__link">
+    cainjector.image.pullPolicy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorserviceaccountcreate-bool" class="md-nav__link">
+    cainjector.serviceAccount.create ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorserviceaccountname-string" class="md-nav__link">
+    cainjector.serviceAccount.name ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorserviceaccountannotations-object" class="md-nav__link">
+    cainjector.serviceAccount.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorserviceaccountlabels-object" class="md-nav__link">
+    cainjector.serviceAccount.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorserviceaccountautomountserviceaccounttoken-bool" class="md-nav__link">
+    cainjector.serviceAccount.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorautomountserviceaccounttoken-bool" class="md-nav__link">
+    cainjector.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorvolumes-array" class="md-nav__link">
+    cainjector.volumes ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorvolumemounts-array" class="md-nav__link">
+    cainjector.volumeMounts ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cainjectorenableservicelinks-bool" class="md-nav__link">
+    cainjector.enableServiceLinks ~ bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acme-solver" class="md-nav__link">
+    ACME Solver
+  </a>
+  
+    <nav class="md-nav" aria-label="ACME Solver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acmesolverimageregistry-string" class="md-nav__link">
+    acmesolver.image.registry ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acmesolverimagerepository-string" class="md-nav__link">
+    acmesolver.image.repository ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acmesolverimagetag-string" class="md-nav__link">
+    acmesolver.image.tag ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acmesolverimagedigest-string" class="md-nav__link">
+    acmesolver.image.digest ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acmesolverimagepullpolicy-string" class="md-nav__link">
+    acmesolver.image.pullPolicy ~ string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startup-api-check" class="md-nav__link">
+    Startup API Check
+  </a>
+  
+    <nav class="md-nav" aria-label="Startup API Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckenabled-bool" class="md-nav__link">
+    startupapicheck.enabled ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapichecksecuritycontext-object" class="md-nav__link">
+    startupapicheck.securityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckcontainersecuritycontext-object" class="md-nav__link">
+    startupapicheck.containerSecurityContext ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapichecktimeout-string" class="md-nav__link">
+    startupapicheck.timeout ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckbackofflimit-number" class="md-nav__link">
+    startupapicheck.backoffLimit ~ number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckjobannotations-object" class="md-nav__link">
+    startupapicheck.jobAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckpodannotations-object" class="md-nav__link">
+    startupapicheck.podAnnotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckextraargs-array" class="md-nav__link">
+    startupapicheck.extraArgs ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckresources-object" class="md-nav__link">
+    startupapicheck.resources ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapichecknodeselector-object" class="md-nav__link">
+    startupapicheck.nodeSelector ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckaffinity-object" class="md-nav__link">
+    startupapicheck.affinity ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapichecktolerations-array" class="md-nav__link">
+    startupapicheck.tolerations ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckpodlabels-object" class="md-nav__link">
+    startupapicheck.podLabels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckimageregistry-string" class="md-nav__link">
+    startupapicheck.image.registry ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckimagerepository-string" class="md-nav__link">
+    startupapicheck.image.repository ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckimagetag-string" class="md-nav__link">
+    startupapicheck.image.tag ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckimagedigest-string" class="md-nav__link">
+    startupapicheck.image.digest ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckimagepullpolicy-string" class="md-nav__link">
+    startupapicheck.image.pullPolicy ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckrbacannotations-object" class="md-nav__link">
+    startupapicheck.rbac.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckautomountserviceaccounttoken-bool" class="md-nav__link">
+    startupapicheck.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckserviceaccountcreate-bool" class="md-nav__link">
+    startupapicheck.serviceAccount.create ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckserviceaccountname-string" class="md-nav__link">
+    startupapicheck.serviceAccount.name ~ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckserviceaccountannotations-object" class="md-nav__link">
+    startupapicheck.serviceAccount.annotations ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckserviceaccountautomountserviceaccounttoken-bool" class="md-nav__link">
+    startupapicheck.serviceAccount.automountServiceAccountToken ~ bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckserviceaccountlabels-object" class="md-nav__link">
+    startupapicheck.serviceAccount.labels ~ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckvolumes-array" class="md-nav__link">
+    startupapicheck.volumes ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckvolumemounts-array" class="md-nav__link">
+    startupapicheck.volumeMounts ~ array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startupapicheckenableservicelinks-bool" class="md-nav__link">
+    startupapicheck.enableServiceLinks ~ bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-security-contexts" class="md-nav__link">
+    Default Security Contexts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigning-values" class="md-nav__link">
+    Assigning Values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cert-manager">cert-manager</h1>
+<p>cert-manager is a Kubernetes addon to automate the management and issuance of
+TLS certificates from various issuing sources.</p>
+<p>It will ensure certificates are valid and up to date periodically, and attempt
+to renew certificates at an appropriate time before expiry.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Kubernetes 1.22+</li>
+</ul>
+<h2 id="installing-the-chart">Installing the Chart</h2>
+<p>Full installation instructions, including details on how to configure extra
+functionality in cert-manager can be found in the <a href="https://cert-manager.io/docs/installation/kubernetes/">installation docs</a>.</p>
+<p>Before installing the chart, you must first install the cert-manager CustomResourceDefinition resources.
+This is performed in a separate step to allow you to easily uninstall and reinstall cert-manager without deleting your installed custom resources.</p>
+<pre><code class="language-bash">$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml
+</code></pre>
+<p>To install the chart with the release name <code>my-release</code>:</p>
+<pre><code class="language-console">## Add the Jetstack Helm repository
+$ helm repo add jetstack https://charts.jetstack.io
+
+## Install the cert-manager helm chart
+$ helm install my-release --namespace cert-manager --version v1.14.5 jetstack/cert-manager
+</code></pre>
+<p>In order to begin issuing certificates, you will need to set up a ClusterIssuer
+or Issuer resource (for example, by creating a 'letsencrypt-staging' issuer).</p>
+<p>More information on the different types of issuers and how to configure them
+can be found in <a href="https://cert-manager.io/docs/configuration/">our documentation</a>.</p>
+<p>For information on how to configure cert-manager to automatically provision
+Certificates for Ingress resources, take a look at the
+<a href="https://cert-manager.io/docs/usage/ingress/">Securing Ingresses documentation</a>.</p>
+<blockquote>
+<p><strong>Tip</strong>: List all releases using <code>helm list</code></p>
+</blockquote>
+<h2 id="upgrading-the-chart">Upgrading the Chart</h2>
+<p>Special considerations may be required when upgrading the Helm chart, and these
+are documented in our full <a href="https://cert-manager.io/docs/installation/upgrading/">upgrading guide</a>.</p>
+<p><strong>Please check here before performing upgrades!</strong></p>
+<h2 id="uninstalling-the-chart">Uninstalling the Chart</h2>
+<p>To uninstall/delete the <code>my-release</code> deployment:</p>
+<pre><code class="language-console">$ helm delete my-release
+</code></pre>
+<p>The command removes all the Kubernetes components associated with the chart and deletes the release.</p>
+<p>If you want to completely uninstall cert-manager from your cluster, you will also need to
+delete the previously installed CustomResourceDefinition resources:</p>
+<pre><code class="language-console">$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<!-- AUTO-GENERATED -->
+
+<h3 id="global">Global</h3>
+<h4 id="globalimagepullsecrets-array"><strong>global.imagePullSecrets</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Reference to one or more secrets to be used when pulling images<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">imagePullSecrets:
+  - name: &quot;image-pull-secret&quot;
+</code></pre>
+<h4 id="globalcommonlabels-object"><strong>global.commonLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Labels to apply to all resources<br />
+Please note that this does not add labels to the resources created dynamically by the controllers. For these resources, you have to add the labels in the template in the cert-manager custom resource: eg. podTemplate/ ingressTemplate in ACMEChallengeSolverHTTP01Ingress<br />
+   ref: https://cert-manager.io/docs/reference/api-docs/#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress<br />
+eg. secretTemplate in CertificateSpec<br />
+   ref: https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec</p>
+<h4 id="globalrevisionhistorylimit-number"><strong>global.revisionHistoryLimit</strong> ~ <code>number</code></h4>
+<p>The number of old ReplicaSets to retain to allow rollback (If not set, default Kubernetes value is set to 10)</p>
+<h4 id="globalpriorityclassname-string"><strong>global.priorityClassName</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Optional priority class to be used for the cert-manager pods</p>
+<h4 id="globalrbaccreate-bool"><strong>global.rbac.create</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Create required ClusterRoles and ClusterRoleBindings for cert-manager</p>
+<h4 id="globalrbacaggregateclusterroles-bool"><strong>global.rbac.aggregateClusterRoles</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Aggregate ClusterRoles to Kubernetes default user-facing roles. Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles</p>
+<h4 id="globalpodsecuritypolicyenabled-bool"><strong>global.podSecurityPolicy.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Create PodSecurityPolicy for cert-manager  </p>
+<p>NOTE: PodSecurityPolicy was deprecated in Kubernetes 1.21 and removed in 1.25</p>
+<h4 id="globalpodsecuritypolicyuseapparmor-bool"><strong>global.podSecurityPolicy.useAppArmor</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Configure the PodSecurityPolicy to use AppArmor</p>
+<h4 id="globalloglevel-number"><strong>global.logLevel</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+2</code></p>
+</blockquote>
+<p>Set the verbosity of cert-manager. Range of 0 - 6 with 6 being the most verbose.</p>
+<h4 id="globalleaderelectionnamespace-string"><strong>global.leaderElection.namespace</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+kube-system</code></p>
+</blockquote>
+<p>Override the namespace used for the leader election lease</p>
+<h4 id="globalleaderelectionleaseduration-string"><strong>global.leaderElection.leaseDuration</strong> ~ <code>string</code></h4>
+<p>The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate.</p>
+<h4 id="globalleaderelectionrenewdeadline-string"><strong>global.leaderElection.renewDeadline</strong> ~ <code>string</code></h4>
+<p>The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration.</p>
+<h4 id="globalleaderelectionretryperiod-string"><strong>global.leaderElection.retryPeriod</strong> ~ <code>string</code></h4>
+<p>The duration the clients should wait between attempting acquisition and renewal of a leadership.</p>
+<h4 id="installcrds-bool"><strong>installCRDs</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Install the cert-manager CRDs, it is recommended to not use Helm to manage the CRDs</p>
+<h3 id="controller">Controller</h3>
+<h4 id="replicacount-number"><strong>replicaCount</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+1</code></p>
+</blockquote>
+<p>Number of replicas of the cert-manager controller to run.  </p>
+<p>The default is 1, but in production you should set this to 2 or 3 to provide high availability.  </p>
+<p>If <code>replicas &gt; 1</code> you should also consider setting <code>podDisruptionBudget.enabled=true</code>.  </p>
+<p>Note: cert-manager uses leader election to ensure that there can only be a single instance active at a time.</p>
+<h4 id="strategy-object"><strong>strategy</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Deployment update strategy for the cert-manager controller deployment. See https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+</code></pre>
+<h4 id="poddisruptionbudgetenabled-bool"><strong>podDisruptionBudget.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Enable or disable the PodDisruptionBudget resource  </p>
+<p>This prevents downtime during voluntary disruptions such as during a Node upgrade. For example, the PodDisruptionBudget will block <code>kubectl drain</code> if it is used on the Node where the only remaining cert-manager<br />
+Pod is currently running.</p>
+<h4 id="poddisruptionbudgetminavailable-number"><strong>podDisruptionBudget.minAvailable</strong> ~ <code>number</code></h4>
+<p>Configures the minimum available pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>maxUnavailable</code> is set.</p>
+<h4 id="poddisruptionbudgetmaxunavailable-number"><strong>podDisruptionBudget.maxUnavailable</strong> ~ <code>number</code></h4>
+<p>Configures the maximum unavailable pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>minAvailable</code> is set.</p>
+<h4 id="featuregates-string"><strong>featureGates</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Comma separated list of feature gates that should be enabled on the controller pod.</p>
+<h4 id="maxconcurrentchallenges-number"><strong>maxConcurrentChallenges</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+60</code></p>
+</blockquote>
+<p>The maximum number of challenges that can be scheduled as 'processing' at once</p>
+<h4 id="imageregistry-string"><strong>image.registry</strong> ~ <code>string</code></h4>
+<p>The container registry to pull the manager image from</p>
+<h4 id="imagerepository-string"><strong>image.repository</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+quay.io/jetstack/cert-manager-controller</code></p>
+</blockquote>
+<p>The container image for the cert-manager controller</p>
+<h4 id="imagetag-string"><strong>image.tag</strong> ~ <code>string</code></h4>
+<p>Override the image tag to deploy by setting this variable. If no value is set, the chart's appVersion will be used.</p>
+<h4 id="imagedigest-string"><strong>image.digest</strong> ~ <code>string</code></h4>
+<p>Setting a digest will override any tag</p>
+<h4 id="imagepullpolicy-string"><strong>image.pullPolicy</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+IfNotPresent</code></p>
+</blockquote>
+<p>Kubernetes imagePullPolicy on Deployment.</p>
+<h4 id="clusterresourcenamespace-string"><strong>clusterResourceNamespace</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Override the namespace used to store DNS provider credentials etc. for ClusterIssuer resources. By default, the same namespace as cert-manager is deployed within is used. This namespace will not be automatically created by the Helm chart.</p>
+<h4 id="namespace-string"><strong>namespace</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>This namespace allows you to define where the services will be installed into if not set then they will use the namespace of the release. This is helpful when installing cert manager as a chart dependency (sub chart)</p>
+<h4 id="serviceaccountcreate-bool"><strong>serviceAccount.create</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Specifies whether a service account should be created</p>
+<h4 id="serviceaccountname-string"><strong>serviceAccount.name</strong> ~ <code>string</code></h4>
+<p>The name of the service account to use.<br />
+If not set and create is true, a name is generated using the fullname template</p>
+<h4 id="serviceaccountannotations-object"><strong>serviceAccount.annotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the controller's ServiceAccount</p>
+<h4 id="serviceaccountlabels-object"><strong>serviceAccount.labels</strong> ~ <code>object</code></h4>
+<p>Optional additional labels to add to the controller's ServiceAccount</p>
+<h4 id="serviceaccountautomountserviceaccounttoken-bool"><strong>serviceAccount.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Automount API credentials for a Service Account.</p>
+<h4 id="automountserviceaccounttoken-bool"><strong>automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<p>Automounting API credentials for a particular pod</p>
+<h4 id="enablecertificateownerref-bool"><strong>enableCertificateOwnerRef</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted</p>
+<h4 id="config-object"><strong>config</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Used to configure options for the controller pod.<br />
+This allows setting options that'd usually be provided via flags. An APIVersion and Kind must be specified in your values.yaml file.<br />
+Flags will override options that are set here.  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">config:
+  apiVersion: controller.config.cert-manager.io/v1alpha1
+  kind: ControllerConfiguration
+  logging:
+    verbosity: 2
+    format: text
+  leaderElectionConfig:
+    namespace: kube-system
+  kubernetesAPIQPS: 9000
+  kubernetesAPIBurst: 9000
+  numberOfConcurrentWorkers: 200
+  featureGates:
+    AdditionalCertificateOutputFormats: true
+    DisallowInsecureCSRUsageDefinition: true
+    ExperimentalCertificateSigningRequestControllers: true
+    ExperimentalGatewayAPISupport: true
+    LiteralCertificateSubject: true
+    SecretsFilteredCaching: true
+    ServerSideApply: true
+    StableCertificateRequestName: true
+    UseCertificateRequestBasicConstraints: true
+    ValidateCAA: true
+  metricsTLSConfig:
+    dynamic:
+      secretNamespace: &quot;cert-manager&quot;
+      secretName: &quot;cert-manager-metrics-ca&quot;
+      dnsNames:
+      - cert-manager-metrics
+      - cert-manager-metrics.cert-manager
+      - cert-manager-metrics.cert-manager.svc
+</code></pre>
+<h4 id="dns01recursivenameservers-string"><strong>dns01RecursiveNameservers</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Comma separated string with host and port of the recursive nameservers cert-manager should query</p>
+<h4 id="dns01recursivenameserversonly-bool"><strong>dns01RecursiveNameserversOnly</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Forces cert-manager to only use the recursive nameservers for verification. Enabling this option could cause the DNS01 self check to take longer due to caching performed by the recursive nameservers</p>
+<h4 id="extraargs-array"><strong>extraArgs</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional command line flags to pass to cert-manager controller binary. To see all available flags run docker run quay.io/jetstack/cert-manager-controller:<version> --help  </p>
+<p>Use this flag to enable or disable arbitrary controllers, for example, disable the CertificiateRequests approver  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">extraArgs:
+  - --controllers=*,-certificaterequests-approver
+</code></pre>
+<h4 id="extraenv-array"><strong>extraEnv</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional environment variables to pass to cert-manager controller binary.</p>
+<h4 id="resources-object"><strong>resources</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Resources to provide to the cert-manager controller pod  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">requests:
+  cpu: 10m
+  memory: 32Mi
+</code></pre>
+<p>ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p>
+<h4 id="securitycontext-object"><strong>securityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+runAsNonRoot: true
+seccompProfile:
+  type: RuntimeDefault</code></p>
+</blockquote>
+<p>Pod Security Context<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="containersecuritycontext-object"><strong>containerSecurityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+allowPrivilegeEscalation: false
+capabilities:
+  drop:
+    - ALL
+readOnlyRootFilesystem: true</code></p>
+</blockquote>
+<p>Container Security Context to be set on the controller component container<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="volumes-array"><strong>volumes</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volumes to add to the cert-manager controller pod.</p>
+<h4 id="volumemounts-array"><strong>volumeMounts</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volume mounts to add to the cert-manager controller container.</p>
+<h4 id="deploymentannotations-object"><strong>deploymentAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the controller Deployment</p>
+<h4 id="podannotations-object"><strong>podAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the controller Pods</p>
+<h4 id="podlabels-object"><strong>podLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Optional additional labels to add to the controller Pods</p>
+<h4 id="serviceannotations-object"><strong>serviceAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional annotations to add to the controller Service</p>
+<h4 id="servicelabels-object"><strong>serviceLabels</strong> ~ <code>object</code></h4>
+<p>Optional additional labels to add to the controller Service</p>
+<h4 id="poddnspolicy-string"><strong>podDnsPolicy</strong> ~ <code>string</code></h4>
+<p>Pod DNS policy<br />
+ref: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy</p>
+<h4 id="poddnsconfig-object"><strong>podDnsConfig</strong> ~ <code>object</code></h4>
+<p>Pod DNS config, podDnsConfig field is optional and it can work with any podDnsPolicy settings. However, when a Pod's dnsPolicy is set to "None", the dnsConfig field has to be specified.<br />
+ref: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config</p>
+<h4 id="nodeselector-object"><strong>nodeSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+kubernetes.io/os: linux</code></p>
+</blockquote>
+<p>The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. See https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/  </p>
+<p>This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.</p>
+<h4 id="ingressshimdefaultissuername-string"><strong>ingressShim.defaultIssuerName</strong> ~ <code>string</code></h4>
+<p>Optional default issuer to use for ingress resources</p>
+<h4 id="ingressshimdefaultissuerkind-string"><strong>ingressShim.defaultIssuerKind</strong> ~ <code>string</code></h4>
+<p>Optional default issuer kind to use for ingress resources</p>
+<h4 id="ingressshimdefaultissuergroup-string"><strong>ingressShim.defaultIssuerGroup</strong> ~ <code>string</code></h4>
+<p>Optional default issuer group to use for ingress resources</p>
+<h4 id="http_proxy-string"><strong>http_proxy</strong> ~ <code>string</code></h4>
+<p>Configures the HTTP_PROXY environment variable for where a HTTP proxy is required</p>
+<h4 id="https_proxy-string"><strong>https_proxy</strong> ~ <code>string</code></h4>
+<p>Configures the HTTPS_PROXY environment variable for where a HTTP proxy is required</p>
+<h4 id="no_proxy-string"><strong>no_proxy</strong> ~ <code>string</code></h4>
+<p>Configures the NO_PROXY environment variable for where a HTTP proxy is required, but certain domains should be excluded</p>
+<h4 id="affinity-object"><strong>affinity</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>A Kubernetes Affinity, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: foo.bar.com/role
+         operator: In
+         values:
+         - master
+</code></pre>
+<h4 id="tolerations-array"><strong>tolerations</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes Tolerations, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">tolerations:
+- key: foo.bar.com/role
+  operator: Equal
+  value: master
+  effect: NoSchedule
+</code></pre>
+<h4 id="topologyspreadconstraints-array"><strong>topologySpreadConstraints</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes TopologySpreadConstraints, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">topologySpreadConstraints:
+- maxSkew: 2
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+</code></pre>
+<h4 id="livenessprobe-object"><strong>livenessProbe</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+enabled: true
+failureThreshold: 8
+initialDelaySeconds: 10
+periodSeconds: 10
+successThreshold: 1
+timeoutSeconds: 15</code></p>
+</blockquote>
+<p>LivenessProbe settings for the controller container of the controller Pod.  </p>
+<p>Enabled by default, because we want to enable the clock-skew liveness probe that restarts the controller in case of a skew between the system clock and the monotonic clock. LivenessProbe durations and thresholds are based on those used for the Kubernetes controller-manager. See: https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245</p>
+<h4 id="enableservicelinks-bool"><strong>enableServiceLinks</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>enableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links.</p>
+<h3 id="prometheus">Prometheus</h3>
+<h4 id="prometheusenabled-bool"><strong>prometheus.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Enable Prometheus monitoring for the cert-manager controller to use with the. Prometheus Operator. If this option is enabled without enabling <code>prometheus.servicemonitor.enabled</code> or<br />
+<code>prometheus.podmonitor.enabled</code>, 'prometheus.io' annotations are added to the cert-manager Deployment<br />
+resources. Additionally, a service is created which can be used together with your own ServiceMonitor (managed outside of this Helm chart). Otherwise, a ServiceMonitor/ PodMonitor is created.</p>
+<h4 id="prometheusservicemonitorenabled-bool"><strong>prometheus.servicemonitor.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Create a ServiceMonitor to add cert-manager to Prometheus</p>
+<h4 id="prometheusservicemonitorprometheusinstance-string"><strong>prometheus.servicemonitor.prometheusInstance</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+default</code></p>
+</blockquote>
+<p>Specifies the <code>prometheus</code> label on the created ServiceMonitor, this is used when different Prometheus instances have label selectors matching different ServiceMonitors.</p>
+<h4 id="prometheusservicemonitortargetport-number"><strong>prometheus.servicemonitor.targetPort</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+9402</code></p>
+</blockquote>
+<p>The target port to set on the ServiceMonitor, should match the port that cert-manager controller is listening on for metrics</p>
+<h4 id="prometheusservicemonitorpath-string"><strong>prometheus.servicemonitor.path</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+/metrics</code></p>
+</blockquote>
+<p>The path to scrape for metrics</p>
+<h4 id="prometheusservicemonitorinterval-string"><strong>prometheus.servicemonitor.interval</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+60s</code></p>
+</blockquote>
+<p>The interval to scrape metrics</p>
+<h4 id="prometheusservicemonitorscrapetimeout-string"><strong>prometheus.servicemonitor.scrapeTimeout</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+30s</code></p>
+</blockquote>
+<p>The timeout before a metrics scrape fails</p>
+<h4 id="prometheusservicemonitorlabels-object"><strong>prometheus.servicemonitor.labels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Additional labels to add to the ServiceMonitor</p>
+<h4 id="prometheusservicemonitorannotations-object"><strong>prometheus.servicemonitor.annotations</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Additional annotations to add to the ServiceMonitor</p>
+<h4 id="prometheusservicemonitorhonorlabels-bool"><strong>prometheus.servicemonitor.honorLabels</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Keep labels from scraped data, overriding server-side labels.</p>
+<h4 id="prometheusservicemonitorendpointadditionalproperties-object"><strong>prometheus.servicemonitor.endpointAdditionalProperties</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>EndpointAdditionalProperties allows setting additional properties on the endpoint such as relabelings, metricRelabelings etc.  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">endpointAdditionalProperties:
+ relabelings:
+ - action: replace
+   sourceLabels:
+   - __meta_kubernetes_pod_node_name
+   targetLabel: instance
+</code></pre>
+<h4 id="prometheuspodmonitorenabled-bool"><strong>prometheus.podmonitor.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Create a PodMonitor to add cert-manager to Prometheus</p>
+<h4 id="prometheuspodmonitorprometheusinstance-string"><strong>prometheus.podmonitor.prometheusInstance</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+default</code></p>
+</blockquote>
+<p>Specifies the <code>prometheus</code> label on the created PodMonitor, this is used when different Prometheus instances have label selectors matching different PodMonitor.</p>
+<h4 id="prometheuspodmonitorpath-string"><strong>prometheus.podmonitor.path</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+/metrics</code></p>
+</blockquote>
+<p>The path to scrape for metrics</p>
+<h4 id="prometheuspodmonitorinterval-string"><strong>prometheus.podmonitor.interval</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+60s</code></p>
+</blockquote>
+<p>The interval to scrape metrics</p>
+<h4 id="prometheuspodmonitorscrapetimeout-string"><strong>prometheus.podmonitor.scrapeTimeout</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+30s</code></p>
+</blockquote>
+<p>The timeout before a metrics scrape fails</p>
+<h4 id="prometheuspodmonitorlabels-object"><strong>prometheus.podmonitor.labels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Additional labels to add to the PodMonitor</p>
+<h4 id="prometheuspodmonitorannotations-object"><strong>prometheus.podmonitor.annotations</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Additional annotations to add to the PodMonitor</p>
+<h4 id="prometheuspodmonitorhonorlabels-bool"><strong>prometheus.podmonitor.honorLabels</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Keep labels from scraped data, overriding server-side labels.</p>
+<h4 id="prometheuspodmonitorendpointadditionalproperties-object"><strong>prometheus.podmonitor.endpointAdditionalProperties</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>EndpointAdditionalProperties allows setting additional properties on the endpoint such as relabelings, metricRelabelings etc.  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">endpointAdditionalProperties:
+ relabelings:
+ - action: replace
+   sourceLabels:
+   - __meta_kubernetes_pod_node_name
+   targetLabel: instance
+</code></pre>
+<h3 id="webhook">Webhook</h3>
+<h4 id="webhookreplicacount-number"><strong>webhook.replicaCount</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+1</code></p>
+</blockquote>
+<p>Number of replicas of the cert-manager webhook to run.  </p>
+<p>The default is 1, but in production you should set this to 2 or 3 to provide high availability.  </p>
+<p>If <code>replicas &gt; 1</code> you should also consider setting <code>webhook.podDisruptionBudget.enabled=true</code>.</p>
+<h4 id="webhooktimeoutseconds-number"><strong>webhook.timeoutSeconds</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+30</code></p>
+</blockquote>
+<p>Seconds the API server should wait for the webhook to respond before treating the call as a failure.<br />
+Value must be between 1 and 30 seconds. See:<br />
+https://kubernetes.io/docs/reference/kubernetes-api/extend-resources/validating-webhook-configuration-v1/  </p>
+<p>We set the default to the maximum value of 30 seconds. Here's why: Users sometimes report that the connection between the K8S API server and the cert-manager webhook server times out. If <em>this</em> timeout is reached, the error message will be "context deadline exceeded", which doesn't help the user diagnose what phase of the HTTPS connection timed out. For example, it could be during DNS resolution, TCP connection, TLS negotiation, HTTP negotiation, or slow HTTP response from the webhook server. So by setting this timeout to its maximum value the underlying timeout error message has more chance of being returned to the end user.</p>
+<h4 id="webhookconfig-object"><strong>webhook.config</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Used to configure options for the webhook pod.<br />
+This allows setting options that'd usually be provided via flags. An APIVersion and Kind must be specified in your values.yaml file.<br />
+Flags will override options that are set here.  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">apiVersion: webhook.config.cert-manager.io/v1alpha1
+kind: WebhookConfiguration
+# The port that the webhook should listen on for requests.
+# In GKE private clusters, by default kubernetes apiservers are allowed to
+# talk to the cluster nodes only on 443 and 10250. so configuring
+# securePort: 10250, will work out of the box without needing to add firewall
+# rules or requiring NET_BIND_SERVICE capabilities to bind port numbers &lt; 1000.
+# This should be uncommented and set as a default by the chart once we graduate
+# the apiVersion of WebhookConfiguration past v1alpha1.
+securePort: 10250
+</code></pre>
+<h4 id="webhookstrategy-object"><strong>webhook.strategy</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Deployment update strategy for the cert-manager webhook deployment. See https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+</code></pre>
+<h4 id="webhooksecuritycontext-object"><strong>webhook.securityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+runAsNonRoot: true
+seccompProfile:
+  type: RuntimeDefault</code></p>
+</blockquote>
+<p>Pod Security Context to be set on the webhook component Pod<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="webhookcontainersecuritycontext-object"><strong>webhook.containerSecurityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+allowPrivilegeEscalation: false
+capabilities:
+  drop:
+    - ALL
+readOnlyRootFilesystem: true</code></p>
+</blockquote>
+<p>Container Security Context to be set on the webhook component container<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="webhookpoddisruptionbudgetenabled-bool"><strong>webhook.podDisruptionBudget.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Enable or disable the PodDisruptionBudget resource  </p>
+<p>This prevents downtime during voluntary disruptions such as during a Node upgrade. For example, the PodDisruptionBudget will block <code>kubectl drain</code> if it is used on the Node where the only remaining cert-manager<br />
+Pod is currently running.</p>
+<h4 id="webhookpoddisruptionbudgetminavailable-number"><strong>webhook.podDisruptionBudget.minAvailable</strong> ~ <code>number</code></h4>
+<p>Configures the minimum available pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>maxUnavailable</code> is set.</p>
+<h4 id="webhookpoddisruptionbudgetmaxunavailable-number"><strong>webhook.podDisruptionBudget.maxUnavailable</strong> ~ <code>number</code></h4>
+<p>Configures the maximum unavailable pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>minAvailable</code> is set.</p>
+<h4 id="webhookdeploymentannotations-object"><strong>webhook.deploymentAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the webhook Deployment</p>
+<h4 id="webhookpodannotations-object"><strong>webhook.podAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the webhook Pods</p>
+<h4 id="webhookserviceannotations-object"><strong>webhook.serviceAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the webhook Service</p>
+<h4 id="webhookmutatingwebhookconfigurationannotations-object"><strong>webhook.mutatingWebhookConfigurationAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the webhook MutatingWebhookConfiguration</p>
+<h4 id="webhookvalidatingwebhookconfigurationannotations-object"><strong>webhook.validatingWebhookConfigurationAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the webhook ValidatingWebhookConfiguration</p>
+<h4 id="webhookvalidatingwebhookconfigurationnamespaceselector-object"><strong>webhook.validatingWebhookConfiguration.namespaceSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+matchExpressions:
+  - key: cert-manager.io/disable-validation
+    operator: NotIn
+    values:
+      - "true"</code></p>
+</blockquote>
+<p>Configure spec.namespaceSelector for validating webhooks.</p>
+<h4 id="webhookmutatingwebhookconfigurationnamespaceselector-object"><strong>webhook.mutatingWebhookConfiguration.namespaceSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Configure spec.namespaceSelector for mutating webhooks.</p>
+<h4 id="webhookextraargs-array"><strong>webhook.extraArgs</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional command line flags to pass to cert-manager webhook binary. To see all available flags run docker run quay.io/jetstack/cert-manager-webhook:<version> --help</p>
+<h4 id="webhookfeaturegates-string"><strong>webhook.featureGates</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Comma separated list of feature gates that should be enabled on the webhook pod.</p>
+<h4 id="webhookresources-object"><strong>webhook.resources</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Resources to provide to the cert-manager webhook pod  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">requests:
+  cpu: 10m
+  memory: 32Mi
+</code></pre>
+<p>ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p>
+<h4 id="webhooklivenessprobe-object"><strong>webhook.livenessProbe</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+failureThreshold: 3
+initialDelaySeconds: 60
+periodSeconds: 10
+successThreshold: 1
+timeoutSeconds: 1</code></p>
+</blockquote>
+<p>Liveness probe values<br />
+ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes</p>
+<h4 id="webhookreadinessprobe-object"><strong>webhook.readinessProbe</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+failureThreshold: 3
+initialDelaySeconds: 5
+periodSeconds: 5
+successThreshold: 1
+timeoutSeconds: 1</code></p>
+</blockquote>
+<p>Readiness probe values<br />
+ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes</p>
+<h4 id="webhooknodeselector-object"><strong>webhook.nodeSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+kubernetes.io/os: linux</code></p>
+</blockquote>
+<p>The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. See https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/  </p>
+<p>This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.</p>
+<h4 id="webhookaffinity-object"><strong>webhook.affinity</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>A Kubernetes Affinity, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: foo.bar.com/role
+         operator: In
+         values:
+         - master
+</code></pre>
+<h4 id="webhooktolerations-array"><strong>webhook.tolerations</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes Tolerations, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">tolerations:
+- key: foo.bar.com/role
+  operator: Equal
+  value: master
+  effect: NoSchedule
+</code></pre>
+<h4 id="webhooktopologyspreadconstraints-array"><strong>webhook.topologySpreadConstraints</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes TopologySpreadConstraints, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">topologySpreadConstraints:
+- maxSkew: 2
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+</code></pre>
+<h4 id="webhookpodlabels-object"><strong>webhook.podLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Optional additional labels to add to the Webhook Pods</p>
+<h4 id="webhookservicelabels-object"><strong>webhook.serviceLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Optional additional labels to add to the Webhook Service</p>
+<h4 id="webhookimageregistry-string"><strong>webhook.image.registry</strong> ~ <code>string</code></h4>
+<p>The container registry to pull the webhook image from</p>
+<h4 id="webhookimagerepository-string"><strong>webhook.image.repository</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+quay.io/jetstack/cert-manager-webhook</code></p>
+</blockquote>
+<p>The container image for the cert-manager webhook</p>
+<h4 id="webhookimagetag-string"><strong>webhook.image.tag</strong> ~ <code>string</code></h4>
+<p>Override the image tag to deploy by setting this variable. If no value is set, the chart's appVersion will be used.</p>
+<h4 id="webhookimagedigest-string"><strong>webhook.image.digest</strong> ~ <code>string</code></h4>
+<p>Setting a digest will override any tag</p>
+<h4 id="webhookimagepullpolicy-string"><strong>webhook.image.pullPolicy</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+IfNotPresent</code></p>
+</blockquote>
+<p>Kubernetes imagePullPolicy on Deployment.</p>
+<h4 id="webhookserviceaccountcreate-bool"><strong>webhook.serviceAccount.create</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Specifies whether a service account should be created</p>
+<h4 id="webhookserviceaccountname-string"><strong>webhook.serviceAccount.name</strong> ~ <code>string</code></h4>
+<p>The name of the service account to use.<br />
+If not set and create is true, a name is generated using the fullname template</p>
+<h4 id="webhookserviceaccountannotations-object"><strong>webhook.serviceAccount.annotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the controller's ServiceAccount</p>
+<h4 id="webhookserviceaccountlabels-object"><strong>webhook.serviceAccount.labels</strong> ~ <code>object</code></h4>
+<p>Optional additional labels to add to the webhook's ServiceAccount</p>
+<h4 id="webhookserviceaccountautomountserviceaccounttoken-bool"><strong>webhook.serviceAccount.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Automount API credentials for a Service Account.</p>
+<h4 id="webhookautomountserviceaccounttoken-bool"><strong>webhook.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<p>Automounting API credentials for a particular pod</p>
+<h4 id="webhooksecureport-number"><strong>webhook.securePort</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+10250</code></p>
+</blockquote>
+<p>The port that the webhook should listen on for requests. In GKE private clusters, by default kubernetes apiservers are allowed to talk to the cluster nodes only on 443 and 10250. so configuring securePort: 10250, will work out of the box without needing to add firewall rules or requiring NET_BIND_SERVICE capabilities to bind port numbers &lt;1000</p>
+<h4 id="webhookhostnetwork-bool"><strong>webhook.hostNetwork</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Specifies if the webhook should be started in hostNetwork mode.  </p>
+<p>Required for use in some managed kubernetes clusters (such as AWS EKS) with custom. CNI (such as calico), because control-plane managed by AWS cannot communicate with pods' IP CIDR and admission webhooks are not working  </p>
+<p>Since the default port for the webhook conflicts with kubelet on the host network, <code>webhook.securePort</code> should be changed to an available port if running in hostNetwork mode.</p>
+<h4 id="webhookservicetype-string"><strong>webhook.serviceType</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+ClusterIP</code></p>
+</blockquote>
+<p>Specifies how the service should be handled. Useful if you want to expose the webhook to outside of the cluster. In some cases, the control plane cannot reach internal services.</p>
+<h4 id="webhookloadbalancerip-string"><strong>webhook.loadBalancerIP</strong> ~ <code>string</code></h4>
+<p>Specify the load balancer IP for the created service</p>
+<h4 id="webhookurl-object"><strong>webhook.url</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Overrides the mutating webhook and validating webhook so they reach the webhook service using the <code>url</code> field instead of a service.</p>
+<h4 id="webhooknetworkpolicyenabled-bool"><strong>webhook.networkPolicy.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Create network policies for the webhooks</p>
+<h4 id="webhooknetworkpolicyingress-array"><strong>webhook.networkPolicy.ingress</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+- from:
+    - ipBlock:
+        cidr: 0.0.0.0/0</code></p>
+</blockquote>
+<p>Ingress rule for the webhook network policy, by default will allow all inbound traffic</p>
+<h4 id="webhooknetworkpolicyegress-array"><strong>webhook.networkPolicy.egress</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+- ports:
+    - port: 80
+      protocol: TCP
+    - port: 443
+      protocol: TCP
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+    - port: 6443
+      protocol: TCP
+  to:
+    - ipBlock:
+        cidr: 0.0.0.0/0</code></p>
+</blockquote>
+<p>Egress rule for the webhook network policy, by default will allow all outbound traffic traffic to ports 80 and 443, as well as DNS ports</p>
+<h4 id="webhookvolumes-array"><strong>webhook.volumes</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volumes to add to the cert-manager controller pod.</p>
+<h4 id="webhookvolumemounts-array"><strong>webhook.volumeMounts</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volume mounts to add to the cert-manager controller container.</p>
+<h4 id="webhookenableservicelinks-bool"><strong>webhook.enableServiceLinks</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>enableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links.</p>
+<h3 id="ca-injector">CA Injector</h3>
+<h4 id="cainjectorenabled-bool"><strong>cainjector.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Create the CA Injector deployment</p>
+<h4 id="cainjectorreplicacount-number"><strong>cainjector.replicaCount</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+1</code></p>
+</blockquote>
+<p>Number of replicas of the cert-manager cainjector to run.  </p>
+<p>The default is 1, but in production you should set this to 2 or 3 to provide high availability.  </p>
+<p>If <code>replicas &gt; 1</code> you should also consider setting <code>cainjector.podDisruptionBudget.enabled=true</code>.  </p>
+<p>Note: cert-manager uses leader election to ensure that there can only be a single instance active at a time.</p>
+<h4 id="cainjectorconfig-object"><strong>cainjector.config</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Used to configure options for the cainjector pod.<br />
+This allows setting options that'd usually be provided via flags. An APIVersion and Kind must be specified in your values.yaml file.<br />
+Flags will override options that are set here.  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">apiVersion: cainjector.config.cert-manager.io/v1alpha1
+kind: CAInjectorConfiguration
+logging:
+ verbosity: 2
+ format: text
+leaderElectionConfig:
+ namespace: kube-system
+</code></pre>
+<h4 id="cainjectorstrategy-object"><strong>cainjector.strategy</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Deployment update strategy for the cert-manager cainjector deployment. See https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+</code></pre>
+<h4 id="cainjectorsecuritycontext-object"><strong>cainjector.securityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+runAsNonRoot: true
+seccompProfile:
+  type: RuntimeDefault</code></p>
+</blockquote>
+<p>Pod Security Context to be set on the cainjector component Pod<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="cainjectorcontainersecuritycontext-object"><strong>cainjector.containerSecurityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+allowPrivilegeEscalation: false
+capabilities:
+  drop:
+    - ALL
+readOnlyRootFilesystem: true</code></p>
+</blockquote>
+<p>Container Security Context to be set on the cainjector component container<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="cainjectorpoddisruptionbudgetenabled-bool"><strong>cainjector.podDisruptionBudget.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>Enable or disable the PodDisruptionBudget resource  </p>
+<p>This prevents downtime during voluntary disruptions such as during a Node upgrade. For example, the PodDisruptionBudget will block <code>kubectl drain</code> if it is used on the Node where the only remaining cert-manager<br />
+Pod is currently running.</p>
+<h4 id="cainjectorpoddisruptionbudgetminavailable-number"><strong>cainjector.podDisruptionBudget.minAvailable</strong> ~ <code>number</code></h4>
+<p>Configures the minimum available pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>maxUnavailable</code> is set.</p>
+<h4 id="cainjectorpoddisruptionbudgetmaxunavailable-number"><strong>cainjector.podDisruptionBudget.maxUnavailable</strong> ~ <code>number</code></h4>
+<p>Configures the maximum unavailable pods for disruptions. Can either be set to an integer (e.g. 1) or a percentage value (e.g. 25%).<br />
+Cannot be used if <code>minAvailable</code> is set.</p>
+<h4 id="cainjectordeploymentannotations-object"><strong>cainjector.deploymentAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the cainjector Deployment</p>
+<h4 id="cainjectorpodannotations-object"><strong>cainjector.podAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the cainjector Pods</p>
+<h4 id="cainjectorextraargs-array"><strong>cainjector.extraArgs</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional command line flags to pass to cert-manager cainjector binary. To see all available flags run docker run quay.io/jetstack/cert-manager-cainjector:<version> --help</p>
+<h4 id="cainjectorfeaturegates-string"><strong>cainjector.featureGates</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+""</code></p>
+</blockquote>
+<p>Comma separated list of feature gates that should be enabled on the cainjector pod.</p>
+<h4 id="cainjectorresources-object"><strong>cainjector.resources</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Resources to provide to the cert-manager cainjector pod  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">requests:
+  cpu: 10m
+  memory: 32Mi
+</code></pre>
+<p>ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p>
+<h4 id="cainjectornodeselector-object"><strong>cainjector.nodeSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+kubernetes.io/os: linux</code></p>
+</blockquote>
+<p>The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. See https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/  </p>
+<p>This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.</p>
+<h4 id="cainjectoraffinity-object"><strong>cainjector.affinity</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>A Kubernetes Affinity, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: foo.bar.com/role
+         operator: In
+         values:
+         - master
+</code></pre>
+<h4 id="cainjectortolerations-array"><strong>cainjector.tolerations</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes Tolerations, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">tolerations:
+- key: foo.bar.com/role
+  operator: Equal
+  value: master
+  effect: NoSchedule
+</code></pre>
+<h4 id="cainjectortopologyspreadconstraints-array"><strong>cainjector.topologySpreadConstraints</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes TopologySpreadConstraints, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">topologySpreadConstraints:
+- maxSkew: 2
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+</code></pre>
+<h4 id="cainjectorpodlabels-object"><strong>cainjector.podLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Optional additional labels to add to the CA Injector Pods</p>
+<h4 id="cainjectorimageregistry-string"><strong>cainjector.image.registry</strong> ~ <code>string</code></h4>
+<p>The container registry to pull the cainjector image from</p>
+<h4 id="cainjectorimagerepository-string"><strong>cainjector.image.repository</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+quay.io/jetstack/cert-manager-cainjector</code></p>
+</blockquote>
+<p>The container image for the cert-manager cainjector</p>
+<h4 id="cainjectorimagetag-string"><strong>cainjector.image.tag</strong> ~ <code>string</code></h4>
+<p>Override the image tag to deploy by setting this variable. If no value is set, the chart's appVersion will be used.</p>
+<h4 id="cainjectorimagedigest-string"><strong>cainjector.image.digest</strong> ~ <code>string</code></h4>
+<p>Setting a digest will override any tag</p>
+<h4 id="cainjectorimagepullpolicy-string"><strong>cainjector.image.pullPolicy</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+IfNotPresent</code></p>
+</blockquote>
+<p>Kubernetes imagePullPolicy on Deployment.</p>
+<h4 id="cainjectorserviceaccountcreate-bool"><strong>cainjector.serviceAccount.create</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Specifies whether a service account should be created</p>
+<h4 id="cainjectorserviceaccountname-string"><strong>cainjector.serviceAccount.name</strong> ~ <code>string</code></h4>
+<p>The name of the service account to use.<br />
+If not set and create is true, a name is generated using the fullname template</p>
+<h4 id="cainjectorserviceaccountannotations-object"><strong>cainjector.serviceAccount.annotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the controller's ServiceAccount</p>
+<h4 id="cainjectorserviceaccountlabels-object"><strong>cainjector.serviceAccount.labels</strong> ~ <code>object</code></h4>
+<p>Optional additional labels to add to the cainjector's ServiceAccount</p>
+<h4 id="cainjectorserviceaccountautomountserviceaccounttoken-bool"><strong>cainjector.serviceAccount.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Automount API credentials for a Service Account.</p>
+<h4 id="cainjectorautomountserviceaccounttoken-bool"><strong>cainjector.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<p>Automounting API credentials for a particular pod</p>
+<h4 id="cainjectorvolumes-array"><strong>cainjector.volumes</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volumes to add to the cert-manager controller pod.</p>
+<h4 id="cainjectorvolumemounts-array"><strong>cainjector.volumeMounts</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volume mounts to add to the cert-manager controller container.</p>
+<h4 id="cainjectorenableservicelinks-bool"><strong>cainjector.enableServiceLinks</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>enableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links.</p>
+<h3 id="acme-solver">ACME Solver</h3>
+<h4 id="acmesolverimageregistry-string"><strong>acmesolver.image.registry</strong> ~ <code>string</code></h4>
+<p>The container registry to pull the acmesolver image from</p>
+<h4 id="acmesolverimagerepository-string"><strong>acmesolver.image.repository</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+quay.io/jetstack/cert-manager-acmesolver</code></p>
+</blockquote>
+<p>The container image for the cert-manager acmesolver</p>
+<h4 id="acmesolverimagetag-string"><strong>acmesolver.image.tag</strong> ~ <code>string</code></h4>
+<p>Override the image tag to deploy by setting this variable. If no value is set, the chart's appVersion will be used.</p>
+<h4 id="acmesolverimagedigest-string"><strong>acmesolver.image.digest</strong> ~ <code>string</code></h4>
+<p>Setting a digest will override any tag</p>
+<h4 id="acmesolverimagepullpolicy-string"><strong>acmesolver.image.pullPolicy</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+IfNotPresent</code></p>
+</blockquote>
+<p>Kubernetes imagePullPolicy on Deployment.</p>
+<h3 id="startup-api-check">Startup API Check</h3>
+<p>This startupapicheck is a Helm post-install hook that waits for the webhook endpoints to become available. The check is implemented using a Kubernetes Job - if you are injecting mesh sidecar proxies into cert-manager pods, you probably want to ensure that they are not injected into this Job's pod. Otherwise the installation may time out due to the Job never being completed because the sidecar proxy does not exit. See https://github.com/cert-manager/cert-manager/pull/4414 for context.</p>
+<h4 id="startupapicheckenabled-bool"><strong>startupapicheck.enabled</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Enables the startup api check</p>
+<h4 id="startupapichecksecuritycontext-object"><strong>startupapicheck.securityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+runAsNonRoot: true
+seccompProfile:
+  type: RuntimeDefault</code></p>
+</blockquote>
+<p>Pod Security Context to be set on the startupapicheck component Pod<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="startupapicheckcontainersecuritycontext-object"><strong>startupapicheck.containerSecurityContext</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+allowPrivilegeEscalation: false
+capabilities:
+  drop:
+    - ALL
+readOnlyRootFilesystem: true</code></p>
+</blockquote>
+<p>Container Security Context to be set on the controller component container<br />
+ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</p>
+<h4 id="startupapichecktimeout-string"><strong>startupapicheck.timeout</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+1m</code></p>
+</blockquote>
+<p>Timeout for 'kubectl check api' command</p>
+<h4 id="startupapicheckbackofflimit-number"><strong>startupapicheck.backoffLimit</strong> ~ <code>number</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+4</code></p>
+</blockquote>
+<p>Job backoffLimit</p>
+<h4 id="startupapicheckjobannotations-object"><strong>startupapicheck.jobAnnotations</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+helm.sh/hook: post-install
+helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+helm.sh/hook-weight: "1"</code></p>
+</blockquote>
+<p>Optional additional annotations to add to the startupapicheck Job</p>
+<h4 id="startupapicheckpodannotations-object"><strong>startupapicheck.podAnnotations</strong> ~ <code>object</code></h4>
+<p>Optional additional annotations to add to the startupapicheck Pods</p>
+<h4 id="startupapicheckextraargs-array"><strong>startupapicheck.extraArgs</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+- -v</code></p>
+</blockquote>
+<p>Additional command line flags to pass to startupapicheck binary. To see all available flags run docker run quay.io/jetstack/cert-manager-ctl:<version> --help  </p>
+<p>We enable verbose logging by default so that if startupapicheck fails, users can know what exactly caused the failure. Verbose logs include details of the webhook URL, IP address and TCP connect errors for example.</p>
+<h4 id="startupapicheckresources-object"><strong>startupapicheck.resources</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Resources to provide to the cert-manager controller pod  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">requests:
+  cpu: 10m
+  memory: 32Mi
+</code></pre>
+<p>ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p>
+<h4 id="startupapichecknodeselector-object"><strong>startupapicheck.nodeSelector</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+kubernetes.io/os: linux</code></p>
+</blockquote>
+<p>The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. See https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/  </p>
+<p>This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.</p>
+<h4 id="startupapicheckaffinity-object"><strong>startupapicheck.affinity</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>A Kubernetes Affinity, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: foo.bar.com/role
+         operator: In
+         values:
+         - master
+</code></pre>
+<h4 id="startupapichecktolerations-array"><strong>startupapicheck.tolerations</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>A list of Kubernetes Tolerations, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core  </p>
+<p>For example:</p>
+<pre><code class="language-yaml">tolerations:
+- key: foo.bar.com/role
+  operator: Equal
+  value: master
+  effect: NoSchedule
+</code></pre>
+<h4 id="startupapicheckpodlabels-object"><strong>startupapicheck.podLabels</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+{}</code></p>
+</blockquote>
+<p>Optional additional labels to add to the startupapicheck Pods</p>
+<h4 id="startupapicheckimageregistry-string"><strong>startupapicheck.image.registry</strong> ~ <code>string</code></h4>
+<p>The container registry to pull the startupapicheck image from</p>
+<h4 id="startupapicheckimagerepository-string"><strong>startupapicheck.image.repository</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+quay.io/jetstack/cert-manager-startupapicheck</code></p>
+</blockquote>
+<p>The container image for the cert-manager startupapicheck</p>
+<h4 id="startupapicheckimagetag-string"><strong>startupapicheck.image.tag</strong> ~ <code>string</code></h4>
+<p>Override the image tag to deploy by setting this variable. If no value is set, the chart's appVersion will be used.</p>
+<h4 id="startupapicheckimagedigest-string"><strong>startupapicheck.image.digest</strong> ~ <code>string</code></h4>
+<p>Setting a digest will override any tag</p>
+<h4 id="startupapicheckimagepullpolicy-string"><strong>startupapicheck.image.pullPolicy</strong> ~ <code>string</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+IfNotPresent</code></p>
+</blockquote>
+<p>Kubernetes imagePullPolicy on Deployment.</p>
+<h4 id="startupapicheckrbacannotations-object"><strong>startupapicheck.rbac.annotations</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+helm.sh/hook: post-install
+helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+helm.sh/hook-weight: "-5"</code></p>
+</blockquote>
+<p>annotations for the startup API Check job RBAC and PSP resources</p>
+<h4 id="startupapicheckautomountserviceaccounttoken-bool"><strong>startupapicheck.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<p>Automounting API credentials for a particular pod</p>
+<h4 id="startupapicheckserviceaccountcreate-bool"><strong>startupapicheck.serviceAccount.create</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Specifies whether a service account should be created</p>
+<h4 id="startupapicheckserviceaccountname-string"><strong>startupapicheck.serviceAccount.name</strong> ~ <code>string</code></h4>
+<p>The name of the service account to use.<br />
+If not set and create is true, a name is generated using the fullname template</p>
+<h4 id="startupapicheckserviceaccountannotations-object"><strong>startupapicheck.serviceAccount.annotations</strong> ~ <code>object</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+helm.sh/hook: post-install
+helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+helm.sh/hook-weight: "-5"</code></p>
+</blockquote>
+<p>Optional additional annotations to add to the Job's ServiceAccount</p>
+<h4 id="startupapicheckserviceaccountautomountserviceaccounttoken-bool"><strong>startupapicheck.serviceAccount.automountServiceAccountToken</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+true</code></p>
+</blockquote>
+<p>Automount API credentials for a Service Account.</p>
+<h4 id="startupapicheckserviceaccountlabels-object"><strong>startupapicheck.serviceAccount.labels</strong> ~ <code>object</code></h4>
+<p>Optional additional labels to add to the startupapicheck's ServiceAccount</p>
+<h4 id="startupapicheckvolumes-array"><strong>startupapicheck.volumes</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volumes to add to the cert-manager controller pod.</p>
+<h4 id="startupapicheckvolumemounts-array"><strong>startupapicheck.volumeMounts</strong> ~ <code>array</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+[]</code></p>
+</blockquote>
+<p>Additional volume mounts to add to the cert-manager controller container.</p>
+<h4 id="startupapicheckenableservicelinks-bool"><strong>startupapicheck.enableServiceLinks</strong> ~ <code>bool</code></h4>
+<blockquote>
+<p>Default value:
+<code>yaml
+false</code></p>
+</blockquote>
+<p>enableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links.</p>
+<!-- /AUTO-GENERATED -->
+<h3 id="default-security-contexts">Default Security Contexts</h3>
+<p>The default pod-level and container-level security contexts, below, adhere to the <a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted">restricted</a> Pod Security Standards policies.</p>
+<p>Default pod-level securityContext:</p>
+<pre><code class="language-yaml">runAsNonRoot: true
+seccompProfile:
+  type: RuntimeDefault
+</code></pre>
+<p>Default containerSecurityContext:</p>
+<pre><code class="language-yaml">allowPrivilegeEscalation: false
+capabilities:
+  drop:
+  - ALL
+</code></pre>
+<h3 id="assigning-values">Assigning Values</h3>
+<p>Specify each parameter using the <code>--set key=value[,key=value]</code> argument to <code>helm install</code>.</p>
+<p>Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,</p>
+<pre><code class="language-console">$ helm install my-release -f values.yaml .
+</code></pre>
+<blockquote>
+<p><strong>Tip</strong>: You can use the default <a href="https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/values.yaml">values.yaml</a></p>
+</blockquote>
+<h2 id="contributing">Contributing</h2>
+<p>This chart is maintained at <a href="https://github.com/cert-manager/cert-manager/tree/master/deploy/charts/cert-manager">github.com/cert-manager/cert-manager</a>.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>

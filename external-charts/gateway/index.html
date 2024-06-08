@@ -1,0 +1,534 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Istio Gateway Helm Chart - The Cafe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#istio-gateway-helm-chart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Cafe" class="md-header__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Cafe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Istio Gateway Helm Chart
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Cafe" class="md-nav__button md-logo" aria-label="The Cafe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    The Cafe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inf/" class="md-nav__link">
+        Infrastructure
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iot/" class="md-nav__link">
+        IoT
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-repo-info" class="md-nav__link">
+    Setup Repo Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-chart" class="md-nav__link">
+    Installing the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-the-chart" class="md-nav__link">
+    Uninstalling the Chart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profiles" class="md-nav__link">
+    Profiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openshift" class="md-nav__link">
+    OpenShift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-auto-information" class="md-nav__link">
+    image: auto Information
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egress-gateway" class="md-nav__link">
+    Egress Gateway
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-networkvm-gateway" class="md-nav__link">
+    Multi-network/VM Gateway
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrating-from-other-installation-methods" class="md-nav__link">
+    Migrating from other installation methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Migrating from other installation methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#legacy-gateway-helm-charts" class="md-nav__link">
+    Legacy Gateway Helm charts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-concerns" class="md-nav__link">
+    General concerns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrating-an-existing-helm-release" class="md-nav__link">
+    Migrating an existing Helm release
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-migrations" class="md-nav__link">
+    Other migrations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="istio-gateway-helm-chart">Istio Gateway Helm Chart</h1>
+<p>This chart installs an Istio gateway deployment.</p>
+<h2 id="setup-repo-info">Setup Repo Info</h2>
+<pre><code class="language-console">helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm repo update
+</code></pre>
+<p><em>See <a href="https://helm.sh/docs/helm/helm_repo/">helm repo</a> for command documentation.</em></p>
+<h2 id="installing-the-chart">Installing the Chart</h2>
+<p>To install the chart with the release name <code>istio-ingressgateway</code>:</p>
+<pre><code class="language-console">helm install istio-ingressgateway istio/gateway
+</code></pre>
+<h2 id="uninstalling-the-chart">Uninstalling the Chart</h2>
+<p>To uninstall/delete the <code>istio-ingressgateway</code> deployment:</p>
+<pre><code class="language-console">helm delete istio-ingressgateway
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<p>To view support configuration options and documentation, run:</p>
+<pre><code class="language-console">helm show values istio/gateway
+</code></pre>
+<h3 id="profiles">Profiles</h3>
+<p>Istio Helm charts have a concept of a <code>profile</code>, which is a bundled collection of value presets.
+These can be set with <code>--set profile=&lt;profile&gt;</code>.
+For example, the <code>demo</code> profile offers a preset configuration to try out Istio in a test environment, with additional features enabled and lowered resource requirements.</p>
+<p>For consistency, the same profiles are used across each chart, even if they do not impact a given chart.</p>
+<p>Explicitly set values have highest priority, then profile settings, then chart defaults.</p>
+<p>As an implementation detail of profiles, the default values for the chart are all nested under <code>defaults</code>.
+When configuring the chart, you should not include this.
+That is, <code>--set some.field=true</code> should be passed, not <code>--set defaults.some.field=true</code>.</p>
+<h3 id="openshift">OpenShift</h3>
+<p>When deploying the gateway in an OpenShift cluster, use the <code>openshift</code> profile to override the default values, for example:</p>
+<pre><code class="language-console">helm install istio-ingressgateway istio/gateway -- set profile=openshift
+</code></pre>
+<h3 id="image-auto-information"><code>image: auto</code> Information</h3>
+<p>The image used by the chart, <code>auto</code>, may be unintuitive.
+This exists because the pod spec will be automatically populated at runtime, using the same mechanism as <a href="istio.io/latest/docs/setup/additional-setup/sidecar-injection">Sidecar Injection</a>.
+This allows the same configurations and lifecycle to apply to gateways as sidecars.</p>
+<p>Note: this does mean that the namespace the gateway is deployed in must not have the <code>istio-injection=disabled</code> label.
+See <a href="https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#controlling-the-injection-policy">Controlling the injection policy</a> for more info.</p>
+<h3 id="examples">Examples</h3>
+<h4 id="egress-gateway">Egress Gateway</h4>
+<p>Deploying a Gateway to be used as an <a href="https://istio.io/latest/docs/tasks/traffic-management/egress/egress-gateway/">Egress Gateway</a>:</p>
+<pre><code class="language-yaml">service:
+  # Egress gateways do not need an external LoadBalancer IP
+  type: ClusterIP
+</code></pre>
+<h4 id="multi-networkvm-gateway">Multi-network/VM Gateway</h4>
+<p>Deploying a Gateway to be used as a <a href="https://istio.io/latest/docs/setup/install/multicluster/">Multi-network Gateway</a> for network <code>network-1</code>:</p>
+<pre><code class="language-yaml">networkGateway: network-1
+</code></pre>
+<h3 id="migrating-from-other-installation-methods">Migrating from other installation methods</h3>
+<p>Installations from other installation methods (such as istioctl, Istio Operator, other helm charts, etc) can be migrated to use the new Helm charts
+following the guidance below.
+If you are able to, a clean installation is simpler. However, this often requires an external IP migration which can be challenging.</p>
+<p>WARNING: when installing over an existing deployment, the two deployments will be merged together by Helm, which may lead to unexpected results.</p>
+<h4 id="legacy-gateway-helm-charts">Legacy Gateway Helm charts</h4>
+<p>Istio historically offered two different charts - <code>manifests/charts/gateways/istio-ingress</code> and <code>manifests/charts/gateways/istio-egress</code>.
+These are replaced by this chart.
+While not required, it is recommended all new users use this chart, and existing users migrate when possible.</p>
+<p>This chart has the following benefits and differences:
+* Designed with Helm best practices in mind (standardized values options, values schema, values are not all nested under <code>gateways.istio-ingressgateway.*</code>, release name and namespace taken into account, etc).
+* Utilizes Gateway injection, simplifying upgrades, allowing gateways to run in any namespace, and avoiding repeating config for sidecars and gateways.
+* Published to official Istio Helm repository.
+* Single chart for all gateways (Ingress, Egress, East West).</p>
+<h4 id="general-concerns">General concerns</h4>
+<p>For a smooth migration, the resource names and <code>Deployment.spec.selector</code> labels must match.</p>
+<p>If you install with <code>helm install istio-gateway istio/gateway</code>, resources will be named <code>istio-gateway</code> and the <code>selector</code> labels set to:</p>
+<pre><code class="language-yaml">app: istio-gateway
+istio: gateway # the release name with leading istio- prefix stripped
+</code></pre>
+<p>If your existing installation doesn't follow these names, you can override them. For example, if you have resources named <code>my-custom-gateway</code> with <code>selector</code> labels
+<code>foo=bar,istio=ingressgateway</code>:</p>
+<pre><code class="language-yaml">name: my-custom-gateway # Override the name to match existing resources
+labels:
+  app: &quot;&quot; # Unset default app selector label
+  istio: ingressgateway # override default istio selector label
+  foo: bar # Add the existing custom selector label
+</code></pre>
+<h4 id="migrating-an-existing-helm-release">Migrating an existing Helm release</h4>
+<p>An existing helm release can be <code>helm upgrade</code>d to this chart by using the same release name. For example, if a previous
+installation was done like:</p>
+<pre><code class="language-console">helm install istio-ingress manifests/charts/gateways/istio-ingress -n istio-system
+</code></pre>
+<p>It could be upgraded with</p>
+<pre><code class="language-console">helm upgrade istio-ingress manifests/charts/gateway -n istio-system --set name=istio-ingressgateway --set labels.app=istio-ingressgateway --set labels.istio=ingressgateway
+</code></pre>
+<p>Note the name and labels are overridden to match the names of the existing installation.</p>
+<p>Warning: the helm charts here default to using port 80 and 443, while the old charts used 8080 and 8443.
+If you have AuthorizationPolicies that reference port these ports, you should update them during this process,
+or customize the ports to match the old defaults.
+See the <a href="https://istio.io/latest/news/security/istio-security-2021-002/">security advisory</a> for more information.</p>
+<h4 id="other-migrations">Other migrations</h4>
+<p>If you see errors like <code>rendered manifests contain a resource that already exists</code> during installation, you may need to forcibly take ownership.</p>
+<p>The script below can handle this for you. Replace <code>RELEASE</code> and <code>NAMESPACE</code> with the name and namespace of the release:</p>
+<pre><code class="language-console">KINDS=(service deployment)
+RELEASE=istio-ingressgateway
+NAMESPACE=istio-system
+for KIND in &quot;${KINDS[@]}&quot;; do
+    kubectl --namespace $NAMESPACE --overwrite=true annotate $KIND $RELEASE meta.helm.sh/release-name=$RELEASE
+    kubectl --namespace $NAMESPACE --overwrite=true annotate $KIND $RELEASE meta.helm.sh/release-namespace=$NAMESPACE
+    kubectl --namespace $NAMESPACE --overwrite=true label $KIND $RELEASE app.kubernetes.io/managed-by=Helm
+done
+</code></pre>
+<p>You may ignore errors about resources not being found.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
