@@ -1,5 +1,7 @@
 # OAuth2 Proxy
 
+## DEVTODO - remove auth2-proxy
+
 ## Existing Secrets
 
 Create existing secret so OAuth2-Proxy cn talk GCP

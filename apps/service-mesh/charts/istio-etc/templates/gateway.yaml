@@ -7,207 +7,217 @@ metadata:
   name: cafe-gateway
   namespace: istio-system
   annotations:
-    cert-manager.io/issuer: letsencrypt-http01
+    # networking.istio.io/service-nodePort: "30080"
+  #   cert-manager.io/issuer: letsencrypt-http01
 spec:
   gatewayClassName: istio
   listeners:
   #
-  # httpbin
+  # http
   #
-  - name: httpbin-http
-    hostname: "httpbin.{{ .Values.domain }}"
+  - name: http
     protocol: HTTP
     port: 80
     allowedRoutes:
       namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+        from: All
+  # #
+  # # httpbin
+  # #
+  # - name: httpbin-http
+  #   hostname: "httpbin.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: httpbin-https
-    hostname: "httpbin.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-httpbin
-  #
-  # Notebook
-  #
-  - name: http-notebook
-    hostname: "notebook.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # - name: httpbin-https
+  #   hostname: "httpbin.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-httpbin
+  # #
+  # # Notebook
+  # #
+  # - name: http-notebook
+  #   hostname: "notebook.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-notebook
-    hostname: "notebook.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-notebook
-  #
-  # ispy
-  #
-  - name: http-ispy
-    hostname: "ispy.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # - name: https-notebook
+  #   hostname: "notebook.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-notebook
+  # #
+  # # ispy
+  # #
+  # - name: http-ispy
+  #   hostname: "ispy.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-ispy
-    hostname: "ispy.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-ispy
-  #
-  # alert
-  #
-  - name: http-alert
-    hostname: "alert.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # - name: https-ispy
+  #   hostname: "ispy.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-ispy
+  # #
+  # # alert
+  # #
+  # - name: http-alert
+  #   hostname: "alert.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-alert
-    hostname: "alert.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-alert
+  # - name: https-alert
+  #   hostname: "alert.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-alert
 
-  #
-  # grafana
-  #
-  - name: http-grafana
-    hostname: "grafana.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # #
+  # # grafana
+  # #
+  # - name: http-grafana
+  #   hostname: "grafana.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-grafana
-    hostname: "grafana.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-grafana
-  #
-  # prometheus
-  #
-  - name: http-prometheus
-    hostname: "prometheus.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # - name: https-grafana
+  #   hostname: "grafana.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-grafana
+  # #
+  # # prometheus
+  # #
+  # - name: http-prometheus
+  #   hostname: "prometheus.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-prometheus
-    hostname: "prometheus.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-prometheus
-  #
-  # serial-gateway
-  #
-  - name: http-serial-gateway
-    hostname: "serial-gateway.{{ .Values.domain }}"
-    protocol: HTTP
-    port: 80
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
+  # - name: https-prometheus
+  #   hostname: "prometheus.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-prometheus
+  # #
+  # # serial-gateway
+  # #
+  # - name: http-serial-gateway
+  #   hostname: "serial-gateway.{{ .Values.domain }}"
+  #   protocol: HTTP
+  #   port: 80
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
 
-  - name: https-serial-gateway
-    hostname: "serial-gateway.{{ .Values.domain }}"
-    protocol: HTTPS
-    port: 443
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            cafe-gateway: enabled
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: tls-cert-serial-gateway
+  # - name: https-serial-gateway
+  #   hostname: "serial-gateway.{{ .Values.domain }}"
+  #   protocol: HTTPS
+  #   port: 443
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: Selector
+  #       selector:
+  #         matchLabels:
+  #           cafe-gateway: enabled
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: tls-cert-serial-gateway
   # #
   # # testme
   # #

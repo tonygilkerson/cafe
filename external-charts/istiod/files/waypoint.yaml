@@ -12,6 +12,14 @@ metadata:
         "gateway.networking.k8s.io/gateway-name" .Name
         "istio.io/gateway-name" .Name
       ) | nindent 4 }}
+  {{- if ge .KubeVersion 128 }}
+  # Safe since 1.28: https://github.com/kubernetes/kubernetes/pull/117412
+  ownerReferences:
+  - apiVersion: gateway.networking.k8s.io/v1beta1
+    kind: Gateway
+    name: "{{.Name}}"
+    uid: "{{.UID}}"
+  {{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,7 +52,6 @@ spec:
           (omit .InfrastructureAnnotations "kubectl.kubernetes.io/last-applied-configuration" "gateway.istio.io/name-override" "gateway.istio.io/service-account" "gateway.istio.io/controller-version")
           (strdict "istio.io/rev" (.Revision | default "default"))
           (strdict
-            "ambient.istio.io/redirection" "disabled"
             "prometheus.io/path" "/stats/prometheus"
             "prometheus.io/port" "15020"
             "prometheus.io/scrape" "true"
@@ -53,6 +60,7 @@ spec:
         {{- toJsonMap
           (strdict
             "sidecar.istio.io/inject" "false"
+            "istio.io/dataplane-mode" "none"
             "service.istio.io/canonical-name" .DeploymentName
             "service.istio.io/canonical-revision" "latest"
            )
@@ -105,8 +113,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        - name: JWT_POLICY
-          value: {{ .Values.global.jwtPolicy }}
         - name: PILOT_CERT_PROVIDER
           value: {{ .Values.global.pilotCertProvider }}
         - name: CA_ADDR
@@ -206,10 +212,17 @@ spec:
         securityContext:
           privileged: false
           runAsGroup: 1337
-          runAsUser: 0
+          runAsUser: 1337
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
           capabilities:
             drop:
             - ALL
+{{- if .Values.gateways.seccompProfile }}
+          seccompProfile:
+{{- toYaml .Values.gateways.seccompProfile | nindent 12 }}
+{{- end }}
         volumeMounts:
         - name: workload-socket
           mountPath: /var/run/secrets/workload-spiffe-uds
@@ -282,6 +295,7 @@ metadata:
     name: "{{.Name}}"
     uid: "{{.UID}}"
 spec:
+  ipFamilyPolicy: PreferDualStack
   ports:
   {{- range $key, $val := .Ports }}
   - name: {{ $val.Name | quote }}

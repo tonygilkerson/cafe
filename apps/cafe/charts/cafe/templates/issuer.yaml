@@ -5,21 +5,22 @@ metadata:
 spec:
   selfSigned: {}
 ---
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-http01
-  namespace: istio-system
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    # server: https://acme-staging-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-http01-account-key
-    solvers:
-      - http01:
-          gatewayHTTPRoute:
-            parentRefs:
-              - name: cafe-gateway
-                namespace: istio-system
-                kind: Gateway
+# DEVTODO - I am not sure how I will handle tls.  I am putting the gateway on the VPN so maybe I need to do DNS01 or self signed
+# apiVersion: cert-manager.io/v1
+# kind: Issuer
+# metadata:
+#   name: letsencrypt-http01
+#   namespace: istio-system
+# spec:
+#   acme:
+#     server: https://acme-v02.api.letsencrypt.org/directory
+#     # server: https://acme-staging-v02.api.letsencrypt.org/directory
+#     privateKeySecretRef:
+#       name: letsencrypt-http01-account-key
+#     solvers:
+#       - http01:
+#           gatewayHTTPRoute:
+#             parentRefs:
+#               - name: cafe-gateway
+#                 namespace: istio-system
+#                 kind: Gateway

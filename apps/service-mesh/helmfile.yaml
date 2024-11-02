@@ -14,6 +14,9 @@ releases:
   values:
   - values/istiod.yaml.gotmpl
 
+# I think this is the istio way not the GatewayAPI way
+# remove this if not needed with GatewayAPI
+#
 # - name: istio-ingress-gateway
 #   namespace: istio-system
 #   chart: ../../external-charts/gateway

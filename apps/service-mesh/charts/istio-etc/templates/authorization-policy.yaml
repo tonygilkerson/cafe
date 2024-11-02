@@ -1,17 +1,17 @@
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: istio-ingress-gateway
-spec:
-  selector:
-    matchLabels:
-      istio.io/gateway-name: cafe-gateway
-  action: CUSTOM
-  provider:
-    # Extension provider configured when we installed Istio
-    name: oauth2-proxy
-  rules:
-  - {}
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: cafe-gateway-custom-oauth
+# spec:
+#   selector:
+#     matchLabels:
+#       istio.io/gateway-name: cafe-gateway
+#   action: CUSTOM
+#   provider:
+#     # Extension provider configured when we installed Istio
+#     name: oauth2-proxy
+#   rules:
+#   - {}
 # ---
 # apiVersion: security.istio.io/v1
 # kind: AuthorizationPolicy
@@ -27,3 +27,17 @@ spec:
 #       values:
 #       # ClientID
 #       - {{ .Values.clientID }}
+# ---
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: cafe-gateway-request-auth-principal
+# spec:
+#   selector:
+#     matchLabels:
+#       istio.io/gateway-name: cafe-gateway
+#   rules:
+#   - when:
+#     - key: request.auth.claims[email]
+#       values:
+#       - "tonygilkerson@gmail.com"

@@ -4,15 +4,15 @@ dependencies:
   version: 0.0.0
 - name: kube-state-metrics
   repository: ""
-  version: 5.15.*
+  version: 5.25.*
 - name: prometheus-node-exporter
   repository: ""
-  version: 4.24.*
+  version: 4.39.*
 - name: grafana
   repository: ""
-  version: 7.0.*
+  version: 8.5.*
 - name: prometheus-windows-exporter
   repository: ""
-  version: 0.1.*
-digest: sha256:b09119000e442dc91c722619ec964247915d78491d9dfd2ea0455a589ee8e60c
-generated: "2023-12-30T19:49:02.065179-05:00"
+  version: 0.6.*
+digest: sha256:c6ff48e8305863d3d8678da03d192246a94d9c230403a408fb610661e2d53ee6
+generated: "2024-11-01T21:59:20.915479-04:00"

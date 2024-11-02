@@ -6,7 +6,7 @@ spec:
   parentRefs:
   - name: cafe-gateway
     namespace: istio-system
-    sectionName: httpbin-https
+    sectionName: http
   rules:
   - backendRefs:
     - name: httpbin
@@ -18,22 +18,22 @@ spec:
     #     - name: I_AM
     #       value: app1
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: httpbin-http
-spec:
-  parentRefs:
-  - name: cafe-gateway
-    namespace: istio-system
-    sectionName: httpbin-http
-  rules:
-  - filters:
-    - requestRedirect:
-        scheme: https
-        statusCode: 301
-      type: RequestRedirect
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   name: httpbin-http
+# spec:
+#   parentRefs:
+#   - name: cafe-gateway
+#     namespace: istio-system
+#     sectionName: httpbin-http
+#   rules:
+#   - filters:
+#     - requestRedirect:
+#         scheme: https
+#         statusCode: 301
+#       type: RequestRedirect
+#     matches:
+#     - path:
+#         type: PathPrefix
+#         value: /

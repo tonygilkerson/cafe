@@ -1,4 +1,4 @@
 domain:
-clientID:
+# clientID:
 jwksUri:
 oidcHostName:

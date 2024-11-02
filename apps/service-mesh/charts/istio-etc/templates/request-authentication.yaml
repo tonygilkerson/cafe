@@ -1,14 +1,14 @@
 # apiVersion: security.istio.io/v1
 # kind: RequestAuthentication
 # metadata:
-#   name: istio-ingress-gateway
+#   name: cafe-gateway-claims-to-headers
 # spec:
 #   selector:
 #     matchLabels:
-#       app: istio-ingress-gateway
+#       istio.io/gateway-name: cafe-gateway
 #   jwtRules:
-#   - issuer: {{ .Values.oidcHostName }}
-#     jwksUri: {{ .Values.jwksUri }}
+#   - issuer: "https://accounts.google.com"
+#     jwksUri: "https://www.googleapis.com/oauth2/v3/certs"
 #     # Forward JWT to httpbin sidecar
 #     forwardOriginalToken: false
 #     # outputPayloadToHeader: x-jwt-payload
@@ -19,10 +19,10 @@
 #       claim: "iss"    
 #     - header: "x-jwt-claim-email"
 #       claim: "email"    
-#     - header: "x-jwt-claim-preferred-username"
-#       claim: "preferred_username"    
+#     - header: "x-jwt-claim-aud"
+#       claim: "aud"    
 #     - header: "x-jwt-claim-name"
-#       claim: "preferred_name"    
+#       claim: "name"    
 #     - header: "x-jwt-claim-picture"
 #       claim: "picture"    
 

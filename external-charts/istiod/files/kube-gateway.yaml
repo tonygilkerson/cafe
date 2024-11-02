@@ -12,6 +12,14 @@ metadata:
         "gateway.networking.k8s.io/gateway-name" .Name
         "istio.io/gateway-name" .Name
       ) | nindent 4 }}
+  {{- if ge .KubeVersion 128 }}
+  # Safe since 1.28: https://github.com/kubernetes/kubernetes/pull/117412
+  ownerReferences:
+  - apiVersion: gateway.networking.k8s.io/v1beta1
+    kind: Gateway
+    name: "{{.Name}}"
+    uid: "{{.UID}}"
+  {{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -60,12 +68,17 @@ spec:
             "istio.io/gateway-name" .Name
           ) | nindent 8 }}
     spec:
-      {{- if .KubeVersion122 }}
-      {{/* safe since 1.22: https://github.com/kubernetes/kubernetes/pull/103326. */}}
       securityContext:
+      {{- if .Values.gateways.securityContext }}
+        {{- toYaml .Values.gateways.securityContext | nindent 8 }}
+      {{- else }}
         sysctls:
         - name: net.ipv4.ip_unprivileged_port_start
           value: "0"
+      {{- if .Values.gateways.seccompProfile }}
+        seccompProfile:
+      {{- toYaml .Values.gateways.seccompProfile | nindent 10 }}
+      {{- end }}
       {{- end }}
       serviceAccountName: {{.ServiceAccount | quote}}
       containers:
@@ -81,8 +94,6 @@ spec:
         {{- end }}
         {{with .Values.global.imagePullPolicy }}imagePullPolicy: "{{.}}"{{end}}
         securityContext:
-        {{- if .KubeVersion122 }}
-          # Safe since 1.22: https://github.com/kubernetes/kubernetes/pull/103326
           capabilities:
             drop:
             - ALL
@@ -92,18 +103,6 @@ spec:
           runAsUser: {{ .ProxyUID | default "1337" }}
           runAsGroup: {{ .ProxyGID | default "1337" }}
           runAsNonRoot: true
-        {{- else }}
-          capabilities:
-            drop:
-            - ALL
-            add:
-            - NET_BIND_SERVICE
-          runAsUser: 0
-          runAsGroup: 1337
-          runAsNonRoot: false
-          allowPrivilegeEscalation: true
-          readOnlyRootFilesystem: true
-        {{- end }}
         ports:
         - containerPort: 15021
           name: status-port
@@ -130,11 +129,9 @@ spec:
       {{- end }}
       {{- if .Values.global.proxy.lifecycle }}
         lifecycle:
-          {{ toYaml .Values.global.proxy.lifecycle | indent 6 }}
+          {{- toYaml .Values.global.proxy.lifecycle | nindent 10 }}
       {{- end }}
         env:
-        - name: JWT_POLICY
-          value: {{ .Values.global.jwtPolicy }}
         - name: PILOT_CERT_PROVIDER
           value: {{ .Values.global.pilotCertProvider }}
         - name: CA_ADDR
@@ -259,10 +256,8 @@ spec:
         # SDS channel between istioagent and Envoy
         - mountPath: /etc/istio/proxy
           name: istio-envoy
-        {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
         - mountPath: /var/run/secrets/tokens
           name: istio-token
-        {{- end }}
         - name: istio-podinfo
           mountPath: /etc/istio/pod
       volumes:
@@ -293,7 +288,6 @@ spec:
             - path: "annotations"
               fieldRef:
                 fieldPath: metadata.annotations
-      {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
       - name: istio-token
         projected:
           sources:
@@ -301,7 +295,6 @@ spec:
               path: istio-token
               expirationSeconds: 43200
               audience: {{ .Values.global.sds.token.aud }}
-      {{- end }}
       {{- if eq .Values.global.pilotCertProvider "istiod" }}
       - name: istiod-ca-cert
         configMap:

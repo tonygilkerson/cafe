@@ -2,7 +2,16 @@
 
 Setup for the Cafe
 
-Githup Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
+Github Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
+
+## Day 2
+
+```sh
+ssh -D 9995 zoo
+
+# in a new terminal
+k config set-context zoo
+```
 
 ## Initial Server Setup
 
@@ -80,22 +89,10 @@ git config --global user.email "tonygilkerson@yahoo.com"
 sudo snap install microk8s --classic --channel=latest/stable
 
 # microk8s upgrade
-K8SVERSION=1.29
+K8SVERSION=1.30
 sudo snap refresh microk8s --channel=$K8SVERSION/stable
 microk8s stop
 microk8s start
-```
-
-On my workstation add the following:
-
-```sh
-# ~/.ssh/config
-# 10.0.0.25 is the wan address of the dd-wrt router, it will port forward 22
-# My IOT cluster
-Host weeble
-  ForwardAgent yes
-  Hostname 10.0.0.25
-  User tgilkerson
 ```
 
 ## Dev Tools
@@ -103,8 +100,9 @@ Host weeble
 ```sh
 sudo apt-get install curl
 
-cd ~/github
+cd ~/github/tonygilkerson
 git clone git@github.com:tonygilkerson/dotfiles.git
+cd dotfiles
 ./dev-tools/dev_tools_install.sh
 ```
 
@@ -112,10 +110,10 @@ git clone git@github.com:tonygilkerson/dotfiles.git
 
 ```bash
 # If microk8s is already installed an you want to start over run reset
-microk8s reset --destroy-storage
+sudo microk8s reset --destroy-storage
 
-microk8s enable dns cert-manager hostpath-storage metrics-server
-microk8s config > ~/.kube/config
+sudo microk8s enable dns hostpath-storage metrics-server
+sudo microk8s config > ~/.kube/config
 ```
 
 ## Cert Manager
@@ -123,7 +121,7 @@ microk8s config > ~/.kube/config
 Install CRDs to break chicken and egg. See [cert-manager doc](https://cert-manager.io/docs/installation/helm/)
 
 ```sh
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml
 ```
 
 ## Docs Dev
@@ -152,10 +150,15 @@ Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https:/
 
 Need to label namespaces that you want to monitor
 
+## CRDs
+
 ```sh
-# Deploy the visibility stack
-# Use "sync" the first time to avoid "no CRD" error
-helmfile -i -f env/weeble/helmfile.yaml sync
+# Apply CRDs first to avoid chicken/egg
+kubectl apply -f external-charts/kube-prometheus-stack/charts/crds/crds --server-side
+
+# install cafe first to create namespaces
+# use sync the first time
+helmfile -i -f env/zoo/helmfile.yaml -l app=cafe sync --skip-deps
 ```
 
 Create slack url secret:
@@ -199,14 +202,23 @@ Go to your [Github Keys](https://github.com/settings/keys) and add the above as 
 
 ```sh
 # Install CRDs
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
 
 # After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
 kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
 
 # Allow access to cafe-gateway
 # DEVTODO - I should add this to the namespace chart
-kubectl label ns istio-system cafe-gateway=enabled
+# DEVTODO - create one gatway will allow all namespaces or put the gateways in the app namespaces
+# kubectl label ns istio-system cafe-gateway=enabled
+```
+
+## Cafe
+
+Install the cafe first to create the namespaces
+
+```sh
+helmfile -i -f env/zoo/helmfile.yaml -l app=cafe apply --skip-deps
 ```
 
 ---

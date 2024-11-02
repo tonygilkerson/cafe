@@ -9,5 +9,5 @@ To install or upgrade the grafana and prometheus (aka KPS) charts, first edit th
 make externalCharts chart=kube-prometheus-stack
 
 # Deploy
-helmfile -f env/weeble/helmfile.yaml -l app=kps apply --skip-deps
+helmfile -f env/zoo/helmfile.yaml -l app=kps apply --skip-deps
 ```

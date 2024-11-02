@@ -1,0 +1,47 @@
+missingFileHandler: Error
+
+helmfiles:
+
+- path: ../../apps/cert-manager
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/service-mesh
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/oauth2-proxy
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/kps
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/cafe
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/serial-gateway
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/castopod
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/ispy
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/notebook
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/httpbin
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+
+
+
+environments:
+  default:
+    values:
+      - clusterName: zoo
+      - domain: tonygilkerson.us
+
+      
+
+
+  

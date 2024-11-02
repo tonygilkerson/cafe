@@ -6,5 +6,5 @@ To install or upgrade the cafe app, first edit the manifests here `apps/cafe/cha
 
 ```sh
 # Deploy
-helmfile -i -f env/weeble/helmfile.yaml -l app=cafe apply --skip-deps
+helmfile -i -f env/zoo/helmfile.yaml -l app=cafe apply --skip-deps
 ```
