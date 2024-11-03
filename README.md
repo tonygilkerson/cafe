@@ -13,9 +13,35 @@ ssh -D 9995 zoo
 k config set-context zoo
 ```
 
-## Initial Server Setup
+## Day 1 - Initial Server Setup
 
 Starting with a clean install of Ubuntu
+
+```sh
+# get current
+sudo apt update
+sudo app upgrade
+
+# SSH
+sudo apt install openssh-server
+
+sudo systemctl start ssh
+sudo systemctl stop ssh
+sudo systemctl restart ssh
+
+sudo systemctl status ssh
+```
+
+## Static IP
+
+In the router I should have DHCP starting at 100 or something like that so I can set a static IP address with no conflicts. Use the use to configure the following:
+
+* IP: 192.168.50.10
+* mask: 192.168.50.255
+* gateway: 192.168.50.0 (or maybe 1?)
+* dns: 8.8.8.8,8.8.4.4
+
+> Note - At this point you can `ssh zoo` from your laptop to finish the setup
 
 ```sh
 # Look at current setting
@@ -35,22 +61,15 @@ sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 16443 # k8s api
+sudo ufw allow 30080 # k8s node ports
+sudo ufw allow 30443 # k8s node ports
 sudo ufw enable
 
-# SSH
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install openssh-server
 
-sudo systemctl start ssh
-sudo systemctl stop ssh
-sudo systemctl restart ssh
-
-sudo systemctl status ssh
-sudo apt-get install iotop
+sudo apt install iotop
 
 # clamav ref: https://www.inmotionhosting.com/support/security/install-clamav-on-ubuntu/
-sudo apt-get install clamav clamav-daemon -y
+sudo apt install clamav clamav-daemon -y
 
 # Common clamav commands
 
@@ -89,7 +108,7 @@ git config --global user.email "tonygilkerson@yahoo.com"
 sudo snap install microk8s --classic --channel=latest/stable
 
 # microk8s upgrade
-K8SVERSION=1.30
+K8SVERSION=1.31
 sudo snap refresh microk8s --channel=$K8SVERSION/stable
 microk8s stop
 microk8s start
@@ -98,8 +117,9 @@ microk8s start
 ## Dev Tools
 
 ```sh
-sudo apt-get install curl
+sudo apt install curl
 
+mkdir -p ~/github/tonygilkerson
 cd ~/github/tonygilkerson
 git clone git@github.com:tonygilkerson/dotfiles.git
 cd dotfiles
@@ -109,9 +129,10 @@ cd dotfiles
 ## MicroK8s
 
 ```bash
-# If microk8s is already installed an you want to start over run reset
+# If microk8s is already installed and you want to start over run reset
 sudo microk8s reset --destroy-storage
 
+mkdir ~/.kube
 sudo microk8s enable dns hostpath-storage metrics-server
 sudo microk8s config > ~/.kube/config
 ```
@@ -129,8 +150,8 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 Install themes
 
 ```sh
-sudo apt-get install python3-pip
-sudo apt-get install mkdocs
+sudo apt install python3-pip
+sudo apt install mkdocs
 
 pip3 install mkdocs-material
 pip3 install mkdocs-mermaid2-plugin
@@ -161,7 +182,35 @@ kubectl apply -f external-charts/kube-prometheus-stack/charts/crds/crds --server
 helmfile -i -f env/zoo/helmfile.yaml -l app=cafe sync --skip-deps
 ```
 
-Create slack url secret:
+## GatewayAPI
+
+```sh
+# Install CRDs
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
+
+# Apply service mesh
+helmfile -i -f env/zoo/helmfile.yaml -l app=service-mesh apply --skip-deps
+
+# After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
+kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
+
+# Allow access to cafe-gateway
+# DEVTODO - I should add this to the namespace chart
+# DEVTODO - create one gatway will allow all namespaces or put the gateways in the app namespaces
+# kubectl label ns istio-system cafe-gateway=enabled
+```
+
+## Httpbin
+
+Deploy httpbin and use it to verify the Service Mesh
+
+```sh
+helmfile -i -f env/zoo/helmfile.yaml -l app=httpbin apply --skip-deps
+```
+
+## Slack
+
+Create slack url secret
 
 ```sh
 SLACK_WEBHOOK_URL="REPLACE-ME"
@@ -197,29 +246,6 @@ Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
 ```
 
 Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
-
-## GatewayAPI
-
-```sh
-# Install CRDs
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
-
-# After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
-kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
-
-# Allow access to cafe-gateway
-# DEVTODO - I should add this to the namespace chart
-# DEVTODO - create one gatway will allow all namespaces or put the gateways in the app namespaces
-# kubectl label ns istio-system cafe-gateway=enabled
-```
-
-## Cafe
-
-Install the cafe first to create the namespaces
-
-```sh
-helmfile -i -f env/zoo/helmfile.yaml -l app=cafe apply --skip-deps
-```
 
 ---
 
