@@ -11,7 +11,7 @@ COPY . .
 RUN pip install mkdocs-alabaster
 # RUN pip install mkdocs-material
 RUN pip install mkdocs-mermaid2-plugin
-RUN pip install mkdocs-simple-plugin
+# RUN pip install mkdocs-simple-plugin
 
 # build docs
 RUN mkdocs build

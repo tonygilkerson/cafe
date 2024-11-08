@@ -5,7 +5,7 @@ theme:
   # font: false
 # repo_url: https://github.com/tonygilkerson/cafe
 plugins:
-  - simple:
+  # - simple:
   - mermaid2:
   - search:
 nav:

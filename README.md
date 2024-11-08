@@ -37,8 +37,8 @@ sudo systemctl status ssh
 In the router I should have DHCP starting at 100 or something like that so I can set a static IP address with no conflicts. Use the use to configure the following:
 
 * IP: 192.168.50.10
-* mask: 192.168.50.255
-* gateway: 192.168.50.0 (or maybe 1?)
+* mask: 255.255.255.0
+* gateway: 192.168.50.1
 * dns: 8.8.8.8,8.8.4.4
 
 > Note - At this point you can `ssh zoo` from your laptop to finish the setup
@@ -137,6 +137,12 @@ sudo microk8s enable dns hostpath-storage metrics-server
 sudo microk8s config > ~/.kube/config
 ```
 
+```sh
+mkdocs serve
+```
+
+Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
+
 ## Cert Manager
 
 Install CRDs to break chicken and egg. See [cert-manager doc](https://cert-manager.io/docs/installation/helm/)
@@ -144,28 +150,6 @@ Install CRDs to break chicken and egg. See [cert-manager doc](https://cert-manag
 ```sh
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml
 ```
-
-## Docs Dev
-
-Install themes
-
-```sh
-sudo apt install python3-pip
-sudo apt install mkdocs
-
-pip3 install mkdocs-material
-pip3 install mkdocs-mermaid2-plugin
-pip3 install mkdocs-simple-plugin
-pip3 install mkdocs-alabaster
-```
-
-Edit markdown files and test with
-
-```sh
-mkdocs serve
-```
-
-Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
 ## kps
 
@@ -247,7 +231,48 @@ Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
 
 Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
 
+## Docs Dev
+
+On your Mac workstation
+One-time setup
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install --upgrade pip
+pip3 install mkdocs-material
+pip3 install mkdocs-mermaid2-plugin
+# pip3 install mkdocs-simple-plugin
+# pip3 install mkdocs-alabaster
+```
+
+Develop
+
+```sh
+make docdev
+open http://127.0.0.1:8000/
+```
+
+Publish
+
+```sh
+make docpub
+open https://tonygilkerson.github.io/cafe/
+```
+
+
+
+
+
+
+
 ---
+
+
+
+
+
+
 
 ## Old Archive Stuff
 
@@ -262,8 +287,6 @@ This no longer applies but might be useful as a reference. If you have not used 
 Add DNS entries in the cert-manager deployment at `spec.template.spec.dnsConfig`
 
 ```yaml
-# DEVTODO - dont install cert-manager as a addon, instead vendor the cart and make this change to the chart
-
 dnsConfig:
   nameservers:
     - 1.1.1.1

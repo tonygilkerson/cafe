@@ -2,7 +2,6 @@
 
 The good stuff
 
-* **[Cafe](https://tonygilkerson.us)** - This documentation web site
-* **[ArgoCD](https://argocd.tonygilkerson.us)** - GitOps for the cluster
-* **[Grafana](https://grafana.tonygilkerson.us)** - Cafe visibility charts
-* **[Prometheus](https://prometheus.tonygilkerson.us)** -  Metrics database
+* **[Cafe](https://tonygilkerson.us:30080)** - This documentation web site
+* **[Grafana](https://grafana.tonygilkerson.us:30080)** - Cafe visibility charts
+* **[Prometheus](https://prometheus.tonygilkerson.us:30080)** -  Metrics database
