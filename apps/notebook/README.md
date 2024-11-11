@@ -9,5 +9,5 @@ To install or upgrade the notebook chart run the following. You can review the c
 make getNotebook
 
 # Deploy
-helmfile -i -f env/weeble/helmfile.yaml -l app=notebook apply --skip-deps
+helmfile -i -f env/zoo/helmfile.yaml -l app=notebook apply --skip-deps
 ```
