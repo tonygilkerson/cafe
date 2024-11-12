@@ -3,5 +3,4 @@ mariadb,https://groundhog2k.github.io/helm-charts,2.1.2
 base,https://istio-release.storage.googleapis.com/charts,1.23.0
 istiod,https://istio-release.storage.googleapis.com/charts,1.23.0
 gateway,https://istio-release.storage.googleapis.com/charts,1.23.0
-oauth2-proxy,https://oauth2-proxy.github.io/manifests,7.1.0
 cert-manager,https://charts.jetstack.io,v1.15.3

@@ -8,9 +8,6 @@ helmfiles:
 - path: ../../apps/service-mesh
   values:
   - {{ $.Values | toYaml | nindent 4}}
-- path: ../../apps/oauth2-proxy
-  values:
-  - {{ $.Values | toYaml | nindent 4}}
 - path: ../../apps/kps
   values:
   - {{ $.Values | toYaml | nindent 4}}

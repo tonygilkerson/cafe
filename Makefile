@@ -19,8 +19,8 @@ define help_info
 	@echo "  $$ make getISpy"
 	@echo "    This will pull the latest chart for the ISpy"
 	@echo ""
-	@echo "  $$ make docdev  - Start mkdocs dev sandbox"
-	@echo "  $$ make docpub  - Publish doc to Gighub pages"	
+	@echo "  $$ make docServe  - Start mkdocs dev sandbox"
+	@echo "  $$ make docPub  - Publish doc to Gighub pages"	
 endef
 
 help:
@@ -54,9 +54,9 @@ getNotebook:
 	git -C .temp clone git@github.com:tonygilkerson/notebook.git
 	cp -r .temp/notebook/charts/notebook external-charts/
 
-docdev:
+docServe:
 	source ".venv/bin/activate"; mkdocs serve
 
 
-docpub:
+docPub:
 	source ".venv/bin/activate"; mkdocs build --clean; mkdocs gh-deploy

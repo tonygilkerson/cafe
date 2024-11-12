@@ -1,3 +1,3 @@
-# The IoT Cafe
+# The Cafe
 
-![cafe system overview](./img/system-overview.drawio.png)
+![splash](./img/cafe-splash.jpg)
