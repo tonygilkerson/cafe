@@ -65,7 +65,7 @@ sudo ufw allow 30080 # k8s node ports
 sudo ufw allow 30443 # k8s node ports
 sudo ufw enable
 
-
+sudo apt install apache2-utils
 sudo apt install iotop
 
 # clamav ref: https://www.inmotionhosting.com/support/security/install-clamav-on-ubuntu/
@@ -137,10 +137,6 @@ sudo microk8s enable dns hostpath-storage metrics-server
 sudo microk8s config > ~/.kube/config
 ```
 
-```sh
-mkdocs serve
-```
-
 Github pages will auto deploy to [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
 ## Cert Manager
@@ -190,6 +186,58 @@ Deploy httpbin and use it to verify the Service Mesh
 
 ```sh
 helmfile -i -f env/zoo/helmfile.yaml -l app=httpbin apply --skip-deps
+```
+
+## Cluster Load Balancer
+
+Using Caddy as a reverse proxy in front of our cluster
+
+Ref: [Caddy install docs](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
+
+```sh
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+```
+
+At this point your browser at  `http://192.168.50.10/` and see the default Caddy page.
+
+Now `  vim /etc/caddy/Caddyfile` and make it look like the following:
+
+```sh
+# Replace MYPASSWORD (see cliperz search for cafe)
+password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
+
+cat <<EOF | sudo tee /etc/caddy/Caddyfile
+httpbin.tonygilkerson.us {
+  basic_auth {
+		tonygilkerson $password
+	}
+  reverse_proxy localhost:30080  
+}
+notebook.tonygilkerson.us {
+  basic_auth {
+		tonygilkerson $password
+	}
+  reverse_proxy localhost:30080
+}
+EOF
+
+# restart
+sudo systemctl restart caddy
+```
+
+For debuging.
+
+```sh
+# status
+systemctl status caddy
+
+# Logs  
+journalctl --no-pager -u caddy
+journalctl -xeu caddy.service
 ```
 
 ## Slack
@@ -259,8 +307,6 @@ Publish
 make docpub
 open https://tonygilkerson.github.io/cafe/
 ```
-
-
 
 ---
 
