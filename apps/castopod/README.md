@@ -9,7 +9,7 @@ To install or upgrade the mariadb charts, first edit the version number in `exte
 make externalCharts chart=mariadb
 
 # Deploy
-helmfile -f env/weeble/helmfile.yaml -l app=castopod sync --skip-deps
+helmfile -f env/zoo/helmfile.yaml -l app=castopod sync --skip-deps
 ```
 
 ## Castopod Setup

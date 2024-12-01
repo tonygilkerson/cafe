@@ -1,0 +1,10 @@
+missingFileHandler: Error
+
+releases:
+
+- name: rabbitmq-cluster-operator
+  namespace: rabbitmq
+  chart: ./charts/rabbitmq-cluster
+
+commonLabels:
+  app: rabbitmq

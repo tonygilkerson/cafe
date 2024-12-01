@@ -1,0 +1,8 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: demoq
+spec:
+  name: demoq # name of the queue
+  rabbitmqClusterReference:
+    name: zoomq

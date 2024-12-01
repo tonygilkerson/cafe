@@ -29,6 +29,15 @@ helmfiles:
 - path: ../../apps/httpbin
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/rabbitmq-cluster-operator
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/rabbitmq
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/keda
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

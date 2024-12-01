@@ -1,0 +1,10 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: demo-binding
+spec:
+  source: demo.fanout # an existing exchange
+  destination: demoq # an existing queue
+  destinationType: queue # can be 'queue' or 'exchange'
+  rabbitmqClusterReference:
+    name: zoomq

@@ -1,0 +1,10 @@
+
+releases:
+- name: keda
+  namespace: keda
+  chart: ../../external-charts/keda
+  # values:
+  # - values/cafe.yaml.gotmpl
+
+commonLabels:
+  app: keda

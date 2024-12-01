@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rabbitmq-cluster
+description: A Helm chart to create a RabbitMQ Cluster
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
