@@ -4,16 +4,7 @@ Setup for the Cafe
 
 Github Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
-## Day 2
-
-```sh
-ssh -D 9995 zoo
-
-# in a new terminal
-k config set-context zoo
-```
-
-## Day 1 - Initial Server Setup
+## Initial Server Setup
 
 Starting with a clean install of Ubuntu
 
@@ -204,23 +195,28 @@ sudo apt install caddy
 
 At this point your browser at  `http://192.168.50.10/` and see the default Caddy page.
 
-Now `  vim /etc/caddy/Caddyfile` and make it look like the following:
+Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
 # Replace MYPASSWORD (see cliperz search for cafe)
 password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
 
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
+tonygilkerson.us {
+  redir https://tonygilkerson.github.io/cafe
+}
+
 httpbin.tonygilkerson.us {
   basic_auth {
-		tonygilkerson $password
-	}
-  reverse_proxy localhost:30080  
+                tonygilkerson $password
+        }
+  reverse_proxy localhost:30080
 }
+
 notebook.tonygilkerson.us {
   basic_auth {
-		tonygilkerson $password
-	}
+                tonygilkerson $password
+        }
   reverse_proxy localhost:30080
 }
 EOF
@@ -229,7 +225,7 @@ EOF
 sudo systemctl restart caddy
 ```
 
-For debuging.
+For debugging.
 
 ```sh
 # status
@@ -306,44 +302,4 @@ Publish
 ```sh
 make docpub
 open https://tonygilkerson.github.io/cafe/
-```
-
----
-
-
-
-
-
-
-
-## Old Archive Stuff
-
-This no longer applies but might be useful as a reference. If you have not used this in a while then you can delete this section 2023-Mar
-
-### Cert-Manager Fix
-
-**cert-manager** needs patched to fix this error
-
->"error"="failed to perform self check GET request ...
-
-Add DNS entries in the cert-manager deployment at `spec.template.spec.dnsConfig`
-
-```yaml
-dnsConfig:
-  nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
-dnsPolicy: None
-```
-
-Edit coredns configmap so we point to the resolv.conf file
-
-```sh
-microk8s kubectl edit cm coredns -n kube-system
-```
-
-Set the forward section to:
-
-```text
-forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
 ```

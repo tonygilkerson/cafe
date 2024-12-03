@@ -9,13 +9,9 @@ plugins:
   - mermaid2:
   - search:
 nav:
-  - Home: index.md
-  - Services:
-    - Notebook: http://notebook.tonygilkerson.us:30080/
-    - CKAD: https://tonygilkerson.github.io/ckad/
-    - httpbin: http://httpbin.tonygilkerson.us:30080/
-  - Infrastructure: inf.md
-  - IoT: iot.md
+  - Notebook: https://notebook.tonygilkerson.us
+  - httpbin: https://httpbin.tonygilkerson.us
+  - CKAD 🌐: https://tonygilkerson.github.io/ckad
 
     
 

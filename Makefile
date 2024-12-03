@@ -20,7 +20,7 @@ define help_info
 	@echo "    This will pull the latest chart for the ISpy"
 	@echo ""
 	@echo "  $$ make docServe  - Start mkdocs dev sandbox"
-	@echo "  $$ make docPub  - Publish doc to Gighub pages"	
+	@echo "  $$ make docPub    - Publish doc to Gighub pages"	
 endef
 
 help:
