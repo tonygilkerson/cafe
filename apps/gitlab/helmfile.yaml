@@ -1,0 +1,18 @@
+missingFileHandler: Error
+
+releases:
+
+# This is the official way... it was just too hard
+# - name: gitlab
+#   namespace: gitlab
+#   chart: ../../external-charts/gitlab
+#   values:
+#   - values/gitlab.yaml.gotmpl
+
+# This is the deployment that I created for the all-in-on docker image
+- name: gitlab
+  namespace: gitlab
+  chart: charts/gitlabdocker
+
+commonLabels:
+  app: gitlab

@@ -1,0 +1,68 @@
+## NOTICE
+#
+# Due to the scope and complexity of this chart, all possible values are
+# not documented in this file. Extensive documentation is available.
+#
+# Please read the docs: https://docs.gitlab.com/charts/
+#
+# Because properties are regularly added, updated, or relocated, it is
+# _strongly suggest_ to not "copy and paste" this YAML. Please provide
+# Helm only those properties you need, and allow the defaults to be
+# provided by the version of this chart at the time of deployment.
+
+## Advanced Configuration
+## https://docs.gitlab.com/charts/advanced
+#
+# Documentation for advanced configuration, such as
+# - External PostgreSQL
+# - External Gitaly
+# - External Redis
+# - External NGINX
+# - External Object Storage providers
+# - PersistentVolume configuration
+
+## The global properties are used to configure multiple charts at once.
+## https://docs.gitlab.com/charts/charts/globals
+global:
+  hosts:
+    domain: tonygilkerson.us
+    externalIP: 74.140.54.142
+  # ingress:
+  #   enabled: false
+  kas:
+    enabled: false
+  pages:
+    enabled: false
+  registry:
+    enabled: false
+  ingress:
+    configureCertmanager: false
+  
+
+
+# certmanager-issuer:
+#   email: gitlab_admin@tonygilkerson.us
+
+## Installation & configuration of jetstack/cert-manager
+## See requirements.yaml for current version
+certmanager:
+  installCRDs: false
+  nameOverride: certmanager
+  # Install cert-manager chart. Set to false if you already have cert-manager
+  # installed or if you are not using cert-manager.
+  install: false
+
+# nginx-ingress:
+#   enabled: false
+prometheus:
+  install: false
+
+gitlab:
+  webservice:
+    resources:
+      requests:
+        cpu: 300m
+        # memory: 2.5G
+        memory: 126M
+    minReplicas: 1
+    maxReplicas: 1  

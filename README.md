@@ -52,12 +52,18 @@ sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 16443 # k8s api
-sudo ufw allow 30080 # k8s node ports
-sudo ufw allow 30443 # k8s node ports
+sudo ufw allow 30080 # k8s node ports for Istio
+sudo ufw allow 30443 # k8s node ports for Istio
+sudo ufw allow 31080 # k8s node ports for gitlab
+sudo ufw allow 31443 # k8s node ports for gitlab
 sudo ufw enable
 
 sudo apt install apache2-utils
 sudo apt install iotop
+
+# After executing the command the screen will turn off automatically every minute (if idle). 
+setterm --blank 1
+
 
 # clamav ref: https://www.inmotionhosting.com/support/security/install-clamav-on-ubuntu/
 sudo apt install clamav clamav-daemon -y
@@ -83,9 +89,6 @@ clamscan -r --move=/path-to-folder /path-to-quarantine-folder
 sudo systemctl stop clamav-freshclam
 sudo freshclam
 sudo systemctl start clamav-freshclam
-
-# After executing the command the screen will turn off automatically every minute (if idle). 
-setterm --blank 1
 
 # Containers
 sudo apt install podman-docker
@@ -207,19 +210,24 @@ tonygilkerson.us {
 }
 
 httpbin.tonygilkerson.us {
-  basic_auth {
-                tonygilkerson $password
-        }
+  basic_auth { 
+    tonygilkerson $password
+  }
   reverse_proxy localhost:30080
 }
 
 notebook.tonygilkerson.us {
-  basic_auth {
-                tonygilkerson $password
-        }
+  basic_auth { 
+    tonygilkerson $password
+  }
   reverse_proxy localhost:30080
 }
+
+gitlab.tonygilkerson.us {
+  reverse_proxy localhost:31080
+}
 EOF
+
 
 # restart
 sudo systemctl restart caddy
@@ -274,6 +282,63 @@ Your public key has been saved in /home/tgilkerson/.ssh/id_ed25519.pub
 ```
 
 Go to your [Github Keys](https://github.com/settings/keys) and add the above as **tgilkerson on weeble**
+
+## Gitlab
+
+Ref
+
+* [Gitlab install](https://about.gitlab.com/install)
+* [Gitlab configuration](https://docs.gitlab.com/omnibus/settings/configuration.html)
+
+For now I am going to install Gilab directly on Ubuntu outside of the cluster.  This is just the easiest.  
+
+> Note: Gitlab needs port 80/443 on the host so it must live on a different server than the one where I have the Caddy reverse proxy.
+
+```sh
+# Install and configure the necessary dependencies
+sudo apt-get update
+sudo apt-get install -y curl openssh-server ca-certificates tzdata perl postfix
+
+# Add the GitLab package repository and install the package
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash
+
+sudo EXTERNAL_URL="http://192.168.50.11" apt-get install gitlab-ee
+# List available versions: apt-cache madison gitlab-ee
+# Specifiy version: sudo EXTERNAL_URL="https://gitlab.example.com" apt-get install gitlab-ee=16.2.3-ee.0
+# Pin the version to limit auto-updates: sudo apt-mark hold gitlab-ee
+# Show what packages are held back: sudo apt-mark showhold
+
+# Open UI and reset the root password
+user: root
+password: <cat /etc/gitlab/initial_root_password>
+url: http://192.168.50.11
+
+```sh
+# Look at current setting
+$ sudo systemctl get-default
+graphical.target
+
+# Set to text mode
+# You will still be able to use X by typing startx after you logged in.
+sudo systemctl enable multi-user.target --force
+sudo systemctl set-default multi-user.target
+
+# Firewall
+sudo ufw status
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
+
+sudo apt install apache2-utils
+sudo apt install iotop
+
+# After executing the command the screen will turn off automatically every minute (if idle). 
+setterm --blank 1
+
+```
 
 ## Docs Dev
 

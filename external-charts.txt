@@ -6,3 +6,4 @@ gateway,https://istio-release.storage.googleapis.com/charts,1.23.0
 cert-manager,https://charts.jetstack.io,v1.15.3
 rabbitmq-cluster-operator,https://charts.bitnami.com/bitnami,4.3.25
 keda,https://kedacore.github.io/charts,2.16.0
+gitlab,https://charts.gitlab.io,8.6.2

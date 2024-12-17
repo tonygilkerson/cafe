@@ -1,0 +1,10 @@
+# ref: https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-by-using-docker-engine\
+
+# see: https://hub.docker.com/r/gitlab/gitlab-ee/tags/
+image:
+  repository: gitlab/gitlab-ee
+  pullPolicy: IfNotPresent
+  tag: "17.4.6-ee.0"
+
+
+hostname: gitlab.tonygilkerson.us

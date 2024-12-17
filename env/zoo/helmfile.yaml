@@ -38,6 +38,9 @@ helmfiles:
 - path: ../../apps/keda
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/gitlab
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 
