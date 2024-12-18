@@ -1,0 +1,12 @@
+missingFileHandler: Error
+
+releases:
+
+- name: gitlab-runner
+  namespace: gitlab-runner
+  chart: ../../external-charts/gitlab-runner
+  values:
+  - values/gitlab-runner.yaml.gotmpl
+
+commonLabels:
+  app: gitlab-runner

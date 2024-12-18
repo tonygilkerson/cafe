@@ -1,0 +1,64 @@
+
+## How many runner pods to launch.
+##
+replicas: 1
+
+## How many old ReplicaSets for this Deployment you want to retain
+revisionHistoryLimit: 3
+
+## The GitLab Server URL (with protocol) that want to register the runner against
+## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-register
+##
+gitlabUrl: http://192.168.50.11/
+
+## DEPRECATED: The Registration Token for adding new Runners to the GitLab Server.
+##
+## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
+##
+# runnerRegistrationToken: ""
+
+## The Runner Token for adding new Runners to the GitLab Server. This must
+## be retrieved from your GitLab instance. It is the token of an already registered runner.
+## ref: (we don't have docs for that yet, but we want to use an existing token)
+##
+# runnerToken: ""
+#
+
+
+## For RBAC support:
+rbac:
+  ## Specifies whether a Role and RoleBinding should be created
+  ## If this value is set to `true`, `serviceAccount.create` should also be set to either `true` or `false`
+  ##
+  create: true
+  ## Define the generated serviceAccountName when create is set to true
+  ## It defaults to "gitlab-runner.fullname" if not provided
+  ## DEPRECATED: Please use `serviceAccount.name` instead
+  generatedServiceAccountName: ""
+
+## Configure ServiceAccount
+##
+serviceAccount:
+  ## Specifies whether a ServiceAccount should be created
+  ##
+  ## TODO: Set default to `false`
+  create: true
+  ## The name of the ServiceAccount to use.
+  ## If not set and create is `true`, a name is generated using the `gitlab-runner.fullname`` template
+  ##
+  name: ""
+
+## Configuration for the Pods that the runner launches for each new job
+##
+runners:
+  # runner configuration, where the multi line string is evaluated as a
+  # template so you can specify helm values inside of it.
+  #
+  # tpl: https://helm.sh/docs/howto/charts_tips_and_tricks/#using-the-tpl-function
+  # runner configuration: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
+  config: |
+    [[runners]]
+      [runners.kubernetes]
+        namespace = "{{.Release.Namespace}}"
+        image = "alpine"
+  secret: gitlab-runner
