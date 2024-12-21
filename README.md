@@ -209,51 +209,47 @@ tonygilkerson.us {
   redir https://tonygilkerson.github.io/cafe
 }
 
-httpbin.tonygilkerson.us {
+# Basic auth example
+#   I am not using basic auth on most of the routes because
+#   I only expose Caddy to the internet when it need to refresh TLS
+#   NOTE: Caddy should not be exposed to the internet 
+#         DNS entries resolve to local IPs 
+foo.tonygilkerson.us {
   basic_auth { 
     tonygilkerson $password
   }
+  reverse_proxy localhost:30080
+}
+
+httpbin.tonygilkerson.us {
   reverse_proxy localhost:30080
 }
 
 notebook.tonygilkerson.us {
-  basic_auth { 
-    tonygilkerson $password
-  }
+  reverse_proxy localhost:30080
+}
+
+ha.tonygilkerson.us {
   reverse_proxy localhost:30080
 }
 
 gitlab.tonygilkerson.us {
-  basic_auth { 
-    tonygilkerson $password
-  }
   reverse_proxy 192.168.50.11
 }
-
-# Home Assistant with not basic auth because we are on local network
-# This is what I want but I only have one dns I need to be able to do stuff like 
-#    ha.zoo.local
-#    gitlab.zoo.local
-#
-zoo.local {
-  reverse_proxy localhost:30080
-}
-
-# Home Assistant
-# Adding basic auth because it is internet exposed, however this seems to
-# cause issues with the app see above entry
-ha.tonygilkerson.us {
-  basic_auth { 
-    tonygilkerson $password
-  }
-  reverse_proxy localhost:30080
-}
-
 EOF
 
 # restart
 sudo systemctl restart caddy
 ```
+
+Here is how DNS on Godaddy should look
+
+| Type  | Name  | Data              | Comment                                    |
+| ----- | ----- | ----------------- | ------------------------------------------ |
+| ~~A~~ | ~~@~~ | ~~74.140.54.142~~ | Don't expose Caddy server to internet      |
+| A     | @     | 192.168.50.10     | domain points to local Caddy server        |
+| A     | *     | 192.168.50.10     | all subdomains point to local Caddy server |
+
 
 For debugging.
 

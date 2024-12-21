@@ -9,6 +9,7 @@ plugins:
   - mermaid2:
   - search:
 nav:
+  - Home Assistant: https://ha.tonygilkerson.us
   - Notebook: https://notebook.tonygilkerson.us
   - httpbin: https://httpbin.tonygilkerson.us
   - CKAD 🌐: https://tonygilkerson.github.io/ckad
