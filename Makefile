@@ -59,4 +59,4 @@ docServe:
 
 
 docPub:
-	source ".venv/bin/activate"; mkdocs build --clean; mkdocs gh-deploy
+	source ".venv/bin/activate"; git pull; mkdocs build --clean; mkdocs gh-deploy
