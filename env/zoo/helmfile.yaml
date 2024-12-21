@@ -41,7 +41,7 @@ helmfiles:
 - path: ../../apps/gitlab
   values:
   - {{ $.Values | toYaml | nindent 4}}
-- path: ../../apps/gitlab-runner
+- path: ../../apps/home-assistant
   values:
   - {{ $.Values | toYaml | nindent 4}}
 

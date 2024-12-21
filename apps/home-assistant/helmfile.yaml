@@ -1,0 +1,11 @@
+
+releases:
+- name: home-assistant
+  namespace: home-assistant
+  chart: charts/home-assistant
+  values:
+  - values/home-assistant.yaml.gotmpl
+  
+
+commonLabels:
+  app: home-assistant

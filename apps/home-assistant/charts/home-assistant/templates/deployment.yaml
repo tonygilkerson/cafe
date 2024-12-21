@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: home-assistant
+  name: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      containers:
+      - image: ghcr.io/home-assistant/home-assistant:stable
+        name: home-assistant
+        volumeMounts:
+        - name: dbus
+          mountPath: /run/dbus
+        volumeMounts:
+        - name: localtime
+          mountPath: /etc/localtime
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: dbus
+        persistentVolumeClaim:
+          claimName: ha-dbus
+      - name: localtime
+        persistentVolumeClaim:
+          claimName: ha-localtime
+      - name: config
+        persistentVolumeClaim:
+          claimName: ha-config
+

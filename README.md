@@ -196,12 +196,12 @@ sudo apt update
 sudo apt install caddy
 ```
 
-At this point your browser at  `http://192.168.50.10/` and see the default Caddy page.
+Point your browser at  `http://192.168.50.10/` and see the default Caddy page.
 
 Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
-# Replace MYPASSWORD (see cliperz search for cafe)
+# Replace MYPASSWORD (see cliperz search for "tonygilkerson.us cafe")
 password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
 
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
@@ -224,10 +224,32 @@ notebook.tonygilkerson.us {
 }
 
 gitlab.tonygilkerson.us {
-  reverse_proxy localhost:31080
+  basic_auth { 
+    tonygilkerson $password
+  }
+  reverse_proxy 192.168.50.11
 }
-EOF
 
+# Home Assistant with not basic auth because we are on local network
+# This is what I want but I only have one dns I need to be able to do stuff like 
+#    ha.zoo.local
+#    gitlab.zoo.local
+#
+zoo.local {
+  reverse_proxy localhost:30080
+}
+
+# Home Assistant
+# Adding basic auth because it is internet exposed, however this seems to
+# cause issues with the app see above entry
+ha.tonygilkerson.us {
+  basic_auth { 
+    tonygilkerson $password
+  }
+  reverse_proxy localhost:30080
+}
+
+EOF
 
 # restart
 sudo systemctl restart caddy
