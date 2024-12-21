@@ -376,13 +376,13 @@ pip3 install mkdocs-mermaid2-plugin
 Develop
 
 ```sh
-make docdev
+make docServe
 open http://127.0.0.1:8000/
 ```
 
 Publish
 
 ```sh
-make docpub
+make docPub
 open https://tonygilkerson.github.io/cafe/
 ```
