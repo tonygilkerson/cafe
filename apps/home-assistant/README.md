@@ -29,6 +29,6 @@ scene: !include scenes.yaml
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 10.1.7.63 # the cafe-gateway-istio pod's ip
+    - 10.1.7.0/24 # the cafe-gateway-istio pod's ip
 
 ```

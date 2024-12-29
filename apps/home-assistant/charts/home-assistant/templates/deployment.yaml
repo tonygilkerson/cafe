@@ -21,12 +21,14 @@ spec:
         volumeMounts:
         - name: dbus
           mountPath: /run/dbus
-        volumeMounts:
         - name: localtime
           mountPath: /etc/localtime
-        volumeMounts:
         - name: config
           mountPath: /config
+        - name: host-devices
+          mountPath: /dev
+        securityContext:
+          privileged: true
       volumes:
       - name: dbus
         persistentVolumeClaim:
@@ -37,4 +39,7 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: ha-config
+      - name: host-devices
+        hostPath:
+          path: /dev
 
