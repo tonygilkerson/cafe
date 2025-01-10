@@ -54,6 +54,9 @@ getNotebook:
 	git -C .temp clone git@github.com:tonygilkerson/notebook.git
 	cp -r .temp/notebook/charts/notebook external-charts/
 
+docBuild:
+	source ".venv/bin/activate"; mkdocs build --clean
+	
 docServe:
 	source ".venv/bin/activate"; mkdocs serve
 
