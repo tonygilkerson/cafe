@@ -51,6 +51,9 @@ sudo ufw default deny incoming
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
+sudo ufw allow nfs
+sudo ufw allow from 192.168.50.11 to any port nfs # Allow gitlab
+sudo ufw allow from 192.168.50.12 to any port nfs # Allow home assistant
 sudo ufw allow 16443 # k8s api
 sudo ufw allow 30080 # k8s node ports for Istio
 sudo ufw allow 30443 # k8s node ports for Istio
@@ -106,6 +109,44 @@ K8SVERSION=1.31
 sudo snap refresh microk8s --channel=$K8SVERSION/stable
 microk8s stop
 microk8s start
+```
+
+## NFS
+
+```sh
+# install
+sudo apt install nfs-kernel-server
+
+# To start the NFS server
+sudo systemctl start nfs-kernel-server.service
+
+# Make share
+sudo mkdir -p /var/nfs/share
+sudo chown -R nobody:nogroup /var/nfs/share
+
+# configure the directories to be exported 
+cat <<EOF | sudo tee /etc/exports
+/var/nfs/share  *(rw,sync,no_subtree_check)
+EOF
+
+# Apply the new config via:
+sudo exportfs -a
+```
+
+To test the NFS server
+
+```sh
+# From the gitlab server
+ssh tgilkerson@192.168.50.11
+
+# Install nfs client
+sudo apt install nfs-common
+
+mkdir /home/tgilkerson/temp/nfs/share
+sudo mount 192.168.50.10:/var/nfs/share /home/tgilkerson/temp/nfs/share
+
+cd /home/tgilkerson/temp/nfs/share/
+ls -l  # You should see files from the zoo server!
 ```
 
 ## Dev Tools
@@ -168,10 +209,6 @@ helmfile -i -f env/zoo/helmfile.yaml -l app=service-mesh apply --skip-deps
 # After you create a Gateway resource you will need to patch the nodeports for the port-forwarding to work
 kubectl -n istio-system patch svc cafe-gateway-istio --type merge -p='{"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"protocol":"TCP","targetPort":80},{"name":"https","nodePort":30443,"port":443,"protocol":"TCP","targetPort":443}]}}'
 
-# Allow access to cafe-gateway
-# DEVTODO - I should add this to the namespace chart
-# DEVTODO - create one gatway will allow all namespaces or put the gateways in the app namespaces
-# kubectl label ns istio-system cafe-gateway=enabled
 ```
 
 ## Httpbin
@@ -196,11 +233,57 @@ sudo apt update
 sudo apt install caddy
 ```
 
+This section makes use of caddy's automatic https, see [local-https](https://caddyserver.com/docs/automatic-https#local-https)
+
 Point your browser at  `http://192.168.50.10/` and see the default Caddy page.
 
 Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
+# Replace MYPASSWORD (see cliperz search for "tonygilkerson.us cafe")
+password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
+
+cat <<EOF | sudo tee /etc/caddy/Caddyfile
+
+httpbin.tonygilkerson.us {
+  tls internal
+  reverse_proxy localhost:30080
+}
+
+notebook.tonygilkerson.us {
+  tls internal
+  reverse_proxy localhost:30080
+}
+
+hadev.tonygilkerson.us {
+  tls internal
+  reverse_proxy localhost:30080
+}
+
+# Could not get this to work, i will come back to it later
+# For now use http://homeassistant.local:8123
+# I think this is a docker networking thing
+#
+# ha.tonygilkerson.us {
+#   tls internal
+#   reverse_proxy 192.168.50.12:8123
+# }
+
+
+gitlab.tonygilkerson.us {
+  tls internal
+  reverse_proxy 192.168.50.11
+}
+EOF
+
+# restart
+sudo systemctl restart caddy
+
+
+#
+# Basic Auth example if you ever need it
+#
+
 # Replace MYPASSWORD (see cliperz search for "tonygilkerson.us cafe")
 password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
 
@@ -221,25 +304,7 @@ foo.tonygilkerson.us {
   reverse_proxy localhost:30080
 }
 
-httpbin.tonygilkerson.us {
-  reverse_proxy localhost:30080
-}
-
-notebook.tonygilkerson.us {
-  reverse_proxy localhost:30080
-}
-
-ha.tonygilkerson.us {
-  reverse_proxy localhost:30080
-}
-
-gitlab.tonygilkerson.us {
-  reverse_proxy 192.168.50.11
-}
 EOF
-
-# restart
-sudo systemctl restart caddy
 ```
 
 Here is how DNS on Godaddy should look
@@ -250,10 +315,12 @@ Here is how DNS on Godaddy should look
 | A     | @     | 192.168.50.10     | domain points to local Caddy server        |
 | A     | *     | 192.168.50.10     | all subdomains point to local Caddy server |
 
-
 For debugging.
 
 ```sh
+# Run this and watch the logs
+sudo caddy run --config /etc/caddy/Caddyfile
+
 # status
 systemctl status caddy
 

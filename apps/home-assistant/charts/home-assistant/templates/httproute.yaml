@@ -4,8 +4,7 @@ metadata:
   name: home-assistant
 spec:
   hostnames:
-  - ha.tonygilkerson.us
-  - zoo.local
+  - hadev.tonygilkerson.us
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
