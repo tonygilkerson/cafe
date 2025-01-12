@@ -19,8 +19,8 @@ RUN git clone https://github.com/tonygilkerson/cafe.git
 
 WORKDIR /home/appuser/cafe
 
-RUN python3 -m venv .vdockerenv
-RUN source .vdockerenv/bin/activate
+RUN python3 -m venv .venv
+RUN source .venv/bin/activate
 RUN pip3 install mkdocs-material
 RUN pip3 install mkdocs-mermaid2-plugin
 RUN mkdocs build --clean
