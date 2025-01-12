@@ -6,17 +6,17 @@ FROM docker.io/fredericwernercc/mkdocs-material as dev
 # Change the default shell to bash
 SHELL ["/bin/bash", "-c"]
 
-RUN /bin/bash -c "whoami"
-RUN /bin/bash -c "which mkdir"
+RUN whoami
+RUN which mkdir
 
 # COPY docs ./docs
 # COPY mkdocs.yml .
-RUN /bin/bash -c "mkdir -p /home/appuser"
-RUN /bin/bash -c "addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser"
+RUN mkdir -p /home/appuser
+RUN addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser
 
 WORKDIR /home/appuser
 # COPY . .
-RUN /bin/bash -c "chown -R appuser:appuser /home/appuser"
+RUN chown -R appuser:appuser /home/appuser
 # RUN chmod -R u+rwx /home/appuser
 USER appuser
 
