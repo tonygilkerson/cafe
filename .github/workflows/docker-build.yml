@@ -16,4 +16,4 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: |
-        docker buildx --platform="linux/amd64" . --file Dockerfile --tag cafe:$(date +%s)
+        docker buildx . --file Dockerfile --tag cafe:$(date +%s)
