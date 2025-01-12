@@ -1,7 +1,8 @@
 ###########################################
 # build
 ###########################################
-FROM docker.io/fredericwernercc/mkdocs-material as dev
+# FROM docker.io/fredericwernercc/mkdocs-material as dev
+FROM squidfunk/mkdocs-material
 
 RUN [ "whoami" ]
 RUN [ "which", "mkdir" ]
