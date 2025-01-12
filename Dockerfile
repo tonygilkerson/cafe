@@ -1,7 +1,10 @@
 ###########################################
 # build
 ###########################################
-FROM --platform=linux/amd64 docker.io/fredericwernercc/mkdocs-material as dev
+FROM docker.io/fredericwernercc/mkdocs-material as dev
+
+# Change the default shell to bash
+SHELL ["/bin/bash", "-c"]
 
 RUN /bin/bash -c "whoami"
 RUN /bin/bash -c "which mkdir"
