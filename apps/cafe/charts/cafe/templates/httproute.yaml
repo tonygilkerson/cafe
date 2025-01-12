@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: notebook
+spec:
+  hostnames:
+  - cafe.tonygilkerson.us
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: cafe-gateway
+    namespace: istio-system
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: cafe
+      port: 8000
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

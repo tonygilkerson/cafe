@@ -240,9 +240,6 @@ Point your browser at  `http://192.168.50.10/` and see the default Caddy page.
 Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
-# Replace MYPASSWORD (see cliperz search for "tonygilkerson.us cafe")
-password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
-
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
 
 httpbin.tonygilkerson.us {
@@ -250,6 +247,10 @@ httpbin.tonygilkerson.us {
   reverse_proxy localhost:30080
 }
 
+cafe.tonygilkerson.us {
+  tls internal
+  reverse_proxy localhost:30080
+}
 notebook.tonygilkerson.us {
   tls internal
   reverse_proxy localhost:30080
