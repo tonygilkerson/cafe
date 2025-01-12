@@ -18,11 +18,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Log in to GitHub Container Registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    # - name: Log in to GitHub Container Registry
+    #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build and push Docker image
       run: |
         IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/cafe:latest
         docker build  --file Dockerfile --tag $IMAGE_NAME .
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         docker push $IMAGE_NAME
