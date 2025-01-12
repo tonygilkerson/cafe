@@ -3,18 +3,13 @@
 ###########################################
 FROM docker.io/fredericwernercc/mkdocs-material as dev
 
-RUN which bash
-
-# Change the default shell to bash
-SHELL ["bash", "-c"]
-
 RUN whoami
-RUN which mkdir
+RUN "which mkdir"
 
 # COPY docs ./docs
 # COPY mkdocs.yml .
-RUN mkdir -p /home/appuser
-RUN addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser
+RUN "mkdir -p /home/appuser"
+RUN "addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser"
 
 WORKDIR /home/appuser
 # COPY . .
