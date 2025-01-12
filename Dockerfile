@@ -3,17 +3,17 @@
 ###########################################
 FROM --platform=linux/amd64 docker.io/fredericwernercc/mkdocs-material as dev
 
-RUN whoami && env
-RUN which mkdir
+RUN /bin/bash -c "whoami"
+RUN /bin/bash -c "which mkdir"
 
 # COPY docs ./docs
 # COPY mkdocs.yml .
-# RUN mkdir -p /home/appuser
-RUN addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser
+RUN /bin/bash -c "mkdir -p /home/appuser"
+RUN /bin/bash -c "addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser"
 
 WORKDIR /home/appuser
 # COPY . .
-RUN chown -R appuser:appuser /home/appuser
+RUN /bin/bash -c "chown -R appuser:appuser /home/appuser"
 # RUN chmod -R u+rwx /home/appuser
 USER appuser
 
