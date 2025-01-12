@@ -60,6 +60,5 @@ docBuild:
 docServe:
 	source ".venv/bin/activate"; mkdocs serve
 
-
 docPub:
 	source ".venv/bin/activate"; git pull; mkdocs build --clean; mkdocs gh-deploy

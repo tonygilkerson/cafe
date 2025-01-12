@@ -27,13 +27,15 @@ RUN pip3 install mkdocs-mermaid2-plugin
 RUN mkdocs build --clean
 
 
-EXPOSE 8000
+# Start mkdocs server in the background, it will watch for content changes
+# Then start a loop that will pull content changes every so often
 ENTRYPOINT [ "/bin/sh", "-c"]
 CMD [ "mkdocs serve --dev-addr 0.0.0.0:8000 & echo Starting;\
         while true; do \
           echo git pull...;\
           git pull;\
-          sleep 15;\
+          echo Sleep for 180 seconds, ZZZzzz...;\
+          sleep 180;\
         done;" \
 ]
 # mkdocs serve --dev-addr 0.0.0.0:8000 &; \
