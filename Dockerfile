@@ -4,18 +4,13 @@
 # FROM docker.io/fredericwernercc/mkdocs-material as dev
 FROM squidfunk/mkdocs-material
 
-RUN whoami
-RUN which mkdir
 
-# COPY docs ./docs
-# COPY mkdocs.yml .
 RUN mkdir -p /home/appuser
 RUN addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser
 
 WORKDIR /home/appuser
-# COPY . .
+
 RUN chown -R appuser:appuser /home/appuser
-# RUN chmod -R u+rwx /home/appuser
 USER appuser
 
 RUN git config --global user.name "Tony Gilkerson"
