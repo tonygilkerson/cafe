@@ -1,3 +1,3 @@
 ![splash](./img/cafe-splash.jpg)
 
-# The Cafe xxx
+# The Cafe
