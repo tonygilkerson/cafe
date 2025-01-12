@@ -34,8 +34,7 @@ CMD [ "mkdocs serve --dev-addr 0.0.0.0:8000 & echo Starting;\
         while true; do \
           echo git pull...;\
           git pull;\
-          echo Sleep for 60 seconds, ZZZzzz...;\
-          sleep 60;\
+          echo Sleep for 90 seconds, ZZZzzz...;\
+          sleep 90;\
         done;" \
 ]
-# mkdocs serve --dev-addr 0.0.0.0:8000 &; \
