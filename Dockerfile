@@ -1,7 +1,7 @@
 ###########################################
 # build
 ###########################################
-FROM docker.io/fredericwernercc/mkdocs-material as dev
+FROM --platform=linux/amd64 docker.io/fredericwernercc/mkdocs-material as dev
 
 RUN whoami && env
 RUN which mkdir
