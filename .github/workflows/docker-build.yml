@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build --platform="linux/amd64" . --file Dockerfile --tag cafe:$(date +%s)
+      run: |
+        export DOCKER_BUILDKIT=0
+        docker build --progress=plain --platform="linux/amd64" . --file Dockerfile --tag cafe:$(date +%s)
