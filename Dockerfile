@@ -5,7 +5,7 @@ FROM docker.io/fredericwernercc/mkdocs-material as dev
 
 # COPY docs ./docs
 # COPY mkdocs.yml .
-RUN mkdir -p /home/appuser
+# RUN mkdir -p /home/appuser
 RUN addgroup -S appuser && adduser -S appuser -G appuser -h /home/appuser
 
 WORKDIR /home/appuser
