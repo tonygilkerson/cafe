@@ -3,8 +3,10 @@
 ###########################################
 FROM docker.io/fredericwernercc/mkdocs-material as dev
 
+RUN which bash
+
 # Change the default shell to bash
-SHELL ["/bin/bash", "-c"]
+SHELL ["bash", "-c"]
 
 RUN whoami
 RUN which mkdir
