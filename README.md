@@ -241,6 +241,9 @@ Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
+tonygilkerson.us {
+  redir https://cafe.tonygilkerson.us
+}
 
 httpbin.tonygilkerson.us {
   tls internal
@@ -251,6 +254,7 @@ cafe.tonygilkerson.us {
   tls internal
   reverse_proxy localhost:30080
 }
+
 notebook.tonygilkerson.us {
   tls internal
   reverse_proxy localhost:30080
@@ -289,10 +293,6 @@ sudo systemctl restart caddy
 password=$(htpasswd -bnBC 10 "" MYPASSWORD | tr -d ':\n')
 
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
-tonygilkerson.us {
-  redir https://tonygilkerson.github.io/cafe
-}
-
 # Basic auth example
 #   I am not using basic auth on most of the routes because
 #   I only expose Caddy to the internet when it need to refresh TLS
