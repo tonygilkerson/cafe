@@ -19,6 +19,8 @@ spec:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: notebook
         resources: {}
+        ports:
+        - containerPort: 8000
         securityContext:
           # runAsUser: 65534
           # runAsGroup: 65534
