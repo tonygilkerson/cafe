@@ -63,6 +63,8 @@ sudo ufw enable
 
 sudo apt install apache2-utils
 sudo apt install iotop
+sudo apt install nmap
+sudo apt install xq
 
 # After executing the command the screen will turn off automatically every minute (if idle). 
 setterm --blank 1
@@ -105,7 +107,10 @@ git config --global user.email "tonygilkerson@yahoo.com"
 sudo snap install microk8s --classic --channel=latest/stable
 
 # microk8s upgrade
-K8SVERSION=1.31
+# see: https://microk8s.io/docs/upgrading
+
+# K8SVERSION=1.31
+K8SVERSION=1.32 # installed on 1/25/2025
 sudo snap refresh microk8s --channel=$K8SVERSION/stable
 microk8s stop
 microk8s start
@@ -382,8 +387,8 @@ For now I am going to install Gilab directly on Ubuntu outside of the cluster.  
 
 ```sh
 # Install and configure the necessary dependencies
-sudo apt-get update
-sudo apt-get install -y curl openssh-server ca-certificates tzdata perl postfix
+sudo apt update
+sudo apt install -y curl openssh-server ca-certificates tzdata perl postfix
 
 # Add the GitLab package repository and install the package
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash
@@ -398,6 +403,13 @@ sudo EXTERNAL_URL="http://192.168.50.11" apt-get install gitlab-ee
 user: root
 password: <cat /etc/gitlab/initial_root_password>
 url: http://192.168.50.11
+
+# Install gitlab release-cli
+
+```sh
+sudo curl --location --output /usr/local/bin/release-cli "https://gitlab.com/api/v4/projects/gitlab-org%2Frelease-cli/packages/generic/release-cli/latest/release-cli-linux-amd64"
+sudo chmod +x /usr/local/bin/release-cli
+```      
 
 ```sh
 # Look at current setting
