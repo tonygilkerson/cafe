@@ -62,6 +62,7 @@ sudo ufw allow 31443 # k8s node ports for gitlab
 sudo ufw enable
 
 sudo apt install apache2-utils
+sudo apt install gnome-tweak-tool
 sudo apt install iotop
 sudo apt install nmap
 sudo apt install xq
