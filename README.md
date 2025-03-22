@@ -439,6 +439,61 @@ setterm --blank 1
 
 ```
 
+## PiHole
+
+Reference: 
+* [tutorial 2023](https://www.crosstalksolutions.com/the-worlds-greatest-pi-hole-and-unbound-tutorial-2023/)
+* [youtube](https://www.youtube.com/watch?v=cE21YjuaB6o&t=267s)
+* [pi-hole.net](https://pi-hole.net/)
+
+
+```sh
+# 
+# Set static IP address
+#
+
+# find the IP assigned to it  via DHCP
+ssh tgilkerson@<ip-address>
+
+# Edit this file 
+sudo vim /etc/dhcpcd.conf
+
+# Make this section look like this
+# Example static IP configuration:
+#interface eth0
+static ip_address=192.168.50.14/24
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=192.168.50.1
+static domain_name_servers=192.168.50.14 8.8.8.8
+
+# Reboot
+sudo reboot
+
+# Wait and log back in
+ssh tgilkerson@192.168.50.14
+
+# Install pihole
+sudo su -
+curl -sSL https://install.pi-hole.net | bash
+
+# Change the Pi-hole Web GUI Admin Password
+sudo pihole setpassword <same-as-tgilkerson-pwd>
+
+# Update gravity each week (see Lists) 
+sudo crontab -e # add the following line
+0 3 * * 0 /usr/local/bin/pihole updateGravity
+```
+
+The web interface is [pihole web admin](http://192.168.50.14/admin)
+
+### Lists
+
+Some Blocking Resources – if you’re interested in taking a deeper dive into what block lists you can add to Pi-hole, here are some good resources:
+
+* [The Best Pi-hole Blocklists](https://avoidthehack.com/best-pihole-blocklists) – `Avoidthehack.com` – This article does an excellent job of explaining the different types of block lists, and then lists a number of resources for lists in different categories of blocking.
+* [The Firebog (blocklist collection)](https://firebog.net/) – This blocklist resource does an excellent job of providing sources of blocklists in multiple categories such as Suspicious, Advertising, Tracking & Telemetry, & Malicious. A good rule of thumb is to add one or two of these lists from each category to your Pi-hole.
+* One more thing to point out – there is a list of commonly whitelisted domains over at [Pi-hole.net](Pi-hole.net). If you’re having issues with a particular website or service (say Spotify or Xbox functionality for instance), go see if there are resources for whitelisting that particular service on that page – it may save you a lot of headache.
+
 ## Docs Dev
 
 On your Mac workstation

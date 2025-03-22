@@ -1,0 +1,10 @@
+
+releases:
+- name: dagger
+  namespace: dagger
+  chart: ../../external-charts/dagger-helm
+  values:
+  - values/dagger.yaml.gotmpl
+
+commonLabels:
+  app: dagger

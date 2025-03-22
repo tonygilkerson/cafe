@@ -93,15 +93,18 @@ while IFS= read -r l; do
   url=$(echo "$l" | cut -d ',' -f 2)
   version=$(echo "$l" | cut -d ',' -f 3)
 
+  # Skip OCI registries
+  if [[ "$url" == oci* ]]; then continue; fi
+
   echo Add/remove Repo:"$name", URL:"$url", Version: "$version"
-  helm repo remove "$name"-external || true
-  helm repo add "$name"-external "$url"
+  helm repo remove "$name" || true
+  helm repo add "$name" "$url"
 
 done < "${list}"
 
 # The "helm pull" command will fail if the repo for its dependencies does not exist. 
 printf "\n\nDo 'helm repo update' to update all that were just added...\n\n"
-helm repo add grafana-external https://grafana.github.io/helm-charts          # Needed for kube-prometheus-stack
+helm repo add grafana https://grafana.github.io/helm-charts          # Needed for kube-prometheus-stack
 
 # Do this once after all the adds because it is slow
 helm repo update
@@ -126,17 +129,23 @@ while IFS= read -r l; do
   #
   if [ -n "$chart" ] && [ "$name" != "$chart" ]; then continue; fi
 
-  echo Pull... Repo:"$name", URL:"$url", Version: "$version"
+  echo "Pull... Repo: $name, URL: $url, Version: $version"
+  echo "Using outdir: $outdir" 
 
   # Remove chart folder before pulling from internet
   rm -rf "${outdir:?}"/"${name}"
-  helm pull "$name"-external/"$name" --version "$version" --untar --untardir "$outdir"
+  
+  if [[ "$url" == oci* ]]; then 
+    helm pull "$url" --version "$version" --untar --untardir "$outdir"
+  else
+    helm pull "$name/$name" --version "$version" --untar --untardir "$outdir"
 
-  # Build out the sub-chart dependencies by pulling from internet
-  helm dependency build "$outdir"/"$name" --skip-refresh
+    # Build out the sub-chart dependencies by pulling from internet
+    helm dependency build "$outdir"/"$name" --skip-refresh
 
-  # Store a local copy of dependencies then remove the chart dependency list from all local charts
-  remove_deps "$outdir"/"$name" 
+    # Store a local copy of dependencies then remove the chart dependency list from all local charts
+    remove_deps "$outdir/$name" 
+  fi
 
   # clean up
   find "$outdir" -type f -name "*.tgz"  -exec rm {} \;
