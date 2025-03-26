@@ -10,6 +10,7 @@ To install or upgrade...
 # Deploy
 helmfile -i -f env/zoo/helmfile.yaml -l app=dagger apply --skip-deps
 ```
+
 ## Connect to dagger engine in cluster from workstation
 
 ref [custom-runner](https://docs.dagger.io/configuration/custom-runner)
@@ -18,7 +19,8 @@ You can point the dagger CLI to the engine running in the cluster like this
 
 ```sh
 # export _EXPERIMENTAL_DAGGER_RUNNER_HOST="kube-pod://<podname>?context=<context>&namespace=<namespace>&container=<container>"
-export _EXPERIMENTAL_DAGGER_RUNNER_HOST="kube-pod://dagger-dagger-helm-engine-gshhj?namespace=dagger&container=dagger-engine"
+DAGGER_ENGINE_POD=$(kubectl get pods -l name=dagger-dagger-helm-engine -o custom-columns=":metadata.name"  --no-headers)
+export _EXPERIMENTAL_DAGGER_RUNNER_HOST="kube-pod://${DAGGER_ENGINE_POD}?namespace=dagger&container=dagger-engine"
 
 # verify
 dagger query <<EOF

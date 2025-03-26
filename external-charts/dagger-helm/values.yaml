@@ -35,6 +35,7 @@ engine:
   # Set to `StatefulSet` for running multiple Engines per K8s node
   kind: DaemonSet
 
+
   ### StatefulSet specific configuration
   #
   statefulSet:
@@ -177,6 +178,23 @@ engine:
   # - name: shared-data
   #   persistentVolumeClaim:
   #     claimName: my-pvc
+
+  ## Host networking requested for this pod. Use the host's network namespace. 
+  hostNetwork:
+
+  ## Set DNS policy and config for the pod
+  dnsPolicy:
+  dnsConfig: {}
+    # nameservers:
+    # - 8.8.8.8
+    # - 8.8.4.4
+    # searches:
+    # - ns1.svc.cluster-domain.example
+    # - my.dns.search.suffix
+    # options:
+    # - name: ndots
+    #   value: "2"
+    # - name: edns0
 
 magicache:
   enabled: false
