@@ -18,7 +18,6 @@ ssh-add ~/.ssh/id_ed25519
 
 # add to infolist
 git config --list --show-origin
-
 ```
 
 
