@@ -10,6 +10,14 @@ Github Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.githu
 git config --global gpg.format ssh
 git config --global user.signingkey /Users/tonygilkerson/.ssh/id_ed25519
 git config --global commit.gpgsign true
+
+# make sure key is listed
+ssh-add -l
+# If your key is not listed, add it:
+ssh-add ~/.ssh/id_ed25519
+
+# add to infolist
+git config --list --show-origin
 ```
 
 
