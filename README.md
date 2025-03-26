@@ -4,6 +4,15 @@ Setup for the Cafe
 
 Github Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.github.io/cafe/)
 
+## Workstation Setup for signing commits
+
+```sh
+git config --global gpg.format ssh
+git config --global user.signingkey /Users/tonygilkerson/.ssh/id_ed25519
+git config --global commit.gpgsign true
+```
+
+
 ## Initial Server Setup
 
 Starting with a clean install of Ubuntu
