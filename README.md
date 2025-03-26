@@ -10,7 +10,7 @@ This did not work!!?
 
 ```sh
 git config --global gpg.format ssh
-git config --global user.signingkey /Users/tonygilkerson/.ssh/id_ed25519
+git config --global user.signingkey ~/.ssh/id_ed25519
 git config --global commit.gpgsign true
 
 # make sure key is listed
@@ -18,12 +18,12 @@ ssh-add -l
 # If your key is not listed, add it:
 ssh-add ~/.ssh/id_ed25519
 
-# create the allowed signers file
-echo "$(git config --get user.email) namespaces=\"git\" $(cat ~/.ssh/id_ed25519.pub)" >> ~/.ssh/allowed_signers
-git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+# add a change thin
+git commit -sm "sign commit"
 
-# add to infolist
-git config --list --show-origin
+# verify
+git log --show-signature -1 
+
 ```
 
 This did not work to undo
@@ -31,6 +31,12 @@ This did not work to undo
 ```sh
 git config --global --unset commit.gpgsign
 git config --global --unset user.signingkey
+```
+
+
+```
+# add to infolist
+git config --list --show-origin
 ```
 
 
