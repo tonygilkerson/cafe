@@ -25,7 +25,6 @@ ssh-add ~/.ssh/id_ed25519
 # add a change thin
 git commit -sm "sign commit"
 
-
 # verify
 git log --show-signature -1 
 
