@@ -29,6 +29,20 @@ git commit -sm "sign commit"
 # verify
 git log --show-signature -1 
 
+# Should look like this
+$ cat .gitconfig
+[user]
+	name = Tony Gilkerson
+	email = tonygilkerson@yahoo.com
+	signingkey = /Users/tonygilkerson/.ssh/id_ed25519.pub
+[pull]
+	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = /Users/tonygilkerson/.ssh/allowed_signers
 ```
 
 This did not work to undo
@@ -36,12 +50,7 @@ This did not work to undo
 ```sh
 git config --global --unset commit.gpgsign
 git config --global --unset user.signingkey
-```
-
-
-```
-# add to infolist
-git config --list --show-origin
+git config --global --unset user.gpg.ssh.allowedSignersFile
 ```
 
 
