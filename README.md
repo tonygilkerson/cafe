@@ -522,4 +522,3 @@ Publish
 make docPub
 open https://tonygilkerson.github.io/cafe/
 ```
-
