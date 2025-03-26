@@ -6,21 +6,23 @@ Github Page: [https://tonygilkerson.github.io/cafe/](https://tonygilkerson.githu
 
 ## Workstation Setup for signing commits
 
-This did not work!!?
-
 ```sh
+# Create a SSH key to use for signing
+ssh-keygen -t ed25519 -C "tonygilkerson@yahoo.com" -f ~/.ssh/id_ed25519_sign
+
 git config --global gpg.format ssh
-git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global user.signingkey ~/.ssh/id_ed25519_sign.pub
 git config --global commit.gpgsign true
 
-echo "git $(cat ~/.ssh/id_ed25519.pub)" > ~/.ssh/allowed_signers
+echo "git $(cat ~/.ssh/id_ed25519_sign.pub)" > ~/.ssh/allowed_signers
 git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 chmod 644 ~/.ssh/allowed_signers
 
 # make sure key is listed
 ssh-add -l
 # If your key is not listed, add it:
-ssh-add ~/.ssh/id_ed25519
+ssh-add ~/.ssh/id_ed25519_sign
+
 
 # add a change thin
 git commit -sm "sign commit"
