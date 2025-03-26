@@ -13,6 +13,10 @@ git config --global gpg.format ssh
 git config --global user.signingkey ~/.ssh/id_ed25519
 git config --global commit.gpgsign true
 
+echo "git $(cat ~/.ssh/id_ed25519.pub)" > ~/.ssh/allowed_signers
+git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+chmod 644 ~/.ssh/allowed_signers
+
 # make sure key is listed
 ssh-add -l
 # If your key is not listed, add it:
