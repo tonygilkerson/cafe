@@ -25,7 +25,7 @@ ssh-add ~/.ssh/id_ed25519_sign
 
 
 # add a change thin
-git commit -sm "sign commit"
+git commit -s -m "sign commit"
 
 # verify
 git log --show-signature -1 
@@ -35,7 +35,7 @@ $ cat .gitconfig
 [user]
 	name = Tony Gilkerson
 	email = tonygilkerson@yahoo.com
-	signingkey = /Users/tonygilkerson/.ssh/id_ed25519.pub
+	signingkey = /Users/tonygilkerson/.ssh/id_ed25519_pub.pub
 [pull]
 	rebase = false
 [gpg]
