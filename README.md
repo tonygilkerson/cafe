@@ -30,7 +30,7 @@ git commit -s -m "sign commit"
 # verify
 git log --show-signature -1 
 
-# Should look like this
+# Git config should look like this
 $ cat .gitconfig
 [user]
 	name = Tony Gilkerson
@@ -46,14 +46,13 @@ $ cat .gitconfig
 	allowedSignersFile = /Users/tonygilkerson/.ssh/allowed_signers
 ```
 
-This did not work to undo
+If you want to undo
 
 ```sh
 git config --global --unset commit.gpgsign
 git config --global --unset user.signingkey
 git config --global --unset user.gpg.ssh.allowedSignersFile
 ```
-
 
 ## Initial Server Setup
 
