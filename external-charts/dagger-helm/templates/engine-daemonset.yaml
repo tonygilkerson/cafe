@@ -29,6 +29,9 @@ spec:
         name: {{ include "dagger.fullname" . }}-engine
         {{- include "dagger.labels" . | nindent 8 }}
     spec:
+      {{- if .Values.engine.runtimeClassName }}
+      runtimeClassName: {{ .Values.engine.runtimeClassName }}
+      {{- end }}
       {{- with .Values.engine.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -49,6 +52,9 @@ spec:
       serviceAccountName: {{ include "dagger.serviceAccountName" . }}
       {{- if .Values.engine.priorityClassName }}
       priorityClassName: {{ .Values.engine.priorityClassName }}
+      {{- end }}
+      {{- if .Values.engine.runtimeClassName }}
+      runtimeClassName: {{ .Values.engine.runtimeClassName }}
       {{- end }}
       {{- with .Values.engine.imagePullSecrets }}
       imagePullSecrets:
@@ -83,11 +89,11 @@ spec:
           {{- if .Values.magicache.enabled }}
           envFrom:
             - secretRef:
-              {{- if .Values.magicache.secretName }}
-              name: {{ .Values.magicache.secretName }}
-              {{- else }}
-              name: {{ include "dagger.fullname" . }}-magicache-token
-              {{- end }}
+                {{- if .Values.magicache.secretName }}
+                name: {{ .Values.magicache.secretName }}
+                {{- else }}
+                name: {{ include "dagger.fullname" . }}-magicache-token
+                {{- end }}
           {{- end }}
           {{- if .Values.engine.port }}
           ports:
@@ -143,16 +149,6 @@ spec:
             {{- with .Values.engine.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-      {{- if .Values.engine.hostNetwork }}
-      hostNetwork: {{ .Values.engine.hostNetwork }}
-      {{- end }}
-      {{- if .Values.engine.dnsPolicy }}
-      dnsPolicy: {{ .Values.engine.dnsPolicy }}
-      {{- end }}
-      {{- with .Values.engine.dnsConfig }}
-      dnsConfig:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       terminationGracePeriodSeconds: {{ .Values.engine.terminationGracePeriodSeconds }}
       volumes:
         {{- if .Values.engine.hostPath.dataVolume.enabled }}

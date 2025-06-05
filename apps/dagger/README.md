@@ -8,7 +8,7 @@ To install or upgrade...
 
 ```sh
 # Deploy
-helmfile -i -f env/zoo/helmfile.yaml -l app=dagger apply --skip-deps
+helmfile -i -f env/zoo/helmfile.yaml.gotmpl -l app=dagger apply --skip-deps
 ```
 
 ## Connect to dagger engine in cluster from workstation
