@@ -102,9 +102,13 @@ while IFS= read -r l; do
 
 done < "${list}"
 
+# Add a hardcoded list of repos that can show up in chart dependencies
+helm repo add grafana https://grafana.github.io/helm-charts      # Needed for kube-prometheus-stack
+helm repo add ollama https://otwld.github.io/ollama-helm/        # Needed for open-webui
+helm repo add tika https://apache.jfrog.io/artifactory/tika      # Needed for open-webui
+
 # The "helm pull" command will fail if the repo for its dependencies does not exist. 
 printf "\n\nDo 'helm repo update' to update all that were just added...\n\n"
-helm repo add grafana https://grafana.github.io/helm-charts          # Needed for kube-prometheus-stack
 
 # Do this once after all the adds because it is slow
 helm repo update

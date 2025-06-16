@@ -1,0 +1,10 @@
+
+releases:
+- name: open-webui
+  namespace: open-webui
+  chart: ../../external-charts/open-webui
+  values:
+  - values/open-webui.yaml.gotmpl
+
+commonLabels:
+  app: open-webui

@@ -1,0 +1,18 @@
+dependencies:
+- name: ollama
+  repository: ""
+  version: '>=0.24.0'
+- name: pipelines
+  repository: ""
+  version: '>=0.0.1'
+- name: tika
+  repository: ""
+  version: '>=2.9.0'
+- name: redis
+  repository: ""
+  version: '>=20.6.2'
+- name: postgresql
+  repository: ""
+  version: '>=15.5.38'
+digest: sha256:5112d4c4c98b34b0858e7b676596c4d9147f41acf80dbe5a5175d6ae80b3ebd9
+generated: "2025-06-16T18:16:36.370528-04:00"

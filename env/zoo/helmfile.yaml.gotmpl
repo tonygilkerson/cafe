@@ -47,6 +47,9 @@ helmfiles:
 - path: ../../apps/dagger
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/open-webui
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

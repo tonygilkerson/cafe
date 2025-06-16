@@ -122,3 +122,11 @@ metadata:
   labels:
     {{- include "ns-common.labels" . | nindent 4 }}
     {{- include "ns-pod-security-privileged.labels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  open-webui
+  labels:
+    {{- include "ns-common.labels" . | nindent 4 }}
+    {{- include "ns-pod-security-baseline.labels" . | nindent 4 }}

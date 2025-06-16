@@ -1,0 +1,26 @@
+ollama:
+  enabled: true
+  ollama:
+    models:
+      pull:
+      - llama3.2:1b
+      run:
+      - llama3.2:1b
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+    limits:
+      cpu: 2500m
+      memory: 3Gi
+
+pipelines:
+  enabled: false
+
+persistence:
+  enabled: true
+
+service:
+  type: NodePort
+  nodePort: 31434
+
