@@ -316,6 +316,11 @@ notebook.tonygilkerson.us {
   reverse_proxy localhost:30080
 }
 
+chat.tonygilkerson.us {
+  tls internal
+  reverse_proxy localhost:31434
+}
+
 hadev.tonygilkerson.us {
   tls internal
   reverse_proxy localhost:30080
@@ -335,6 +340,7 @@ gitlab.tonygilkerson.us {
   tls internal
   reverse_proxy 192.168.50.11
 }
+
 EOF
 
 # restart
