@@ -1,0 +1,10 @@
+
+releases:
+- name: ollama
+  namespace: ollama
+  chart: charts/ollama
+  values:
+  - values/ollama.yaml.gotmpl
+
+commonLabels:
+  app: ollama

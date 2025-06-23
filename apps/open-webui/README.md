@@ -15,4 +15,4 @@ helmfile -i -f env/zoo/helmfile.yaml.gotmpl -l app=open-webui apply --skip-deps
 
 ## Open the UI
 
-[UI]()
+Open UI at [chat.tonygilkerson.us](https://chat.tonygilkerson.us)

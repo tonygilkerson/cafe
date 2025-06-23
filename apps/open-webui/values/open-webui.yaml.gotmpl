@@ -3,16 +3,24 @@ ollama:
   ollama:
     models:
       pull:
-      - llama3.2:1b
+      # - qwen2.5-coder:3b
+      # - qwen2.5-coder:7b
+      # - qwen2.5-coder:0.5b
+      # - qwen3:4b
+      - qwen3:8B-Q4_K_M
       run:
-      - llama3.2:1b
-  resources:
-    requests:
-      cpu: 1000m
-      memory: 2Gi
-    limits:
-      cpu: 2500m
-      memory: 3Gi
+      # - qwen2.5-coder:3b
+      # - qwen2.5-coder:7b
+      # - qwen2.5-coder:0.5b
+      # - qwen3:4b
+      - qwen3:8B-Q4_K_M
+  # resources:
+  #   requests:
+  #     cpu: 2000m
+  #     memory: 3Gi
+  #   limits:
+  #     cpu: 3500m
+  #     memory: 6Gi
 
 pipelines:
   enabled: false
@@ -23,4 +31,16 @@ persistence:
 service:
   type: NodePort
   nodePort: 31434
+
+# -- OpenAI base API URL to use. Defaults to the Pipelines service endpoint when Pipelines are enabled, and "https://api.openai.com/v1" if Pipelines are not enabled and this value is blank
+openaiBaseApiUrl: "http://open-webui-ollama.open-webui:11434/v1"
+
+# -- OpenAI base API URLs to use. Overwrites the value in openaiBaseApiUrl if set
+openaiBaseApiUrls:
+- http://open-webui-ollama.open-webui:11434/v1
+  # - "https://api.openai.com/v1"
+  # - "https://api.company.openai.com/v1"
+
+
+
 

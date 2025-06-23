@@ -50,6 +50,9 @@ helmfiles:
 - path: ../../apps/open-webui
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/ollama
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 
