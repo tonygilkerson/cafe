@@ -157,6 +157,9 @@ git config --global user.email "tonygilkerson@yahoo.com"
 # microk8s
 sudo snap install microk8s --classic --channel=latest/stable
 
+# To see what the latest version is available 
+sudo snap info microk8s
+
 # microk8s upgrade
 # see: https://microk8s.io/docs/upgrading
 
