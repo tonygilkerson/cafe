@@ -8,5 +8,5 @@ rabbitmq-cluster-operator,https://charts.bitnami.com/bitnami,4.3.25
 keda,https://kedacore.github.io/charts,2.16.0
 gitlab,https://charts.gitlab.io,8.6.2
 gitlab-runner,https://charts.gitlab.io,0.71.0
-dagger-helm,oci://registry.dagger.io/dagger-helm,0.18.11
+dagger-helm,oci://registry.dagger.io/dagger-helm,0.18.12
 open-webui,https://helm.openwebui.com/,6.20.0
