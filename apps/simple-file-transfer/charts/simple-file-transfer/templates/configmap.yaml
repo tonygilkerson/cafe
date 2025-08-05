@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-file-transfer-script
+data:
+  webserver.py: |
+    from flask import Flask, send_from_directory, render_template_string, request
+    import os
+
+    app = Flask(__name__)
+    FILES_DIR = '/share'  # Change this to your desired directory
+
+    @app.route('/')
+    def index():
+        files = os.listdir(FILES_DIR)
+        html = """
+        <h2>File List</h2>
+        <ul>
+        {% for file in files %}
+          <li><a href="/download/{{`{{ file }}`}}">{{`{{ file }}`}}</a></li>
+        {% endfor %}
+        </ul>
+        """
+        return render_template_string(html, files=files)
+
+    @app.route('/download/<path:filename>')
+    def download(filename):
+        return send_from_directory(FILES_DIR, filename, as_attachment=True)
+
+    @app.route('/upload', methods=['POST'])
+    def upload():
+        file = request.files['file']
+        file.save(os.path.join(FILES_DIR, file.filename))
+        return 'File uploaded!', 200
+
+    if __name__ == '__main__':
+        os.makedirs(FILES_DIR, exist_ok=True)
+        app.run(host='0.0.0.0', port=8080)

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-file-transfer
+  name: simple-file-transfer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-file-transfer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-file-transfer
+    spec:
+      containers:
+      - name: python
+        image: python:3.11-slim
+        workingDir: /share
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            pip install flask
+            mkdir -p /share
+            mkdir -p /webserver
+            python /webserver/webserver.py
+        volumeMounts:
+        - name: webserver-script
+          mountPath: /webserver/webserver.py
+          subPath: webserver.py
+      volumes:
+      - name: webserver-script
+        configMap:
+          name: simple-file-transfer-script

@@ -53,6 +53,9 @@ helmfiles:
 - path: ../../apps/ollama
   values:
   - {{ $.Values | toYaml | nindent 4}}
+- path: ../../apps/simple-file-transfer
+  values:
+  - {{ $.Values | toYaml | nindent 4}}
 
 
 

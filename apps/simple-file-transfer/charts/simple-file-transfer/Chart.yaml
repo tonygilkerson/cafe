@@ -1,0 +1,9 @@
+apiVersion: v2
+name: simple-file-transfer
+description: A Helm chart for a simple http file transfer app
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.16.0"

@@ -500,11 +500,11 @@ setterm --blank 1
 
 ## PiHole
 
-Reference: 
+Reference
+
 * [tutorial 2023](https://www.crosstalksolutions.com/the-worlds-greatest-pi-hole-and-unbound-tutorial-2023/)
 * [youtube](https://www.youtube.com/watch?v=cE21YjuaB6o&t=267s)
 * [pi-hole.net](https://pi-hole.net/)
-
 
 ```sh
 # 
@@ -541,9 +541,23 @@ sudo pihole setpassword <same-as-tgilkerson-pwd>
 # Update gravity each week (see Lists) 
 sudo crontab -e # add the following line
 0 3 * * 0 /usr/local/bin/pihole updateGravity
+
+
 ```
 
 The web interface is [pihole web admin](http://192.168.50.14/admin)
+
+Next configure DHCP to use the Pi-Hole
+
+* Open [ASUS Web UI](http://192.168.50.1/)
+* Go to `Advanced Settings->LAN`
+* Click the `DHCP Server` tab (this might take you directly there [DHCP SERVER](http://192.168.50.1/Advanced_DHCP_Content.asp))
+
+```yaml
+# DNS and WINS Server Setting
+DNS Server 1: '192.168.50.14'  # Pi-Hole
+DNS Server 2:                  # Optional but if needed use 8.8.8.8 
+```
 
 ### Lists
 

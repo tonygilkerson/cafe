@@ -1,0 +1,12 @@
+missingFileHandler: Error
+
+releases:
+
+- name: simple-file-transfer
+  namespace: simple-file-transfer
+  chart: charts/simple-file-transfer
+  # values:
+  # - values/simple-file-transfer.yaml.gotmpl
+
+commonLabels:
+  app: simple-file-transfer
