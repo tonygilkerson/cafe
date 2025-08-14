@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "gitlab-runner.fullname" . | quote }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ default .Release.Namespace .Values.namespace | quote }}
   labels:
     app: {{ include "gitlab-runner.fullname" . | quote }}
     chart: {{ include "gitlab-runner.chart" . | quote }}
@@ -19,6 +19,12 @@ metadata:
 spec:
   {{- if .Values.service.clusterIP }}
   clusterIP: {{ .Values.service.clusterIP | quote }}
+  {{- end }}
+  {{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
+  {{- end }}
+  {{- if .Values.service.internalTrafficPolicy }}
+  internalTrafficPolicy: {{ .Values.service.internalTrafficPolicy }}
   {{- end }}
   {{- if .Values.service.externalIPs }}
   externalIPs:

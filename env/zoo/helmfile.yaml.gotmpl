@@ -38,7 +38,7 @@ helmfiles:
 - path: ../../apps/keda
   values:
   - {{ $.Values | toYaml | nindent 4}}
-- path: ../../apps/gitlab
+- path: ../../apps/gitlab-runner
   values:
   - {{ $.Values | toYaml | nindent 4}}
 - path: ../../apps/home-assistant

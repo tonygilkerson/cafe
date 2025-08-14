@@ -6,10 +6,25 @@ To install or upgrade...
 
 ```sh
 # Deploy
-helmfile -i -f env/zoo/helmfile.yaml -l app=gitlab-runner apply --skip-deps
+helmfile -i -f env/zoo/helmfile.yaml.gotmpl -l app=gitlab-runner apply --skip-deps
 ```
 
-## Runner
+## Update Helm Chart
+
+To look for new chart versions
+
+```sh
+helm repo update
+helm search repo gitlab-runner/gitlab-runner --versions
+
+# edit external-charts.txt
+make externalCharts chart=gitlab-runner
+
+# see install/upgrade above
+```
+
+
+## New Runner
 
 ref: [new creation workflow](https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html#creating-runners-programmatically)
 

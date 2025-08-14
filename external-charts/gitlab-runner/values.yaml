@@ -1,3 +1,11 @@
+## Configure namespace where the GitLab Runner deployment will be created
+## By default, the runner deployment uses the Release namespace (.Release.Namespace)
+## Set this value to override and deploy the runner in a different namespace
+## This allows separation between runner management (this namespace) and job execution (runners.jobNamespace)
+##
+## Example: Deploy runner in "ops" namespace while jobs run in "gitlab" namespace
+# namespace: ""
+
 ## GitLab Runner Image
 ##
 ## By default it's using registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v{VERSION}
@@ -42,7 +50,7 @@ imagePullPolicy: IfNotPresent
 ## Configure the livenessProbe
 livenessProbe: {}
 #   initialDelaySeconds: 60
-#   periodSeconds: 10
+#   periodSeconds: 60
 #   successThreshold: 1
 #   failureThreshold: 3
 #   terminationGracePeriodSeconds: 30
@@ -50,7 +58,7 @@ livenessProbe: {}
 ## Configure the readinessProbe
 readinessProbe: {}
 #   initialDelaySeconds: 60
-#   periodSeconds: 10
+#   periodSeconds: 60
 #   successThreshold: 1
 #   failureThreshold: 3
 
@@ -65,12 +73,6 @@ readinessProbe: {}
 ## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-register
 ##
 # gitlabUrl: https://gitlab.your-domain.com/
-
-## DEPRECATED: The Registration Token for adding new Runners to the GitLab Server.
-##
-## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-##
-# runnerRegistrationToken: ""
 
 ## The Runner Token for adding new Runners to the GitLab Server. This must
 ## be retrieved from your GitLab instance. It is the token of an already registered runner.
@@ -90,7 +92,6 @@ readinessProbe: {}
 ## - If the token is prefixed with `glrt-` (meaning the runner was created in the UI or API),
 ##   the unregisterRunners property deletes the runner manager, not the runner.
 ##   The runner manager is identified by the runner and the machine that contains the config.toml.
-## - If the runner was registered with a registration token (deprecated), the runner is deleted.
 unregisterRunners: true
 
 ## When stopping the runner, give it time to wait for its jobs to terminate.
@@ -173,6 +174,18 @@ sessionServer:
 
   #Valid values: ClusterIP, Headless, NodePort, LoadBalancer
   serviceType: LoadBalancer
+
+  ## Specify the services external traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # externalTrafficPolicy:
+
+  ## Specify the services internal traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # internalTrafficPolicy:
 
   # if enabled, sessionServer.publicIP variable should be set to the host e.g. runner1.example.com
   ingress:
@@ -304,6 +317,11 @@ metrics:
   serviceMonitor:
     enabled: false
 
+    ## Namespace where ServiceMonitor should be installed. Defaults to the
+    ## same namespace where the release will be installed.
+    ##
+    namespace: ""
+
     ## Provide additional labels to the service monitor resource
     ##
     ## labels: {}
@@ -404,9 +422,29 @@ service:
   ##
   # additionalPorts: []
 
+  ## Specify the services external traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # externalTrafficPolicy:
+
+  ## Specify the services internal traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # internalTrafficPolicy:
+
 ## Configuration for the Pods that the runner launches for each new job
 ##
 runners:
+  ## Configure namespace where GitLab Runner job pods will be created
+  ## By default, job pods use the Release namespace (.Release.Namespace)
+  ## Set this value to run jobs in a different namespace than the runner deployment
+  ## This enables separation between runner management and job execution
+  ##
+  ## Example: Runner in "ops" namespace, jobs in "gitlab" namespace
+  # jobNamespace: ""
+
   # runner configuration, where the multi line string is evaluated as a
   # template so you can specify helm values inside of it.
   #
@@ -415,7 +453,7 @@ runners:
   config: |
     [[runners]]
       [runners.kubernetes]
-        namespace = "{{.Release.Namespace}}"
+        namespace = "{{ default .Release.Namespace .Values.runners.jobNamespace }}"
         image = "alpine"
 
   ## Absolute path for an existing runner configuration file
@@ -427,39 +465,9 @@ runners:
   ##
   # executor: kubernetes
 
-  ## DEPRECATED: Specify whether the runner should be locked to a specific project: true, false.
-  ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-  ##
-  # locked: true
-
-  ## DEPRECATED: Specify the tags associated with the runner. Comma-separated list of tags.
-  ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-  ##
-  # tags: ""
-
   ## Specify the name for the runner.
   ##
   # name: ""
-
-  ## DEPRECATED: Specify the maximum timeout (in seconds) that will be set for job when using this Runner
-  ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-  ##
-  # maximumTimeout: ""
-
-  ## DEPRECATED: Specify if jobs without tags should be run.
-  ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-  ##
-  # runUntagged: true
-
-  ## DEPRECATED: Specify whether the runner should only run protected branches.
-  ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
-  ##
-  # protected: true
 
   ## The name of the secret containing runner-token and runner-registration-token
   # secret: gitlab-runner
@@ -662,6 +670,8 @@ deploymentAnnotations: {}
 deploymentLabels: {}
   # Example:
   # owner.team: <my_cool_team>
+  # owner.team: "{{ .Values.team }}"
+  # tags.{{ .Values.tag }}/env: "{{ .Values.environment }}"
 
 ## Lifecycle options to be added to deployment
 ##
@@ -768,3 +778,19 @@ extraObjects: []
 #     dataFrom:
 #     - extract:
 #         key: my-secret-store-secret
+
+## Add additional containers to the Pod, e.g. to run as sidecars.
+##
+## Example:
+#  - name: docker
+#    image: docker:20.10-dind
+#    securityContext:
+#      privileged: true
+#    volumeMounts:
+#      - mountPath: /var/run/
+#        name: dind-socket
+#    lifecycle:
+#      postStart:
+#        exec:
+#          command: [ "sh", "-c", "until docker info; do sleep 1; done;" ]
+extraContainers: []

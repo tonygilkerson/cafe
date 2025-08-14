@@ -25,14 +25,26 @@ spec:
         args:
           - |
             pip install flask
+            mkdir -p /static
             mkdir -p /share
             mkdir -p /webserver
             python /webserver/webserver.py
         volumeMounts:
+        - name: webserver-index
+          mountPath: /static/index.html
+          subPath: index.html
         - name: webserver-script
           mountPath: /webserver/webserver.py
           subPath: webserver.py
+        - name: share-volume
+          mountPath: /share          
       volumes:
+      - name: webserver-index
+        configMap:
+          name: simple-file-transfer-index
       - name: webserver-script
         configMap:
           name: simple-file-transfer-script
+      - name: share-volume
+        persistentVolumeClaim:
+          claimName: simple-file-transfer-pvc          

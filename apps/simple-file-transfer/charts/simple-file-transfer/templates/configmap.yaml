@@ -1,6 +1,31 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: simple-file-transfer-index
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple File Transfer</title>
+    </head>
+    <body>
+        <h1>Simple File Transfer Service</h1>
+        <p>Welcome to Simple File Transfer Service</p>
+        <p>This service is running and ready to handle file uploads and downloads</p>
+        
+        <h2>Download</h2>
+          <p><a href="/list">View Files</a></p>
+      
+        <h2>Upload Example:</h3>
+           <textarea readonly rows="2" cols="80">curl -F "file=@filename.txt" http://192.168.50.10:30123/upload</textarea>
+    </body>
+    </html>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: simple-file-transfer-script
 data:
   webserver.py: |
@@ -8,13 +33,19 @@ data:
     import os
 
     app = Flask(__name__)
-    FILES_DIR = '/share'  # Change this to your desired directory
+    SHARE_DIR = '/share'
+    STATIC_DIR = '/static'
 
     @app.route('/')
     def index():
-        files = os.listdir(FILES_DIR)
+        return send_from_directory(STATIC_DIR, 'index.html')
+       
+
+    @app.route('/list')
+    def list():
+        files = os.listdir(SHARE_DIR)
         html = """
-        <h2>File List</h2>
+        <h2>Files (/share)</h2>
         <ul>
         {% for file in files %}
           <li><a href="/download/{{`{{ file }}`}}">{{`{{ file }}`}}</a></li>
@@ -25,14 +56,16 @@ data:
 
     @app.route('/download/<path:filename>')
     def download(filename):
-        return send_from_directory(FILES_DIR, filename, as_attachment=True)
+        return send_from_directory(SHARE_DIR, filename, as_attachment=True)
 
     @app.route('/upload', methods=['POST'])
     def upload():
         file = request.files['file']
-        file.save(os.path.join(FILES_DIR, file.filename))
+        file.save(os.path.join(SHARE_DIR, file.filename))
         return 'File uploaded!', 200
 
     if __name__ == '__main__':
-        os.makedirs(FILES_DIR, exist_ok=True)
+        os.makedirs(SHARE_DIR, exist_ok=True)
         app.run(host='0.0.0.0', port=8080)
+
+ 
