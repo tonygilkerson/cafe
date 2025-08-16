@@ -12,12 +12,76 @@
   <p>This is your local static <code>index.html</code> page served up from zoo</p>
   <h2>Links</h2>
 
-  <ul>
-    <li><a href="http://fw.home.lan">pfSense Firewall</a> (<code>http://fw.home.lan</code>)</li>
-    <li><a href="http://pihole.home.lan/admin/">Pi-Holio</a> (<code>http://pihole.home.lan</code>)</li>
-    <li><a href="http://ha.home.lan:8123">Home Assistant</a> (<code>http://ha.home.lan:8123</code>)</li>
-    <li><a href="http://zoo.home.lan:30123">File Share on Zoo</a> (<code>http://zoo.home.lan:30123/</code>)</li>
-  </ul>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>URL</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="http://fw.home.lan">pfSense Firewall</a></td>
+        <td><code>http://fw.home.lan</code></td>
+        <td>Network firewall and router management</td>
+      </tr>
+      <tr>
+        <td><a href="http://pihole.home.lan/admin/">Pi-Hole</a></td>
+        <td><code>http://pihole.home.lan</code></td>
+        <td>Network-wide ad blocking and DNS management</td>
+      </tr>
+      <tr>
+        <td><a href="http://ha.home.lan:8123">Home Assistant</a></td>
+        <td><code>http://ha.home.lan:8123</code></td>
+        <td>Home automation and smart device control</td>
+      </tr>
+      <tr>
+        <td><a href="http://zoo.home.lan:30123">File Share (zoo)</a></td>
+        <td><code>http://zoo.home.lan:30123</code></td>
+        <td>Simple file upload and download service</td>
+      </tr>
+      <tr>
+        <td><a href="http://gitlab.home.lan">Gitlab (bay)</a></td>
+        <td><code>http://gitlab.home.lan</code></td>
+        <td>Git repository hosting and CI/CD platform</td>
+      </tr>
+      <tr>
+        <td><a href="http://slzb.home.lan">Zigbee SLZB</a></td>
+        <td><code>http://slzb.home.lan</code></td>
+        <td>
+          Zigbee coordinator and device management. <br>
+          Located in the <b>BBG</b>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="http://asus.home.lan">ASUS RT-AX1800S</a></td>
+        <td><code>http://asus.home.lan</code></td>
+        <td>
+          BBH-home WiFi Access Point<br>
+          Located above the <b>TV</b><br>
+          User: <code>tonygilkerson</code>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="http://e2500.home.lan">Linksys E2500</a></td>
+        <td><code>http://e2500.home.lan</code></td>
+        <td>
+          BBH-IOT WiFi Access Point<br>
+          Located above the <b>TV</b><br>
+          User: <code>tgilkerson</code>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="http://hp.home.lan">HP OfficeJet Pro 8710</a></td>
+        <td><code>http://hp.home.lan</code></td>
+        <td>
+          The printer. <br>
+          Located in the <b>Library</b>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   
 
   <h2>Notes</h2>
@@ -26,8 +90,9 @@
   </ul>
 
   <h2>Tools</h2>
-  <!-- Removed form wrapper -->
+
   <div>
+    <p>Use this form to upload a file to <a href="http://zoo.home.lan:30123/">http://zoo.home.lan:30123</a></p>
     <!-- Input field for filename -->
     <label for="filename">Filename:</label>
     <input type="text" id="filename" name="filename" placeholder="Enter filename (e.g., myfile.txt)">
@@ -37,7 +102,7 @@
     <!-- Text area for file content -->
     <label for="content">File Content:</label>
     <br>
-    <textarea id="content" name="content" rows="10" cols="50" placeholder="Enter your file content here..."></textarea>
+    <textarea id="content" name="content" rows="5" cols="50" placeholder="Enter your file content here..."></textarea>
     
     <br><br>
     
@@ -51,7 +116,7 @@
     </button>
     
     <!-- Result div -->
-    <div id="result">Upload results will appear here</div>
+    <div id="result"></div>
   </div>
 
 

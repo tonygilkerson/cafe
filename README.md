@@ -359,8 +359,14 @@ EOF
 # Create local web directory
 sudo mkdir -p /var/www/html
 
-# Manually edit index.html
-sudo vim /var/www/html/index.html # past contents of home.lan.index.html
+# Push content
+scp home.lan.index.html zoo:/var/www/html/index.html
+
+    # NOTE for the above scp to work you will need to do this one-time setups
+    # On zoo server
+    sudo usermod -a -G caddy tgilkerson
+    # Set group write permissions
+    sudo chmod g+w /var/www/html/index.html
 
 # restart
 sudo chown -R caddy:caddy /var/www/html

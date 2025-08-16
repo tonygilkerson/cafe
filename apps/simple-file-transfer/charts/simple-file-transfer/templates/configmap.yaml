@@ -42,9 +42,30 @@ data:
         <h2>Files (/share)</h2>
         <ul>
         {% for file in files %}
-          <li><a href="/share/{{`{{ file }}`}}">{{`{{ file }}`}}</a></li>
+          <li>
+            <button onclick="deleteFile('{{`{{ file }}`}}')" style="margin-left: 10px; background-color: #ff4444; color: white; border: none; padding: 2px 6px; cursor: pointer;">X</button>
+            - <a href="/share/{{`{{ file }}`}}">{{`{{ file }}`}}</a>
+          </li>
         {% endfor %}
         </ul>
+        
+        <script>
+        function deleteFile(filename) {
+            if (confirm('Are you sure you want to delete ' + filename + '?')) {
+                fetch('/share/' + filename, {
+                    method: 'DELETE'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    location.reload(); // Refresh the page to update the file list
+                })
+                .catch(error => {
+                    alert('Error: ' + error);
+                });
+            }
+        }
+        </script>
         """
         return render_template_string(html, files=files)
 
@@ -87,7 +108,24 @@ data:
         except Exception as e:
             return f'Error: {str(e)}', 500
 
+    @app.route('/share/<path:filename>', methods=['DELETE'])
+    def delete_file(filename):
+        try:
+            filepath = os.path.join(SHARE_DIR, filename)
+            
+            if not os.path.exists(filepath):
+                return f'File "{filename}" not found', 404
+                return f'File "{{`{{ filename }}`}}" not found', 404
+            
+            if not os.path.isfile(filepath):
+                return f'"{{`{{ filename }}`}}" is not a file', 400
+            
+            os.remove(filepath)
+            return f'File "{{`{{ filename }}`}}" deleted successfully!', 200
+                
+        except Exception as e:
+            return f'Error: {str(e)}', 500
+
     if __name__ == '__main__':
         os.makedirs(SHARE_DIR, exist_ok=True)
         app.run(host='0.0.0.0', port=8080)
- 
