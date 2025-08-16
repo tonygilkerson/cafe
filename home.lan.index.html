@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home LAN</title>
+    <!-- Updated to working HTMX version -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+  <h1>Welcome to Home LAN</h1>
+  
+  <p>This is your local static <code>index.html</code> page served up from zoo</p>
+  <h2>Links</h2>
+
+  <ul>
+    <li><a href="http://fw.home.lan">pfSense Firewall</a> (<code>http://fw.home.lan</code>)</li>
+    <li><a href="http://pihole.home.lan/admin/">Pi-Holio</a> (<code>http://pihole.home.lan</code>)</li>
+    <li><a href="http://ha.home.lan:8123">Home Assistant</a> (<code>http://ha.home.lan:8123</code>)</li>
+    <li><a href="http://zoo.home.lan:30123">File Share on Zoo</a> (<code>http://zoo.home.lan:30123/</code>)</li>
+  </ul>
+  
+
+  <h2>Notes</h2>
+  <ul>
+    <li>To edit this file, shell into <code>zoo</code> and <code>sudo vim /var/www/index.html</code></li>
+  </ul>
+
+  <h2>Tools</h2>
+  <!-- Removed form wrapper -->
+  <div>
+    <!-- Input field for filename -->
+    <label for="filename">Filename:</label>
+    <input type="text" id="filename" name="filename" placeholder="Enter filename (e.g., myfile.txt)">
+    
+    <br><br>
+    
+    <!-- Text area for file content -->
+    <label for="content">File Content:</label>
+    <br>
+    <textarea id="content" name="content" rows="10" cols="50" placeholder="Enter your file content here..."></textarea>
+    
+    <br><br>
+    
+    <!-- Button to upload with working HTMX -->
+    <button hx-post="/upload" 
+            hx-include="#filename,#content"
+            hx-target="#result"
+            hx-swap="innerHTML"
+            hx-trigger="click">
+      Upload File
+    </button>
+    
+    <!-- Result div -->
+    <div id="result">Upload results will appear here</div>
+  </div>
+
+
+  <hr>
+   <footer>
+    <small>© 2025 Home LAN | Last updated: August 2025</small>
+  </footer>
+</body>
+</html>

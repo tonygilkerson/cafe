@@ -300,6 +300,16 @@ Create `/etc/caddy/Caddyfile` and make it look like the following.
 
 ```sh
 cat <<EOF | sudo tee /etc/caddy/Caddyfile
+
+# manually add content to /var/www/html
+http://home.lan {
+  root * /var/www/html
+  file_server
+
+  # Proxy upload requests to zoo (avoids CORS errors)
+  reverse_proxy /upload localhost:30123
+}
+
 tonygilkerson.us {
   redir https://cafe.tonygilkerson.us
 }
@@ -346,7 +356,14 @@ gitlab.tonygilkerson.us {
 
 EOF
 
+# Create local web directory
+sudo mkdir -p /var/www/html
+
+# Manually edit index.html
+sudo vim /var/www/html/index.html # past contents of home.lan.index.html
+
 # restart
+sudo chown -R caddy:caddy /var/www/html
 sudo systemctl restart caddy
 
 
